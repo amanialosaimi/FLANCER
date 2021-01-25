@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors')
 /* Import RESTful API Routes */
-const { ROUTERS } = require('./BACKEND')
+const { index } = require('./routes/index')
 /* Initial Express Server */
 const app = express()
 /* Database Connection */
@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('tiny'));
 app.use(cors());
 /* RESTful API Routes */
-app.use('/api/v1/', ROUTERS)
+app.use('/api/v1', index)
 /* Application Port */
 const PORT = process.env.PORT || 3000
 /* API Server Listen For Connections */
