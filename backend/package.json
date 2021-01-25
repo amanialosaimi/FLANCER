@@ -1,0 +1,21 @@
+{
+  "name": "project3",
+  "version": "0.0.1",
+  "description": "Team 2 - Building Project 3",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Abdulaziz Alfayaa, Abeer Albawardi, Amani Alosaimi and Fahad Alsaedi",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.12",
+    "morgan": "^1.10.0"
+  }
+}
