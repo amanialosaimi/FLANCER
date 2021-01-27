@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-/* Schema */
+/* Project Schema */
 const projectSchema = new mongoose.Schema({
     title: String,
     description: String,
@@ -18,7 +18,7 @@ const projectSchema = new mongoose.Schema({
 { timestamps: { currentTime: () => Math.floor(Date.now() / 1000) } }
     )
 /* Create Model From Schema */
-const ProjectSchema = mongoose.model('ProjectSchema', projectSchema)
+const ProjectModel = mongoose.model('ProjectSchema', projectSchema)
 
 /* Export Model */
-module.exports = ProjectSchema
+module.exports = ProjectModel

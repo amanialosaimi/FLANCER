@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const Schema = mongoose.Schema
 
 /* Developer Schema */
 const developerSchema = new mongoose.Schema({
@@ -11,7 +10,7 @@ const developerSchema = new mongoose.Schema({
     projectsCount: Number,
     projects: [
         {
-            type: Schema.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: "Project"
         }
     ],
@@ -23,7 +22,7 @@ const developerSchema = new mongoose.Schema({
 )
 
 /* Create Model From Schema */
-const DeveloperSchema = mongoose.model('DeveloperSchema', developerSchema)
+const DeveloperModel = mongoose.model('DeveloperSchema', developerSchema)
 
 /* Export Model */
-module.exports = DeveloperSchema
+module.exports = DeveloperModel
