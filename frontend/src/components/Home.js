@@ -1,10 +1,10 @@
-import React from "react";
-import NavMenu from "./NavMenu";
-import FlancerLogo from "./Header";
-import FirstBlock from "./content/FirstBlock";
+import React from "react"
+import NavMenu from "./NavMenu"
+import FlancerLogo from "./Header"
+import FirstBlock from "./content/FirstBlock"
 import MiddleBlock from "./content/MiddleBlock"
 import LastBlockImg from "./content/LastBlock"
-import { Row, Col } from "antd";
+import { Row, Col } from "antd"
 function Home() {
   return (
     <div>
@@ -15,12 +15,10 @@ function Home() {
         <Col flex="auto">
           <NavMenu />
         </Col>
-      </Row>
-      <Row>
         <Col >
           <FirstBlock />
-          <MiddleBlock/>
-          <LastBlockImg/>
+          <MiddleBlock />
+          <LastBlockImg />
         </Col>
       </Row>
     </div>
