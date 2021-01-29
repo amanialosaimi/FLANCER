@@ -1,11 +1,11 @@
 import React from "react";
 import { Menu } from "antd";
-import { Row, Col } from "antd";
 import "../App.css";
+import { Link } from "react-router-dom";
 
 class NavMenu extends React.Component {
   state = {
-    current: "mail",
+    current: "home",
   };
 
   handleClick = (e) => {
@@ -21,11 +21,12 @@ class NavMenu extends React.Component {
         selectedKeys={[current]}
         mode="horizontal"
       >
-        <Menu.Item key="alipay1">Home</Menu.Item>
-        <Menu.Item key="alipay2">Latest Project</Menu.Item>
-        <Menu.Item key="setting:3">Deveolopers</Menu.Item>
-        <Menu.Item key="setting:4">About</Menu.Item>
-        <Menu.Item key="setting:5">Contact Us</Menu.Item>
+        <Menu.Item key="home"><Link to="/">Home</Link></Menu.Item>
+        <Menu.Item key="profile"><Link to="/profile">Profile</Link></Menu.Item>
+        <Menu.Item key="latest">Latest Project</Menu.Item>
+        <Menu.Item key="developers">Developers</Menu.Item>
+        <Menu.Item key="about">About</Menu.Item>
+        <Menu.Item key="contact">Contact Us</Menu.Item>
       </Menu>
     );
   }
