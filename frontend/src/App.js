@@ -1,9 +1,8 @@
-import Developers from "./components/Developers";
-
+import Home from './components/Home.js'
 function App() {
   return (
     <div className="App">
-     {/* <Developers/> */}
+      <Home/>
     </div>
   );
 }
