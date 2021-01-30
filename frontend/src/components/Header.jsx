@@ -5,13 +5,13 @@ import { ReactComponent as FlancerLogo } from "../images/flancerLogo_1.svg";
 function Header() {
   return (
     <>
-     <Row>
+      <Row>
         <Col >
-        <FlancerLogo />
+          <FlancerLogo />
         </Col>
-        <Col><NavMenu/></Col>
+        <Col><NavMenu /></Col>
       </Row>
-      
+
     </>
   );
 }

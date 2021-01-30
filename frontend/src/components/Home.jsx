@@ -1,6 +1,3 @@
-import React from "react";
-import NavMenu from "./NavMenu";
-import FlancerLogo from "./Header";
 import FirstBlock from "./content/FirstBlock";
 import MiddleBlock from "./content/MiddleBlock";
 import LastBlockImg from "./content/LastBlock";

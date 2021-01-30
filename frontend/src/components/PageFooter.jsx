@@ -10,7 +10,7 @@ function PageFooter() {
             position: "fixed",
             bottom: "0",
             width: "100%",
-            height: "4%",
+            padding: "0",
             textAlign: "center",
           }}
         >
