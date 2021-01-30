@@ -22,7 +22,7 @@ class NavMenu extends React.Component {
         mode="horizontal"
       >
         <Menu.Item key="home"><Link to="/">Home</Link></Menu.Item>
-        <Menu.Item key="profile"><Link to="/profile">Profile</Link></Menu.Item>
+        <Menu.Item key="profile"><Link to="/dashboard">Dashboard</Link></Menu.Item>
         <Menu.Item key="latest">Latest Project</Menu.Item>
         <Menu.Item key="developers">Developers</Menu.Item>
         <Menu.Item key="about">About</Menu.Item>

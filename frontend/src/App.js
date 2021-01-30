@@ -1,25 +1,30 @@
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
 } from "react-router-dom";
+import DeveloperSidebar from './components/profile/DeveloperSidebar'
+import DeveloperProjects from './components/profile/DeveloperProjects'
 
 import Home from './components/Home.js'
 import DeveloperProfile from './components/profile/DeveloperProfile'
 function App() {
   return (
     <Router>
-      <div className="App">
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/profile">
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route>
+          <DeveloperSidebar />
+          <Route exact path="/dashboard">
             <DeveloperProfile />
           </Route>
-        </Switch>
-      </div>
-
+          <Route path="/myprojects">
+            <DeveloperProjects />
+          </Route>
+        </Route>
+      </Switch>
     </Router>
   );
 }
