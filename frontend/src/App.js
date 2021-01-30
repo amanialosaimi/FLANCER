@@ -6,7 +6,7 @@ import {
 import DeveloperSidebar from './components/profile/DeveloperSidebar'
 import DeveloperProjects from './components/profile/DeveloperProjects'
 
-import Home from './components/Home.js'
+import Home from './components/Home'
 import DeveloperProfile from './components/profile/DeveloperProfile'
 function App() {
   return (
