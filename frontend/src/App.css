@@ -5,23 +5,23 @@
   box-sizing: border-box;
 }
 h1,
-p {
+p,
+h2 {
   color: #1b3a4b;
-  
 }
-.firstBlock{
-    font-size: 1.5em;
+.firstBlock {
+  font-size: 1.5em;
 }
-.middleBlock{
-    background-color: rgb(0, 100, 102, 0.4 );
-    height: 700px;
-    font-size: 1.5em;
+.middleBlock {
+  background-color: rgb(0, 100, 102, 0.4);
+  height: 700px;
+  font-size: 1.5em;
 }
 
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  height: auto;
+  height: 3000px;
 }
 
 .container {
@@ -49,6 +49,12 @@ body {
 .large-font {
   font-size: 48px;
 }
+.semi-large-font {
+  font-size: 32px;
+}
+.qoute {
+  font-size: 20px;
+}
 
 .xlarge-font {
   font-size: 64px;
@@ -72,7 +78,8 @@ img {
 }
 
 /* end of styling home page */
-h4{
-    text-align: center;
-    color:#006466;
+
+/* Latest project timeline style */
+.site-layout .site-layout-background {
+  background: #fff;
 }

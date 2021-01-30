@@ -23,7 +23,7 @@ class NavMenu extends React.Component {
       >
         <Menu.Item key="home"><Link to="/">Home</Link></Menu.Item>
         <Menu.Item key="profile"><Link to="/profile">Profile</Link></Menu.Item>
-        <Menu.Item key="latest">Latest Project</Menu.Item>
+        <Menu.Item key="latest"><Link to="/latest">Latest Project</Link></Menu.Item>
         <Menu.Item key="developers">Developers</Menu.Item>
         <Menu.Item key="about">About</Menu.Item>
         <Menu.Item key="contact">Contact Us</Menu.Item>

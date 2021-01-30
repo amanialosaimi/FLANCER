@@ -6,9 +6,11 @@ function FirstBlock() {
       <div className="row">
         <div className="column-66">
           <h1 className="xlarge-font">
-            THE DISTINATION <br />
-            OF KEEPING YOUR WORK <br />
-            <br />
+            <b>
+              THE DISTINATION <br />
+              OF KEEPING YOUR WORK <br />
+              <br />
+            </b>
           </h1>
           <h1 className="large-font">
             <b>Why FLANCER?</b>
