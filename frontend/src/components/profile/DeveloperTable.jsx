@@ -50,7 +50,7 @@ export default class DeveloperTable extends Component {
             rowExpandable: record => record.name !== 'Not Expandable',
           }}
           dataSource={data}
-        />,
+        />
 
       </div>
     )

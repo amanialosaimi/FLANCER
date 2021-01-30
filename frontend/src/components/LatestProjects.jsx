@@ -10,6 +10,7 @@ import {
   Timeline,
   Divider,
   BackTop,
+  Tooltip,
 } from "antd";
 
 import {
@@ -66,6 +67,7 @@ function LatestProjects() {
               }}
             >
               {/* first project details section goes here */}
+              {/* Adding a tooltip for icons only for the first section */}
 
               <Timeline>
                 <Timeline.Item color="#4d194d">
@@ -73,11 +75,21 @@ function LatestProjects() {
                   <Card
                     style={{ width: 1300, marginTop: 16 }}
                     actions={[
-                      <CodeOutlined />,
-                      <FieldTimeOutlined />,
-                      <StarOutlined />,
-                      <UnlockOutlined />,
-                      <SafetyCertificateOutlined />,
+                      <Tooltip placement="top" title="Technologies">
+                        <CodeOutlined />
+                      </Tooltip>,
+                      <Tooltip placement="top" title="Date">
+                        <FieldTimeOutlined />
+                      </Tooltip>,
+                      <Tooltip placement="top" title="Stars">
+                        <StarOutlined />
+                      </Tooltip>,
+                      <Tooltip placement="top" title="This project is public">
+                        <UnlockOutlined />
+                      </Tooltip>,
+                      <Tooltip placement="top" title="Licence">
+                        <SafetyCertificateOutlined />
+                      </Tooltip>,
                     ]}
                   >
                     <Meta
