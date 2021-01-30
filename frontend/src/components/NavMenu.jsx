@@ -2,6 +2,8 @@ import React from "react";
 import { Menu } from "antd";
 import "../App.css";
 import { Link } from "react-router-dom";
+import Login from "./Login";
+// import Login from "./Login";
 
 class NavMenu extends React.Component {
   state = {
@@ -28,7 +30,9 @@ class NavMenu extends React.Component {
         <Menu.Item key="developers">Developers</Menu.Item>
         <Menu.Item key="about"><Link to="/about">About</Link></Menu.Item>
         <Menu.Item key="contact">Contact Us</Menu.Item>
+        <Login/>
       </Menu>
+      
     );
   }
 }

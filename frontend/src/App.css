@@ -93,6 +93,7 @@ img {
   font-size: 1.5em;
   margin-top: 20px;
   font-weight: bold;
+  color: #fff;
 
 }
 .Card-Title{
@@ -102,4 +103,7 @@ img {
 .Card-contatnt{
   text-align: left;
   font-size: 1em;
+}
+.site-card-wrapper{
+  background: linear-gradient(141deg, #f8f7ef 15%, #80b2b3 48%, #006466 70% , #1b3a4b 95%) ;
 }
