@@ -11,6 +11,7 @@ import DeveloperProfile from './components/profile/DeveloperProfile'
 import DeveloperProjects from './components/profile/DeveloperProjects'
 import LatestProjects from "./components/LatestProjects";
 import PageFooter from "./components/PageFooter";
+import About from "./components/About";
 
 function App() {
   return (
@@ -25,6 +26,12 @@ function App() {
           <Header />
           <LatestProjects />
           <PageFooter />
+        </Route>
+        <Route path="/about">
+          <Header/>
+          <About/>
+          <PageFooter />
+
         </Route>
         <Route>
           <DeveloperSidebar />

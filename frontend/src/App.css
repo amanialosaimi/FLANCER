@@ -83,3 +83,23 @@ img {
 .site-layout .site-layout-background {
   background: #fff;
 }
+.site-card-wrapper {
+  padding: 30px;
+  background: #ececec;
+  
+}
+.lastLine{
+  text-align: center;
+  font-size: 1.5em;
+  margin-top: 20px;
+  font-weight: bold;
+
+}
+.Card-Title{
+  text-align: center;
+
+}
+.Card-contatnt{
+  text-align: left;
+  font-size: 1em;
+}

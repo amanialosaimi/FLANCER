@@ -15,6 +15,7 @@ class NavMenu extends React.Component {
 
   render() {
     const { current } = this.state;
+    
     return (
       <Menu
         onClick={this.handleClick}
@@ -25,7 +26,7 @@ class NavMenu extends React.Component {
         <Menu.Item key="profile"><Link to="/dashboard">Dashboard</Link></Menu.Item>
         <Menu.Item key="latest"><Link to="/latest">Latest Project</Link></Menu.Item>
         <Menu.Item key="developers">Developers</Menu.Item>
-        <Menu.Item key="about">About</Menu.Item>
+        <Menu.Item key="about"><Link to="/about">About</Link></Menu.Item>
         <Menu.Item key="contact">Contact Us</Menu.Item>
       </Menu>
     );
