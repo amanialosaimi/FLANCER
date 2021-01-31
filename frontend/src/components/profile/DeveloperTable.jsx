@@ -43,6 +43,7 @@ export default class DeveloperTable extends Component {
     return (
       <div>
         <br />
+        
         <Table
           columns={columns}
           expandable={{
