@@ -22,7 +22,6 @@ h1, p, h2 {
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  height: 3000px;
 }
 
 .container {
@@ -124,3 +123,8 @@ img {
 .contact-title {
   text-align: center
 }
+.Setting{
+ margin-top: 250px;
+ margin-left: 300px;
+ width: 1000px;
+ background-color: rgb(0, 100, 102, 0.4);}

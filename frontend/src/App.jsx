@@ -9,10 +9,12 @@ import Header from './components/Header'
 import DeveloperSidebar from './components/profile/DeveloperSidebar'
 import DeveloperProfile from './components/profile/DeveloperProfile'
 import DeveloperProjects from './components/profile/DeveloperProjects'
-import LatestProjects from "./components/LatestProjects";
-import PageFooter from "./components/PageFooter";
-import About from "./components/About";
+import Setting from './components/profile/DeveloperSetting'
+import LatestProjects from "./components/LatestProjects"
+import PageFooter from "./components/PageFooter"
+import About from "./components/About"
 import Contact from "./components/Contact"
+
 
 function App() {
   return (
@@ -45,6 +47,9 @@ function App() {
           </Route>
           <Route path="/myprojects">
             <DeveloperProjects />
+          </Route>
+          <Route path="/profile/settings">
+            <Setting/>
           </Route>
         </Route>
       </Switch>
