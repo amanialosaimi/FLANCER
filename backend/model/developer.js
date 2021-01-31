@@ -1,7 +1,10 @@
 const mongoose = require('mongoose')
+const passportLocalMongoose = require('passport-local-mongoose')
 
 /* Developer Schema */
 const developerSchema = new mongoose.Schema({
+    username: String,
+    password: String,
     firstname: String,
     lastname: String,
     location: String,
@@ -20,6 +23,7 @@ const developerSchema = new mongoose.Schema({
 },
 { timestamps: { currentTime: () => Math.floor(Date.now() / 1000) } }
 )
+developerSchema.plugin(passportLocalMongoose)
 
 /* Create Model From Schema */
 const DeveloperModel = mongoose.model('DeveloperSchema', developerSchema)

@@ -1,7 +1,7 @@
 {
-  "name": "project3",
-  "version": "0.0.3",
-  "description": "Team 2 - Building Project 3",
+  "name": "flancer",
+  "version": "0.1.0",
+  "description": "Flancer Backend Server, Made by Team 2",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
@@ -13,10 +13,15 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "cookie-session": "^1.4.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "github-api": "^3.4.0",
     "mongoose": "^5.11.12",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^6.1.0"
   }
 }

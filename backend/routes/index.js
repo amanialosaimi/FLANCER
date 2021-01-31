@@ -6,29 +6,37 @@ const Github = new GitHubExtended(({
 }))
 index.route('/')
     .get(async (request, response) => {
-
-        Github.getUserProfile('apple').then((profile) => {
-            console.log(
-                "\nFull Name: ", profile.name,
-                "Location: ", profile.location + '\n',
-                "Public Repos: ", profile.public_repos,
-                "Private Repos: ", profile.total_private_repos + '\n',
-                "Following: ", profile.following,
-                "Followers: ", profile.followers + '\n'
-            )
-        })
-
-        Github.getUserRepos('apple')
-            .then((result) => {
-                result.map((repo) => {
-                    console.log(
-                        'Repo Name: ', repo.name + '\n',
-                        'Private: ', repo.private,
-                        'Forks: ', repo.forks,
-                        'Stars: ', repo.stargazers_count,
-                        'Watchers: ', repo.watchers_count + '\n'
-                    )
-                })
+        if (request.isAuthenticated()) {
+            let profileInfo = {};
+            let repos = [];
+            await Github.getUserProfile('apple').then((profile) => {
+                profileInfo = {
+                    'Full Name': profile.name,
+                    'Location': profile.location,
+                    'Public Repos': profile.public_repos,
+                    'Private Repos': profile.total_private_repos,
+                    'Following': profile.following,
+                    'Followers': profile.followers
+                }
+                return profileInfo
             })
+
+            await Github.getUserRepos('apple')
+                .then((result) => {
+                    result.map((repo) => {
+                        repos.push({
+                            'Repo Name': repo.name,
+                            'Private': repo.private,
+                            'Forks': repo.forks,
+                            'Stars': repo.stargazers_count,
+                            'Watchers': repo.watchers_count
+                        })
+                    })
+                    return repos
+                })
+                response.json({profileInfo, repos})
+        } else {
+            response.redirect('/auth/login')
+        }
     })
 module.exports = { index }
