@@ -7,10 +7,7 @@
         super(props)
       
         this.state = {
-           
-            
         }
-     
       }
       render() {
         const layout = {
@@ -75,7 +72,6 @@
         );
       }
     }
-    
     export default Contact;
     
     
