@@ -108,11 +108,9 @@ img {
   text-align: left;
   font-size: 1em;
 }
-
-.site-card-wrapper {
-  background: linear-gradient(141deg, #f8f7ef 15%, #80b2b3 48%, #006466 70%, #1b3a4b 95%);
+.site-card-wrapper{
+  background: linear-gradient(141deg, #f8f7ef 15%, #80b2b3 48%, #006466 70% , #1b3a4b 95%) ;
 }
-
 .contact-container {
   background-color: #e9e8e8ea;
   width: 70%;
@@ -120,7 +118,13 @@ img {
   padding: 50px 50px 20px 5px;
   margin-top: 6px;
 }
-
 .contact-title {
-  text-align: center
+  text-align: center;
+}
+.register-container {
+  background-color: #e9e8e8ea;
+  width: 70%;
+  margin: auto;
+  padding: 50px 50px 20px 5px;
+  margin-top: 6px;
 }

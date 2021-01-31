@@ -1,18 +1,15 @@
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import Home from './components/Home'
-import Header from './components/Header'
-import DeveloperSidebar from './components/profile/DeveloperSidebar'
-import DeveloperProfile from './components/profile/DeveloperProfile'
-import DeveloperProjects from './components/profile/DeveloperProjects'
+import Home from "./components/Home";
+import Header from "./components/Header";
+import DeveloperSidebar from "./components/profile/DeveloperSidebar";
+import DeveloperProfile from "./components/profile/DeveloperProfile";
+import DeveloperProjects from "./components/profile/DeveloperProjects";
 import LatestProjects from "./components/LatestProjects";
 import PageFooter from "./components/PageFooter";
 import About from "./components/About";
-import Contact from "./components/Contact"
+import Contact from "./components/Contact";
+import Register from "./components/Register";
 
 function App() {
   return (
@@ -29,13 +26,18 @@ function App() {
           <PageFooter />
         </Route>
         <Route path="/about">
-          <Header/>
-          <About/>
+          <Header />
+          <About />
           <PageFooter />
         </Route>
         <Route path="/contact">
-          <Header/>
-          <Contact/>
+          <Header />
+          <Register />
+          <PageFooter />
+        </Route>
+        <Route path="/register">
+          <Header />
+          <Register />
           <PageFooter />
         </Route>
         <Route>
