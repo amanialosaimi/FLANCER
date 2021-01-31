@@ -127,4 +127,9 @@ img {
  margin-top: 250px;
  margin-left: 300px;
  width: 1000px;
+ text-align: center;
  background-color: rgb(0, 100, 102, 0.4);}
+.font-setting{
+font-size: 40px;
+ color: white; 
+}

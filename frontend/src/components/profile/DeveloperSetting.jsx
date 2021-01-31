@@ -33,7 +33,9 @@ export default class DeveloperSetting extends Component {
     render() {
         return (
             <div className = 'Setting'>
-              <br/>
+              <h1 className="font-setting">
+                 <b>Developer Setting</b>
+              </h1>
               <br/>
               <Button onClick={this.raiseInvoiceClicked} block>Open githup page</Button>
               <Button className ='Dark' onClick={this.changeLight}  block>Dark Mode</Button>
