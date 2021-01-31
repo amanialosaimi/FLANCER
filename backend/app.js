@@ -49,7 +49,7 @@ app.use('/api/v1', index)
 app.use("/auth", auth);
 /* Check If User Login */
 const checkLogin = (req, res, next) => {
-    if (!req.user) {
+    if (!req.isAuthenticated()) {
         res.status(401).json({
             authenticated: false,
             message: "User Login Required"

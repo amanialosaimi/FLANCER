@@ -22,7 +22,7 @@ auth.get("/logout", (req, res) => {
 
 /* User Profile OR Flash Error */
 auth.get('/login', function (req, res) {
-    if (req.user) {
+    if (req.isAuthenticated()) {
         res.json({
             user: req.user,
         });

@@ -4,7 +4,6 @@ const passportLocalMongoose = require('passport-local-mongoose')
 /* Developer Schema */
 const developerSchema = new mongoose.Schema({
     username: String,
-    password: String,
     firstname: String,
     lastname: String,
     location: String,
@@ -19,7 +18,7 @@ const developerSchema = new mongoose.Schema({
     ],
     isActive: Boolean,
     createdAt: Number,
-    updateAt: Number
+    updatedAt: Number
 },
 { timestamps: { currentTime: () => Math.floor(Date.now() / 1000) } }
 )
