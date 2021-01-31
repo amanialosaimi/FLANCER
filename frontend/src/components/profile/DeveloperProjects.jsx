@@ -1,16 +1,17 @@
 import DeveloperTable from './DeveloperTable';
+import ProjectForm from './ProjectForm';
 import { Typography, Layout, Card, Col, Row } from 'antd';
 import 'antd/dist/antd.css';
 
 const { Title } = Typography;
 const { Content, Footer } = Layout;
-
 export default function DeveloperProjects() {
     return (
         <Layout style={{ marginLeft: 200 }}>
             {/* <Header className="site-layout-background" style={{ padding: 0 }} > HEADER TITLE </Header> */}
             <Row style={{ marginTop: 30 }}>
                 <Col span={10} style={{ margin: '0 28px 0' }}><Title level={1}>Developer Name</Title></Col>
+                <Col><ProjectForm/></Col>
             </Row>
             <Row style={{ marginTop: 30, marginLeft: 28 }}>
                 <Col span={8}>
