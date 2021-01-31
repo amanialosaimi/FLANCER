@@ -1,0 +1,13 @@
+@import '~antd/dist/antd.css';
+.container {
+  background-color: #e9e8e8ea;
+  width: 70%;
+  margin: auto;
+  padding: 50px 50px 20px 5px;
+  margin-top: 6px;
+    
+  }
+  h1{
+    text-align:center
+  }
+
