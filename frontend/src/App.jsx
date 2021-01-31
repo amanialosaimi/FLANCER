@@ -32,7 +32,7 @@ function App() {
         </Route>
         <Route path="/contact">
           <Header />
-          <Register />
+          <Contact />
           <PageFooter />
         </Route>
         <Route path="/register">

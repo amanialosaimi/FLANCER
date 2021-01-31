@@ -20,6 +20,7 @@ const layout = {
   },
 };
 const validateMessages = {
+  // eslint-disable-next-line
   required: "${label} is required!",
 };
 
@@ -34,7 +35,11 @@ export default class ProjectForm extends Component {
   render() {
     return (
       <>
-        <Col span={20} style={{ margin: "0 1100px 10px" }}>
+        <Col span={20} style={{
+          top: "50px",
+          right: "45px",
+          position: "fixed"
+        }}>
           <Button style={style} onClick={() => this.setModalVisible(true)}>
             Add Project +
           </Button>
