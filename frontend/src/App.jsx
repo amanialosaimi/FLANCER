@@ -10,6 +10,7 @@ import PageFooter from "./components/PageFooter";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Register from "./components/Register";
+import Setting from './components/profile/DeveloperSetting'
 
 function App() {
   return (
@@ -47,6 +48,9 @@ function App() {
           </Route>
           <Route path="/myprojects">
             <DeveloperProjects />
+          </Route>
+          <Route path="/profile/settings">
+            <Setting/>
           </Route>
         </Route>
       </Switch>
