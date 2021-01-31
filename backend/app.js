@@ -69,14 +69,18 @@ app.get("/", checkLogin, (req, res) => {
 });
 /* Register New User */
 app.post('/register', (req, res) => {
-    Developer.register(new Developer({ username: req.body.username }), req.body.password, function (err) {
-        if (err) {
-            console.log('Error Register New User: ', err);
-            return next(err);
-        }
-        console.log('New User Registered!');
-        res.redirect('/auth/login');
-    })
+    if (!req.isAuthenticated()) {
+        Developer.register(new Developer({ username: req.body.username }), req.body.password, function (err) {
+            if (err) {
+                console.log('Error Register New User: ', err);
+                return next(err);
+            }
+            console.log('New User Registered!');
+            res.redirect('/auth/login');
+        })
+    } else {
+        res.json({message: "You are already logged in"})
+    }
 })
 /* Find All Users - Temporary Route */
 app.get('/find', (req, res) => {
