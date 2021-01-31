@@ -12,6 +12,7 @@ import DeveloperProjects from './components/profile/DeveloperProjects'
 import LatestProjects from "./components/LatestProjects";
 import PageFooter from "./components/PageFooter";
 import About from "./components/About";
+import Contact from "./components/Contact"
 
 function App() {
   return (
@@ -31,7 +32,11 @@ function App() {
           <Header/>
           <About/>
           <PageFooter />
-
+        </Route>
+        <Route path="/contact">
+          <Header/>
+          <Contact/>
+          <PageFooter />
         </Route>
         <Route>
           <DeveloperSidebar />
