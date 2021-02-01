@@ -6,10 +6,10 @@ function Header() {
   return (
     <>
       <Row>
-        <Col >
+        <Col style={{height : "50px"}}>
           <FlancerLogo />
         </Col>
-        <Col><NavMenu /></Col>
+        <Col style={{height : "50px"}}><NavMenu /></Col>
       </Row>
 
     </>

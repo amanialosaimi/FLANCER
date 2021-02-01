@@ -3,8 +3,10 @@ import DeveloperDashboard from "./DeveloperDashboard";
 import DeveloperProfile from "./DeveloperProfile";
 import DeveloperProjects from "./DeveloperProjects";
 import DeveloperPublication from "./DeveloperPublication"
- // eslint-disable-next-line
- import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import DeveloperSetting from './DeveloperSetting'
+
+// eslint-disable-next-line
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 export default function Dashboard() {
     return (
@@ -22,6 +24,9 @@ export default function Dashboard() {
                 </Route>
                 <Route path="/dashboard/publication">
                     <DeveloperPublication />
+                </Route>
+                <Route path="/dashboard/settings">
+                    <DeveloperSetting />
                 </Route>
             </Switch>
         </div>
