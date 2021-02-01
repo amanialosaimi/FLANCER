@@ -62,17 +62,20 @@ user.route('/profile')
 
 
 /* PUT | Edit User Profile */
-app.put('/:id', async (request, response) => {
+user.put('/:id', async (request, response) => {
     if (request.isAuthenticated()) {
-        try {
-            await Developer.findOneAndUpdate({ _id: request.params.id }, request.body, (err, result) => {
-                if (err) {
-                    res.json(err);
-                } else {
-                    res.json({message: 'Profile Updated!'});
-                }
-            });
-        } catch (err) { console.log(err) }
+        if (request.params.id == request.user._id) {
+            try {
+                await Developer.findOneAndUpdate({ _id: request.user._id }, request.body, (err, result) => {
+                    if (!err) {
+                        response.json({ message: 'Profile Updated!' });
+                        /* response.redirect("/auth/login") */
+                    } else {
+                        response.json(err);
+                    }
+                });
+            } catch (err) { console.log(err) }
+        } else { response.json({ message: "You are not allowed to update profile" }) }
     } else {
         response.json({ message: "You must log in to edit your profile" })
     }
