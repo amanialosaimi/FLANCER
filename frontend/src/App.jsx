@@ -11,8 +11,37 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import Register from "./components/Register";
 import Setting from './components/profile/DeveloperSetting'
+import axios from 'axios'
 
 function App() {
+  
+  //this axios for get all the users from the server
+  getAllUsers = () => {
+    axios
+      .get(`http://localhost:3000/find`)
+      .then((response) => {
+        console.log("RESPONSE: ", response);
+        console.log("DATA: ", response.data);
+      })
+      .catch((err) => {
+        console.log("ERR: ", err);
+      });
+  };
+  //this for new user
+  register = (newUserInfo = {username: "demo", password: "demo"}) => {
+    console.log('send API POST ');
+    axios
+      .post(`http://localhost:3000/register`, newUserInfo)
+      .then((response) => {
+        console.log('RESPONSE: ', response);
+        console.log('DATA: ', response.data);
+        // HERE IS YOUR LOGIC
+        
+      })
+      .catch((err) => {
+        console.log('ERR: ', err);
+      });
+  };
   return (
     <Router>
       <Switch>
