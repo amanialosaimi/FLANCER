@@ -25,7 +25,7 @@ const developerSchema = new mongoose.Schema({
 developerSchema.plugin(passportLocalMongoose)
 
 /* Create Model From Schema */
-const DeveloperModel = mongoose.model('DeveloperSchema', developerSchema)
+const DeveloperModel = mongoose.model('Developer', developerSchema)
 
 /* Export Model */
 module.exports = DeveloperModel

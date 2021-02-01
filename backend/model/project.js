@@ -18,7 +18,7 @@ const projectSchema = new mongoose.Schema({
 { timestamps: { currentTime: () => Math.floor(Date.now() / 1000) } }
     )
 /* Create Model From Schema */
-const ProjectModel = mongoose.model('ProjectSchema', projectSchema)
+const ProjectModel = mongoose.model('Project', projectSchema)
 
 /* Export Model */
 module.exports = ProjectModel

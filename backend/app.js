@@ -11,10 +11,11 @@ const LocalStrategy = require('passport-local').Strategy;
 /* Import REST API Routes */
 const { index } = require('./routes/index')
 const { auth } = require('./routes/auth')
+const { user } = require('./routes/user')
 /* Initial Express Server */
 const app = express()
 /* Database Connection */
-const db = 'flancer';
+const db = 'Flancers';
 mongoose.connect(`mongodb://localhost:27017/${db}`, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
 const Developer = require('./model/developer')
 /* Middlewares */
@@ -43,10 +44,12 @@ passport.use(new LocalStrategy(Developer.authenticate()));
 passport.serializeUser(Developer.serializeUser())
 /* Deserialize User */
 passport.deserializeUser(Developer.deserializeUser())
-/* RESTful API Routes */
+/* REST API Endpoints */
 app.use('/api/v1', index)
-/* Setup Authorization Routes */
+/* REST API Authorization Endpoints */
 app.use("/auth", auth);
+/* REST API User Endpoints */
+app.use('/user', user);
 /* Check If User Login */
 const checkLogin = (req, res, next) => {
     if (!req.isAuthenticated()) {
@@ -89,42 +92,9 @@ app.get('/find', (req, res) => {
     })
 })
 
-//find user by Id 
-app.get("/find/:id", (req, res) => {
-    Developer.findById(req.params.id, (err, founduser) => {
-      if (err) {
-        res.json(err);
-      } else {
-          res.json({message: "You are already logged in"})
-        res.json(founduser);
-      }
-  })
-});
-//update user by Id 
-app.put('/find/:id', (req, res) => {
-    console.log('PARAMS:', req.params);
-    Developer.findOneAndUpdate({ _id: req.params.id }, req.body, (err, result) => {
-      if (err) {
-        res.json(err);
-      } else {
-        res.json('DONE');
-      }
-    });
-  });
-  //delete the user byID 
-  app.delete('/find/:id', (req, res) => {
-    console.log('PARAMS:', req.params);
-    Developer.findOneAndDelete({ _id: req.params.id }, (err, result) => {
-      if (err) {
-        res.json(err);
-      } else {
-        res.json('DELETE SUCCESS');
-      }
-    });
-  });
-  //for the error
+/* Endpoint Not Found */
 app.get("*", (req, res) => {
-    res.status(404).sendFile(`${__dirname}/404/404.html`);
+    res.status(404).json({"messagge": "Endpoint Not Found"});
   });
 /* Application Port */
 const PORT = process.env.PORT || 3000
