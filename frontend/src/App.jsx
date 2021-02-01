@@ -2,9 +2,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Home from "./components/Home";
 import Header from "./components/Header";
-import DeveloperSidebar from "./components/profile/DeveloperSidebar";
-import DeveloperProfile from "./components/profile/DeveloperProfile";
-import DeveloperProjects from "./components/profile/DeveloperProjects";
+import Dashboard from "./components/profile/Dashboard"
 import LatestProjects from "./components/LatestProjects";
 import PageFooter from "./components/PageFooter";
 import About from "./components/About";
@@ -14,7 +12,7 @@ import Setting from './components/profile/DeveloperSetting'
 import axios from 'axios'
 
 function App() {
-  
+
   //this axios for get all the users from the server
   const getAllUsers = () => {
     axios
@@ -28,7 +26,7 @@ function App() {
       });
   };
   //this for new user
-  const register = (newUserInfo = {username: "demo", password: "demo"}) => {
+  const register = (newUserInfo = { username: "demo", password: "demo" }) => {
     console.log('send API POST ');
     axios
       .post(`http://localhost:3000/register`, newUserInfo)
@@ -36,54 +34,42 @@ function App() {
         console.log('RESPONSE: ', response);
         console.log('DATA: ', response.data);
         // HERE IS YOUR LOGIC
-        
+
       })
       .catch((err) => {
         console.log('ERR: ', err);
       });
   };
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/">
-          <Header />
-          <Home />
-          <PageFooter />
-        </Route>
-        <Route path="/latest">
-          <Header />
-          <LatestProjects />
-          <PageFooter />
-        </Route>
-        <Route path="/about">
-          <Header />
-          <About />
-          <PageFooter />
-        </Route>
-        <Route path="/contact">
-          <Header />
-          <Contact />
-          <PageFooter />
-        </Route>
-        <Route path="/register">
-          <Header />
-          <Register />
-          <PageFooter />
-        </Route>
-        <Route>
-          <DeveloperSidebar />
-          <Route exact path="/dashboard">
-            <DeveloperProfile />
+    <>
+      <Router>
+        <Header />
+        <Switch>
+          <Route exact path="/">
+            <Home />
           </Route>
-          <Route path="/myprojects">
-            <DeveloperProjects />
+          <Route path="/latest">
+            <LatestProjects />
           </Route>
-          <Route path="/profile/settings">
-            <Setting/>
+          <Route path="/about">
+            <About />
           </Route>
-        </Route>
-      </Switch>
-    </Router>
+          <Route path="/contact">
+            <Contact />
+          </Route>
+          <Route path="/register">
+            <Register />
+          </Route>
+          <Route>
+            <Route path="/dashboard">
+              <Dashboard />
+            </Route>
+          </Route>
+        </Switch>
+        <PageFooter />
+      </Router>
+
+    </>
   );
 }
 

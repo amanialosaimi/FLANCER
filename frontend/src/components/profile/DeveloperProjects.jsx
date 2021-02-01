@@ -10,8 +10,7 @@ export default function DeveloperProjects() {
         <Layout style={{ marginLeft: 200 }}>
             {/* <Header className="site-layout-background" style={{ padding: 0 }} > HEADER TITLE </Header> */}
             <Row style={{ marginTop: 30 }}>
-                <Col span={10} style={{ margin: '0 28px 0' }}><Title level={1}>Developer Name</Title></Col>
-                <Col><ProjectForm/></Col>
+                <Col span={10} style={{ margin: '0 28px 0' }}><Title level={1}>Projects</Title></Col>
             </Row>
             <Row style={{ marginTop: 30, marginLeft: 28 }}>
                 <Col span={8}>
