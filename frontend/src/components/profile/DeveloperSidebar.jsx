@@ -1,5 +1,5 @@
 import { Menu, Layout } from 'antd';
-import FlancerLogo from "../Header"
+import { ReactComponent as FlancerLogo } from "../../images/flancerLogo_1.svg";
 import { Link } from "react-router-dom";
 import {
     UserOutlined,
