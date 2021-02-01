@@ -16,7 +16,7 @@ import axios from 'axios'
 function App() {
   
   //this axios for get all the users from the server
-  getAllUsers = () => {
+  const getAllUsers = () => {
     axios
       .get(`http://localhost:3000/find`)
       .then((response) => {
@@ -28,7 +28,7 @@ function App() {
       });
   };
   //this for new user
-  register = (newUserInfo = {username: "demo", password: "demo"}) => {
+  const register = (newUserInfo = {username: "demo", password: "demo"}) => {
     console.log('send API POST ');
     axios
       .post(`http://localhost:3000/register`, newUserInfo)
