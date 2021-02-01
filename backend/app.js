@@ -89,6 +89,43 @@ app.get('/find', (req, res) => {
     })
 })
 
+//find user by Id 
+app.get("/find/:id", (req, res) => {
+    Developer.findById(req.params.id, (err, founduser) => {
+      if (err) {
+        res.json(err);
+      } else {
+          res.json({message: "You are already logged in"})
+        res.json(founduser);
+      }
+  })
+});
+//update user by Id 
+app.put('/find/:id', (req, res) => {
+    console.log('PARAMS:', req.params);
+    Developer.findOneAndUpdate({ _id: req.params.id }, req.body, (err, result) => {
+      if (err) {
+        res.json(err);
+      } else {
+        res.json('DONE');
+      }
+    });
+  });
+  //delete the user byID 
+  app.delete('/find/:id', (req, res) => {
+    console.log('PARAMS:', req.params);
+    Developer.findOneAndDelete({ _id: req.params.id }, (err, result) => {
+      if (err) {
+        res.json(err);
+      } else {
+        res.json('DELETE SUCCESS');
+      }
+    });
+  });
+  //for the error
+app.get("*", (req, res) => {
+    res.status(404).sendFile(`${__dirname}/404/404.html`);
+  });
 /* Application Port */
 const PORT = process.env.PORT || 3000
 /* API Server Listen For Connections */
