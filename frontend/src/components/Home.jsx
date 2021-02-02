@@ -4,7 +4,7 @@ import LastBlockImg from "./content/LastBlock";
 import { Row, Col } from "antd";
 function Home() {
   return (
-    <div>
+    <div className="contContainer">
       <Row>
         <Col>
           <FirstBlock />
