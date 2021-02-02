@@ -10,6 +10,8 @@ import Contact from "./components/Contact";
 import Register from "./components/Register";
 import Setting from './components/profile/DeveloperSetting'
 import axios from 'axios'
+import Members from "./components/Members";
+
 
 function App() {
 
@@ -53,6 +55,9 @@ function App() {
           </Route>
           <Route path="/about">
             <About />
+          </Route>
+          <Route path="/memebrs">
+            <Members/>
           </Route>
           <Route path="/contact">
             <Contact />

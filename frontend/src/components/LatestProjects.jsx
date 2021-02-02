@@ -36,8 +36,8 @@ const style = {
 };
 function LatestProjects() {
   return (
-    <div className="site-layout-background">
-      <Layout style={{ padding: "0 24px 24px" }} className="site-layout">
+    <div className=" contContainer ">
+      <Layout style={{ padding: "0 24px 24px" }} className=" site-card-wrapper">
         <Breadcrumb style={{ margin: "16px 0" }}>
           <Divider orientation="center" type="horizontal">
             <h1 className="large-font">

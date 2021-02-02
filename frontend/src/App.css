@@ -1,11 +1,12 @@
 @import "~antd/dist/antd.css";
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400&display=swap');
 /* Home page style */
 
 * {
   box-sizing: border-box;
 }
 
-h1, p, h2 {
+h1, p, h2, h3, h4 {
   color: #1b3a4b;
 }
 
@@ -21,7 +22,7 @@ h1, p, h2 {
 
 body {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .container {
@@ -111,11 +112,11 @@ img {
   background: linear-gradient(141deg, #f8f7ef 15%, #80b2b3 48%, #006466 70% , #1b3a4b 95%) ;
 }
 .contact-container {
-  background-color: #e9e8e8ea;
   width: 70%;
   margin: auto;
   padding: 50px 50px 20px 5px;
   margin-top: 6px;
+  align-items: center;
 }
 .contact-title {
   text-align: center;
@@ -136,4 +137,17 @@ img {
 .font-setting{
 font-size: 40px;
  color: white; 
+}
+
+.members{
+  align-items: center;
+}
+.contContainer{
+  margin-top: 120px ;
+}
+.ant-timeline-item-tail{
+  color: #fff;
+}
+.ant-timeline-item-head, .ant-layout,.site-layout .site-layout-background {
+  background-color: rgba(255, 255, 255, 0);
 }
