@@ -18,6 +18,7 @@ const app = express()
 const db = 'Flancers';
 mongoose.connect(`mongodb://localhost:27017/${db}`, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
 const Developer = require('./model/developer')
+const Project = require('./model/project')
 /* Middlewares */
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -94,7 +95,12 @@ app.get('/find', (req, res) => {
         res.json(all)
     })
 })
-
+// find public projects 
+app.get('/findPublicProject', (req, res) => {
+    Project.find({isVisible : true}, (err, public) => {
+        res.json(public)
+    })
+})
 /* Endpoint Not Found */
 app.get("*", (req, res) => {
     res.status(404).json({"messagge": "Endpoint Not Found"});
