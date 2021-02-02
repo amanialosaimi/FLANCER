@@ -83,7 +83,7 @@ user.put('/:id', async (request, response) => {
 // find public projects for show it to other users 
 user.get('/publicProjects', (req, res) => {
     try {
-        await Project.find({{isVisible : true})
+        await Project.find({isVisible : true})
             .populate("projects")
             .exec((err, result) => {
                 if (!err) response.json(result)
