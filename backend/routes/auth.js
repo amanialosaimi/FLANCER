@@ -38,7 +38,7 @@ auth.post('/login',
             failureFlash: false
         }),
     function (req, res) {
-        res.redirect('/');
+        res.redirect('/auth/login');
     });
 
 module.exports = { auth };

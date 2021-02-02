@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Home from "./components/Home";
@@ -8,44 +9,28 @@ import PageFooter from "./components/PageFooter";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Register from "./components/Register";
-import Setting from './components/profile/DeveloperSetting'
-import axios from 'axios'
 import Members from "./components/Members";
 
 
+import { checkStatus } from "./components/ops/API"
 function App() {
+  const [isLogged, setIsLogged] = useState(false)
 
-  //this axios for get all the users from the server
-  const getAllUsers = () => {
-    axios
-      .get(`http://localhost:3000/find`)
-      .then((response) => {
-        console.log("RESPONSE: ", response);
-        console.log("DATA: ", response.data);
-      })
-      .catch((err) => {
-        console.log("ERR: ", err);
-      });
-  };
-  //this for new user
-  const register = (newUserInfo = { username: "demo", password: "demo" }) => {
-    console.log('send API POST ');
-    axios
-      .post(`http://localhost:3000/register`, newUserInfo)
-      .then((response) => {
-        console.log('RESPONSE: ', response);
-        console.log('DATA: ', response.data);
-        // HERE IS YOUR LOGIC
+  const checkLoginStatus = () => {
+    checkStatus().then((profile)=>{
+      if (profile.data.cookies){
+        setIsLogged(true)
+      }
+    })
+  }
 
-      })
-      .catch((err) => {
-        console.log('ERR: ', err);
-      });
-  };
+  useEffect(() => {
+    checkLoginStatus()
+  }, [])
   return (
     <>
       <Router>
-        <Header />
+        <Header authd={isLogged} auth={setIsLogged} />
         <Switch>
           <Route exact path="/">
             <Home />
@@ -65,11 +50,13 @@ function App() {
           <Route path="/register">
             <Register />
           </Route>
-          <Route>
-            <Route path="/dashboard">
-              <Dashboard />
+          {isLogged ?
+            <Route>
+              <Route path="/dashboard">
+                <Dashboard />
+              </Route>
             </Route>
-          </Route>
+            : ""}
         </Switch>
         <PageFooter />
       </Router>

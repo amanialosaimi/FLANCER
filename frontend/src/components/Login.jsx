@@ -1,13 +1,10 @@
 import "../App.css";
-import React, { Component } from "react";
-import { Button, Modal, Input, Space } from "antd";
+import React, { useState } from "react";
+import { Form, Button, Modal, Input, Checkbox } from "antd";
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 // import { ReactComponent as LoginBg } from "../images/LoginBg.svg";
+import { login } from "./ops/API"
 
-import {
-  UserOutlined,
-  EyeInvisibleOutlined,
-  EyeTwoTone,
-} from "@ant-design/icons";
 const style = {
   height: 40,
   width: 90,
@@ -19,52 +16,109 @@ const style = {
   fontSize: 16,
   padding: 0,
 };
-export default class Login extends Component {
-  state = {
-    modal1Visible: false,
+const LoginCollection = ({ visible, onLogin, onCancel }) => {
+
+  const [form] = Form.useForm();
+
+  return (<Modal
+    title="Welcome Back!"
+    centered
+    visible={visible}
+    onOk={() => form
+      .validateFields()
+      .then((values) => {
+        console.log(values)
+        form.resetFields();
+        onLogin(values);
+      })
+      .catch((info) => {
+        console.log('Validate Failed:', info);
+      })
+    }
+    onCancel={onCancel}
+    htmlType="submit"
+
+  //   style={{ backgroundImage: `url(${LoginBg})`, backgroundRepeat: 'no-repeat',
+  //   width:'250px', height:'300px'}}
+  >
+    <Form
+      form={form}
+      name="normal_login"
+      className="login-form"
+      initialValues={{
+        remember: true,
+      }}
+    >
+      <Form.Item
+        name="username"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your Username!',
+          },
+        ]}
+      >
+        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+      </Form.Item>
+      <Form.Item
+        name="password"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your Password!',
+          },
+        ]}
+      >
+        <Input
+          prefix={<LockOutlined className="site-form-item-icon" />}
+          type="password"
+          placeholder="Password"
+        />
+      </Form.Item>
+      <Form.Item>
+        <Form.Item valuePropName="checked" noStyle>
+          <Checkbox>Remember me</Checkbox>
+        </Form.Item><a className="login-form-forgot" href="#">Forgot password</a></Form.Item>
+      <Form.Item>
+        <a href="/register">Register now!</a>
+      </Form.Item>
+    </Form>
+  </Modal>)
+}
+export default function Login(props) {
+  const [visible, setVisible] = useState(false)
+
+  const onLogin = async (values) => {
+    console.log('Received values of form: ', values);
+    try {
+      await login(values)
+      setVisible(false)
+      props.auth(true)
+
+    } catch (err) {
+      console.log(err)
+    }
+
   };
 
-  setModalVisible(modalVisible) {
-    this.setState({ modalVisible });
-  }
-
-  render() {
-    return (
-      <>
-        <Button
-          style={style}
-          type="primary"
-          onClick={() => this.setModalVisible(true)}
-        >
-          Login
+  return (
+    <>
+      <Button
+        style={style}
+        type="primary"
+        onClick={() => setVisible(true)}
+      >
+        Login
         </Button>
-        
-        <Modal
-          title="Welcome Back!"
-          centered
-          visible={this.state.modalVisible}
-          onOk={() => this.setModalVisible(false)}
-          onCancel={() => this.setModalVisible(false)}
-          
-        //   style={{ backgroundImage: `url(${LoginBg})`, backgroundRepeat: 'no-repeat',
-        //   width:'250px', height:'300px'}}
-        >
-          <Space direction="vertical">
-            <Input placeholder="Type your username" prefix={<UserOutlined />} />
-          </Space>
-          <br />
-          <br />
-          <Space direction="vertical">
-            <Input.Password
-              placeholder="Type your password"
-              iconRender={(visible) =>
-                visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-              }
-            />
-          </Space>
-        </Modal>
-        
-      </>
-    );
-  }
+
+      <LoginCollection
+        visible={visible}
+        onLogin={onLogin}
+        onCancel={() => {
+          setVisible(false);
+        }}
+      />
+
+    </>
+  )
 }

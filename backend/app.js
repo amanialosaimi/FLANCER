@@ -20,9 +20,12 @@ mongoose.connect(`mongodb://localhost:27017/${db}`, { useNewUrlParser: true, use
 const Developer = require('./model/developer')
 /* Middlewares */
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan('tiny'));
-app.use(cors({ credentials: true }));
+app.use(cors({
+    credentials: true,
+    origin: 'http://localhost:3001',
+}));
 
 /* Auth Cookie Setup */
 app.use(
