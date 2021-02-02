@@ -80,6 +80,18 @@ user.put('/:id', async (request, response) => {
         response.json({ message: "You must log in to edit your profile" })
     }
 })
+// find public projects for show it to other users 
+user.get('/findPublicProject', (req, res) => {
+    try {
+        await Project.find({isVisible : true}, (err, public) => {
+            if (!err) {
+                res.json(public);
+            } else {
+                res.json(err);
+            }
+        });
+    } catch (err) { console.log(err) }
+});
 
 /* Delete | delete User account */
 user.delete('/deleteAccount', async (request, response) => {
