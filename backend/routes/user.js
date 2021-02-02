@@ -81,4 +81,26 @@ user.put('/:id', async (request, response) => {
     }
 })
 
-module.exports = { user }
+/* Delete | delete User account */
+user.delete('/deleteAccount', async (request, response) => {
+    if (request.isAuthenticated()){
+      if (request.query.deleteProfile == request.user._id){
+        try {
+            await Developer.deleteOne({ _id: request.user._id }, (err, result) => {
+                if (!err) {
+                    response.json({ message: 'Account deleted ' });
+                } else {
+                    response.json(err);
+                }
+            });
+        }
+        catch (err) {
+             console.log(err) }
+      }
+      response.json({ message: "You are not allowed to delete account" }) 
+    }else{
+      response.json({ message: "You must log in to delete your account" })
+    }
+})
+   
+module.exports = { user } 
