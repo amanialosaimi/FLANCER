@@ -8,25 +8,25 @@ import DeveloperSetting from './DeveloperSetting'
 // eslint-disable-next-line
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-export default function Dashboard() {
+export default function Dashboard(props) {
     return (
         <div>
             <DeveloperSidebar />
             <Switch>
                 <Route exact path="/dashboard">
-                    <DeveloperDashboard />
+                    <DeveloperDashboard profile={props.profile} />
                 </Route>
                 <Route path="/dashboard/profile">
-                    <DeveloperProfile />
+                    <DeveloperProfile profile={props.profile} />
                 </Route>
                 <Route path="/dashboard/projects">
-                    <DeveloperProjects />
+                    <DeveloperProjects profile={props.profile} />
                 </Route>
                 <Route path="/dashboard/publication">
-                    <DeveloperPublication />
+                    <DeveloperPublication profile={props.profile} />
                 </Route>
                 <Route path="/dashboard/settings">
-                    <DeveloperSetting />
+                    <DeveloperSetting profile={props.profile} />
                 </Route>
             </Switch>
         </div>

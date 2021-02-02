@@ -15,11 +15,12 @@ import Members from "./components/Members";
 import { checkStatus } from "./components/ops/API"
 function App() {
   const [isLogged, setIsLogged] = useState(false)
-
+  const [profile, setProfile] = useState()
   const checkLoginStatus = () => {
-    checkStatus().then((profile)=>{
-      if (profile.data.cookies){
+    checkStatus().then((profile) => {
+      if (profile.data.cookies) {
         setIsLogged(true)
+        setProfile(profile.data)
       }
     })
   }
@@ -41,8 +42,8 @@ function App() {
           <Route path="/about">
             <About />
           </Route>
-          <Route path="/memebrs">
-            <Members/>
+          <Route path="/members">
+            <Members />
           </Route>
           <Route path="/contact">
             <Contact />
@@ -53,7 +54,7 @@ function App() {
           {isLogged ?
             <Route>
               <Route path="/dashboard">
-                <Dashboard />
+                <Dashboard profile={profile} />
               </Route>
             </Route>
             : ""}

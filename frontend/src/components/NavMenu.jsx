@@ -33,7 +33,7 @@ function NavMenu(props) {
     >
       <Menu.Item key="home"><Link to="/">Home</Link></Menu.Item>
       <Menu.Item key="latest"><Link to="/latest">Latest Project</Link></Menu.Item>
-      <Menu.Item key="members">Members</Menu.Item>
+      <Menu.Item key="members"><Link to="/members">Members</Link></Menu.Item>
       <Menu.Item key="about"><Link to="/about">About</Link></Menu.Item>
       <Menu.Item key="contact"><Link to="/contact">Contact Us</Link></Menu.Item>
       {props.authd ? <>
