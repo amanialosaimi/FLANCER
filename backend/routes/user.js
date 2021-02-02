@@ -81,17 +81,16 @@ user.put('/:id', async (request, response) => {
     }
 })
 // find public projects for show it to other users 
-user.get('/findPublicProject', (req, res) => {
+user.get('/publicProjects', (req, res) => {
     try {
-        await Project.find({isVisible : true}, (err, public) => {
-            if (!err) {
-                res.json(public);
-            } else {
-                res.json(err);
-            }
-        });
-    } catch (err) { console.log(err) }
-});
+        await Project.find({{isVisible : true})
+            .populate("projects")
+            .exec((err, result) => {
+                if (!err) response.json(result)
+            })
+    } catch (err) {
+        console.log(err)
+    }
 
 /* Delete | delete User account */
 user.delete('/deleteAccount', async (request, response) => {
