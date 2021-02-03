@@ -90,8 +90,8 @@ user.get('/publicProjects', async (req, res) => {
                     let publicProjects = []
                     result.map((user)=>{
                         user.projects.map((userProject)=>{
-                            if (userProject.projects.isVisible){
-                                publicProjects.push(userProject)
+                            if (userProject && userProject.isVisible){
+                                publicProjects.push({user: [user._id, user.username], project: userProject})
                             }
                         })
                     })
@@ -116,9 +116,11 @@ user.delete('/deleteAccount', async (request, response) => {
             });
         }
         catch (err) {
-             console.log(err) }
+             console.log(err) 
+             response.json({ message: "You are not allowed to delete account" }) 
+            }
       }
-      response.json({ message: "You are not allowed to delete account" }) 
+      
     }else{
       response.json({ message: "You must log in to delete your account" })
     }
