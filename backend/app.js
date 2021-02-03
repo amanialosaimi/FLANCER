@@ -99,7 +99,7 @@ app.post('/api/register', (req, res) => {
                 return next(err);
             }
             console.log('New User Registered!');
-            res.redirect('/auth/login');
+            res.redirect('/api/auth/login');
         })
     } else {
         res.json({ message: "You are already logged in" })

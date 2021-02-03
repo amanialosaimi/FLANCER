@@ -34,11 +34,11 @@ auth.get('/login', function (req, res) {
 auth.post('/login',
     passport.authenticate('local',
         {
-            failureRedirect: '/auth/login/failed',
+            failureRedirect: '/api/auth/login/failed',
             failureFlash: false
         }),
     function (req, res) {
-        res.redirect('/auth/login');
+        res.redirect('/api/auth/login');
     });
 
 module.exports = { auth };
