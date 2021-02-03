@@ -1,4 +1,5 @@
 /* Import Packages */
+require("dotenv").config();
 const mongoose = require('mongoose')
 const express = require('express')
 const morgan = require('morgan');
@@ -15,8 +16,7 @@ const { user } = require('./routes/user')
 /* Initial Express Server */
 const app = express()
 /* Database Connection */
-const db = 'flancers';
-mongoose.connect(`mongodb+srv://dbFlancer:dbFL@2021@cluster0.sk19x.mongodb.net/${db}?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
+mongoose.connect('mongodb+srv://dbFlancer:dbFL@2021@cluster0.sk19x.mongodb.net/flancers?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
 const Developer = require('./model/developer')
 const Project = require('./model/project')
 /* Middlewares */
@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan('tiny'));
 app.use(cors({
     credentials: true,
-    origin: 'http://localhost:3001',
+    origin: ['http://localhost:3001', '*'],
 }));
 
 /* Auth Cookie Setup */
@@ -51,9 +51,9 @@ passport.deserializeUser(Developer.deserializeUser())
 /* REST API Endpoints */
 app.use('/api/v1', index)
 /* REST API Authorization Endpoints */
-app.use("/auth", auth);
+app.use("/api/auth", auth);
 /* REST API User Endpoints */
-app.use('/user', user);
+app.use('/api/user', user);
 /* Check If User Login */
 const checkLogin = (req, res, next) => {
     if (!req.isAuthenticated()) {
@@ -66,7 +66,7 @@ const checkLogin = (req, res, next) => {
     }
 };
 /* Login Status */
-app.get("/", checkLogin, async (req, res) => {
+app.get("/api", checkLogin, async (req, res) => {
         try {
             await Developer.find({ _id: req.user._id })
                 .populate("projects")
@@ -91,7 +91,7 @@ app.get("/", checkLogin, async (req, res) => {
 
 });
 /* Register New User */
-app.post('/register', (req, res) => {
+app.post('/api/register', (req, res) => {
     if (!req.isAuthenticated()) {
         Developer.register(new Developer({ username: req.body.username }), req.body.password, function (err) {
             if (err) {
@@ -106,21 +106,18 @@ app.post('/register', (req, res) => {
     }
 })
 /* Find All Users - Temporary Route */
-app.get('/find', (req, res) => {
+app.get('/api/find', (req, res) => {
     Developer.find({}, (err, all) => {
         res.json(all)
     })
 })
 // find public projects 
-app.get('/findPublicProject', (req, res) => {
+app.get('/api/findPublicProject', (req, res) => {
     Project.find({isVisible : true}, (err, public) => {
         res.json(public)
     })
 })
-/* Endpoint Not Found */
-app.get("*", (req, res) => {
-    res.status(404).json({ "messagge": "Endpoint Not Found" });
-});
+
 /* Application Port */
 const PORT = process.env.PORT || 3000
 /* API Server Listen For Connections */

@@ -1,25 +1,48 @@
 import axios from 'axios'
-
-const API_SERVER = `http://localhost:3000`
-
+const API = 'http://localhost:3000'
 export const createProject = async (projectDetails) => {
   axios.defaults.withCredentials = true
   await axios
-    .post(`${API_SERVER}/user/createProject`, projectDetails)
+    .post(`${API}/api/user/createProject`, projectDetails)
+    .then((result) => result)
+    .catch((err) => err)
 }
 
+export const readProject = async (projectID) => {
+  axios.defaults.withCredentials = true
+  await axios
+    .get(`${API}/api/user/project?id=${projectID}`)
+    .then((result) => result)
+    .catch((err) => err)
+}
+
+export const updateProject = async (projectID, updates) => {
+  axios.defaults.withCredentials = true
+  await axios
+    .put(`${API}/api/user/project?id=${projectID}`, updates)
+    .then((result) => result)
+    .catch((err) => err)
+}
+
+export const deleteProject = async (projectID) => {
+  axios.defaults.withCredentials = true
+  await axios
+    .delete(`${API}/api/user/project?id=${projectID}`)
+    .then((result) => result)
+    .catch((err) => err)
+}
 
 export const login = async (credential) => {
   axios.defaults.withCredentials = true
   const request = axios
-    .post(`${API_SERVER}/auth/login`, {
+    .post(`${API}/api/auth/login`, {
       username: credential.username,
       password: credential.password,
       withCredentials: true,
       headers: { crossDomain: true, 'Content-Type': 'application/json' },
     })
     .then(response => response)
-    .catch((err)=> "Authentication failed")
+    .catch((err) => "Authentication failed")
 
   return {
     type: 'USER_LOGIN',
@@ -30,7 +53,7 @@ export const login = async (credential) => {
 
 export const logout = () => {
   axios
-    .get(`${API_SERVER}/auth/logout`)
+    .get(`${API}/api/auth/logout`)
     .then((response) => {
       console.log('RESPONSE: ', response);
     })
@@ -41,7 +64,7 @@ export const logout = () => {
 export const checkStatus = async () => {
   let profile;
   axios.defaults.withCredentials = true
-  await axios.get(`${API_SERVER}`)
+  await axios.get(`${API}/api`)
     .then((res) => {
       profile = res
     })
@@ -51,7 +74,7 @@ export const checkStatus = async () => {
 export const updateProfile = async (userID, updates) => {
   let profile
   axios.defaults.withCredentials = true
-  await axios.put(`${API_SERVER}/user/${userID}`, updates)
+  await axios.put(`${API}/api/user/${userID}`, updates)
     .then((res) => {
       profile = res
     })
@@ -61,7 +84,7 @@ export const updateProfile = async (userID, updates) => {
 //this axios for get all the users from the server
 export const getAllUsers = () => {
   axios
-    .get(`${API_SERVER}/find`)
+    .get(`${API}/api/find`)
     .then((response) => {
       console.log("RESPONSE: ", response);
       console.log("DATA: ", response.data);
@@ -75,7 +98,7 @@ export const getAllUsers = () => {
 export const register = (newUserInfo = { username: "demo", password: "demo" }) => {
   console.log('send API POST ');
   axios
-    .post(`${API_SERVER}/register`, newUserInfo)
+    .post(`${API}/api/register`, newUserInfo)
     .then((response) => {
       console.log('RESPONSE: ', response);
       console.log('DATA: ', response.data);
