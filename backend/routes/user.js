@@ -91,7 +91,7 @@ user.get('/publicProjects', (req, res) => {
     } catch (err) {
         console.log(err)
     }
-
+})
 /* Delete | delete User account */
 user.delete('/deleteAccount', async (request, response) => {
     if (request.isAuthenticated()){
