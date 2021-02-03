@@ -1,6 +1,16 @@
 import React, { Component } from "react";
-import { Form, Input, Button,  } from 'antd';
+import { Form, Input, Button, Divider  } from 'antd';
 import '../App.css'
+const style = {
+  height: 40,
+  width: 100,
+  lineHeight: "30px",
+  borderRadius: 4,
+  backgroundColor: "#fff",
+  color: "#006466",
+  textAlign: "center",
+  fontSize: 14,
+};
 class Register extends Component {
   constructor(props) {
     super(props)
@@ -22,10 +32,15 @@ class Register extends Component {
         console.log('Failed:', errorInfo);
       };
     return (
-      <div>
-        
+      <div className="contContainer site-card-wrapper">
+        <Divider orientation="center" type="horizontal">
+          <h1 className="large-font contact-title">
+            <b>Register</b>
+          </h1>
+
+        </Divider>
         <div className='register-container'>
-        <h1 className="contact-title">Register</h1>
+        <h1 className="contact-title">Be one of our creatives!</h1>
          <Form
       {...layout}
       name="basic"
@@ -33,28 +48,28 @@ class Register extends Component {
       onFinishFailed={onFinishFailed}
     >
       <Form.Item
-        label="Firstname"
+        label={<h4><b>First Name</b></h4>}
         name="Firstname"
         rules={[{ required: true, message: 'Please input your firstname!' }]}
       >
         <Input />
       </Form.Item>
       <Form.Item
-        label="Lastname"
+        label={<h4><b>Last Name</b></h4>}
         name="Lastname"
         rules={[{ required: true, message: 'Please input your Lastname!' }]}
       >
         <Input />
       </Form.Item>
       <Form.Item
-        label="email"
+        label={<h4><b>Email</b></h4>}
         name="email"
         rules={[{ required: true, message: 'Please input your email!' }]}
       >
         <Input />
       </Form.Item>
       <Form.Item
-        label="Password"
+        label={<h4><b>Password</b></h4>}
         name="password"
         rules={[{ required: true, message: 'Please input your password!' }]}
       >
@@ -62,14 +77,14 @@ class Register extends Component {
       </Form.Item>
      
       <Form.Item
-        label="Re-enter Password"
+        label={<h4><b>Re-enter Password</b></h4>}
         name="Re-enter Password"
         rules={[{ required: true, message: 'Re-enter Password!' }]}
       >
         <Input.Password />
       </Form.Item>
       <Form.Item {...tailLayout}>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" style={style}>
           submit
         </Button>
       </Form.Item>

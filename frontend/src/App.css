@@ -113,28 +113,42 @@ img {
   background: linear-gradient(141deg, #f8f7ef 15%, #80b2b3 48%, #006466 70% , #1b3a4b 95%) ;
 }
 .contact-container {
-  width: 70%;
+  width: 40%;
   margin: auto;
   padding: 50px 50px 20px 5px;
   margin-top: 6px;
+  margin-bottom: 70px;
   align-items: center;
+  border: 1px solid #fff;
 }
 .contact-title {
   text-align: center;
 }
 .register-container {
-  background-color: #e9e8e8ea;
-  width: 70%;
+  width: 40%;
   margin: auto;
   padding: 50px 50px 20px 5px;
   margin-top: 6px;
+  margin-bottom: 70px;
+  border: 1px solid #fff;
 }
 .Setting{
  margin-top: 250px;
- margin-left: 300px;
- width: 1000px;
- text-align: center;
- background-color: rgb(0, 100, 102, 0.4);}
+ margin-bottom: 100px;
+ margin-left: 450px;
+ width: 100vh;
+ text-align: left;
+ border: 1px solid #006466;
+ /* background-color: rgb(0, 100, 102, 0.4); */
+}
+.Settings-items{
+  width: 65%;
+  margin: auto;
+  padding: 50px 50px 20px 5px;
+  margin-top: 6px;
+  margin-bottom: 70px;
+  
+}
 .font-setting{
 font-size: 40px;
  color: white; 

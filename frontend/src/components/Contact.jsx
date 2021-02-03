@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Input, Button, Divider } from 'antd';
+import { Form, Input, Button, Divider, Space } from 'antd';
 import axios from 'axios'
 import '../App.css'
 const { TextArea } = Input;
@@ -50,6 +50,7 @@ class Contact extends Component {
           <h1 className="large-font contact-title">
             <b>Contact Us</b>
           </h1>
+          <h2>Let's keep in touch!</h2>
 
         </Divider>
         <div className='contact-container'>
