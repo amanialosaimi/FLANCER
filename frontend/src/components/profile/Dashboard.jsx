@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react"
 import DeveloperSidebar from "./DeveloperSidebar";
 import DeveloperDashboard from "./DeveloperDashboard";
 import DeveloperProfile from "./DeveloperProfile";
@@ -9,24 +10,29 @@ import DeveloperSetting from './DeveloperSetting'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 export default function Dashboard(props) {
+
+    const [uesrProfile, setProfile] = useState()
+    useEffect(() => {
+        setProfile(props.profile)
+    }, [props.profile])
     return (
         <div>
             <DeveloperSidebar />
             <Switch>
                 <Route exact path="/dashboard">
-                    <DeveloperDashboard profile={props.profile} />
+                    <DeveloperDashboard profile={uesrProfile} />
                 </Route>
                 <Route path="/dashboard/profile">
-                    <DeveloperProfile profile={props.profile} />
+                    <DeveloperProfile profile={uesrProfile} />
                 </Route>
                 <Route path="/dashboard/projects">
-                    <DeveloperProjects profile={props.profile} />
+                    <DeveloperProjects profile={uesrProfile} status={props.status} />
                 </Route>
                 <Route path="/dashboard/publication">
-                    <DeveloperPublication profile={props.profile} />
+                    <DeveloperPublication profile={uesrProfile} />
                 </Route>
                 <Route path="/dashboard/settings">
-                    <DeveloperSetting profile={props.profile} />
+                    <DeveloperSetting profile={uesrProfile} />
                 </Route>
             </Switch>
         </div>

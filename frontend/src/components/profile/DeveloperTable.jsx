@@ -1,59 +1,77 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Table } from 'antd';
-import { EyeOutlined, StarOutlined } from '@ant-design/icons'
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import '../../App.css'
-export default class DeveloperTable extends Component {
-  render() {
+export default function DeveloperTable(props) {
+  const [projects, updateProject] = useState([])
+  useEffect(() => {
+    let result = props.projects?.map(function (project, i) {
+      let projectObject = Object.assign({}, project);
+      projectObject.delete = <DeleteOutlined />;
+      projectObject.edit = <EditOutlined />
+      projectObject.key = i + 1
+      projectObject.isVisible = projectObject.isVisible ? "Public" : "Private"
+      return projectObject;
+    })
+    console.log(result)
+    updateProject(result)
 
-    const columns = [
-      {
-        title: 'Project Title',
-        dataIndex: 'Project Title',
-      },
-      {
-        title: 'Technologies',
-        dataIndex: 'Technologies',
-      },
-      {
-        title: 'Date',
-        dataIndex: 'Date',
-      },
-      {
-        title: 'Public / Private',
-        dataIndex: 'Public / Private',
-      },
-      {
-        title: 'Licence',
-        dataIndex: 'Licence',
-      },
-      {
-        title: <StarOutlined />,
-        dataIndex: 'Stars',
-      },
-      {
-        title: <EyeOutlined />,
-        dataIndex: 'Viewers',
-      },
-    ];
-    const data = [
+  }, [props.projects])
+  const columns = [
+    {
+      title: '#',
+      dataIndex: 'key',
+      defaultSortOrder: 'descends',
+    },
+    {
+      title: 'Project Title',
+      dataIndex: 'title',
+    },
+    {
+      title: 'Description',
+      dataIndex: 'description',
+    },
+    {
+      title: 'Technologies',
+      dataIndex: 'technology',
+    },
+    {
+      title: 'Start Date',
+      dataIndex: 'date',
+    },
+    {
+      title: 'Visible',
+      dataIndex: 'isVisible',
+    },
+    {
+      title: 'Licence',
+      dataIndex: 'licence',
+    },
+    {
+      title: "Update",
+      dataIndex: 'edit',
+    },
+    {
+      title: "Delete",
+      dataIndex: 'delete',
+    },
+  ];
 
-    ]
+  return (
+    <div>
+      <br />
 
+      <Table
+        columns={columns}
+        // sortDirections={['descend', 'ascend']}
+        // expandable={{
+        //   expandedRowRender: record => <p style={{ margin: 0 }}>{record.Description}</p>,
+        //   rowExpandable: record => record.name !== 'Not Expandable',
+        // }}
+        dataSource={props.projects ? projects : []}
+      />
 
-    return (
-      <div>
-        <br />
-        
-        <Table
-          columns={columns}
-          expandable={{
-            expandedRowRender: record => <p style={{ margin: 0 }}>{record.Description}</p>,
-            rowExpandable: record => record.name !== 'Not Expandable',
-          }}
-          dataSource={data}
-        />
+    </div>
+  )
 
-      </div>
-    )
-  }
 }

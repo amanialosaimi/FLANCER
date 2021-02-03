@@ -16,19 +16,10 @@ user.route('/createProject')
         if (request.isAuthenticated()) {
             try {
                 Developer.findById(request.user._id, (err, user) => {
-                    const newProjectDetails = new Project({
-                        title: request.body.title,
-                        description: request.body.desc,
-                        licence: request.body.licence,
-                        technology: [],
-                        topics: [],
-                        url: request.body.url,
-                        isVisible: request.body.isVisible,
-                    })
-                    newProjectDetails.technology.push(request.body.technology)
-                    newProjectDetails.topics.push(request.body.topics)
-                    newProjectDetails.save((err, newProject) => {
-                        if (!err) console.log(newProject)
+                    const newProjectDetails = new Project(request.body)
+                    //newProjectDetails.topics.push(request.body.topics)
+                    newProjectDetails.save((err, project) => {
+                        if (!err){ response.json(project) }
                     })
                     user.projects.push(newProjectDetails)
                     user.save((err, developerProject) => {
@@ -40,6 +31,25 @@ user.route('/createProject')
             response.json({ message: "You must log in to create new project" })
         }
     })
+
+
+/* Initial Project Collection For First Time */
+// user.route('/projects')
+//     .get(async (req, res, next) => {
+//         try {
+//             await Project.create({ title: "hola" }, (err, logs) => {
+//                 if (!err && logs.length > 0) {
+//                     res.json(logs)
+//                 } else {
+//                     next(res.status(204).send())
+//                 }
+//             })
+//         } catch (error) {
+//             console.log(error)
+//             next(res.status(500).json({ status: "rejected" }))
+//         }
+//     })
+
 
 /* GET | Show User Profile */
 user.route('/profile')
@@ -108,26 +118,26 @@ user.get('/publicProjects', async (req, res) => {
 })
 /* Delete | delete User account */
 user.delete('/deleteAccount', async (request, response) => {
-    if (request.isAuthenticated()){
-      if (request.query.deleteProfile == request.user._id){
-        try {
-            await Developer.deleteOne({ _id: request.user._id }, (err, result) => {
-                if (!err) {
-                    response.json({ message: 'Account deleted ' });
-                } else {
-                    response.json(err);
-                }
-            });
-        }
-        catch (err) {
-             console.log(err) 
-             response.json({ message: "You are not allowed to delete account" }) 
+    if (request.isAuthenticated()) {
+        if (request.query.deleteProfile == request.user._id) {
+            try {
+                await Developer.deleteOne({ _id: request.user._id }, (err, result) => {
+                    if (!err) {
+                        response.json({ message: 'Account deleted ' });
+                    } else {
+                        response.json(err);
+                    }
+                });
             }
-      }
-      
-    }else{
-      response.json({ message: "You must log in to delete your account" })
+            catch (err) {
+                console.log(err)
+            }
+        } else {
+            response.json({ message: "You are not allowed to delete account" })
+        }
+    } else {
+        response.json({ message: "You must log in to delete your account" })
     }
 })
-   
+
 module.exports = { user } 

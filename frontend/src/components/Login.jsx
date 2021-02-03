@@ -16,7 +16,7 @@ const style = {
   fontSize: 16,
   padding: 0,
 };
-const LoginCollection = ({ visible, onLogin, onCancel }) => {
+const LoginCollection = ({ visible, onLogin, onCancel, statusMessage }) => {
 
   const [form] = Form.useForm();
 
@@ -27,7 +27,6 @@ const LoginCollection = ({ visible, onLogin, onCancel }) => {
     onOk={() => form
       .validateFields()
       .then((values) => {
-        console.log(values)
         form.resetFields();
         onLogin(values);
       })
@@ -49,6 +48,7 @@ const LoginCollection = ({ visible, onLogin, onCancel }) => {
         remember: true,
       }}
     >
+      {statusMessage}
       <Form.Item
         name="username"
         rules={[
@@ -87,14 +87,21 @@ const LoginCollection = ({ visible, onLogin, onCancel }) => {
 }
 export default function Login(props) {
   const [visible, setVisible] = useState(false)
-
+  const [statusMessage, setStatusMessage] = useState("")
   const onLogin = async (values) => {
-    console.log('Received values of form: ', values);
     try {
-      await login(values)
-      setVisible(false)
-      props.auth(true)
-
+      await login(values).then((res) => {
+        return res.payload
+      })
+        .then((login) => {
+          if (login.data) {
+            setStatusMessage("Logged in successfuly...")
+            setVisible(false)
+            props.auth(true)
+          } else {
+            setStatusMessage("Authentication failed")
+          }
+        })
     } catch (err) {
       console.log(err)
     }
@@ -112,6 +119,7 @@ export default function Login(props) {
         </Button>
 
       <LoginCollection
+        statusMessage={statusMessage}
         visible={visible}
         onLogin={onLogin}
         onCancel={() => {

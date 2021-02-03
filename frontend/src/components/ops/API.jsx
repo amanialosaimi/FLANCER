@@ -2,16 +2,14 @@ import axios from 'axios'
 
 const API_SERVER = `http://localhost:3000`
 
-export const createProject = (projectDetails) => {
-  axios
+export const createProject = async (projectDetails) => {
+  axios.defaults.withCredentials = true
+  await axios
     .post(`${API_SERVER}/user/createProject`, projectDetails)
-    .then((response) => {
-      console.log('RESPONSE: ', response);
-    })
 }
 
 
-export const login = (credential) => {
+export const login = async (credential) => {
   axios.defaults.withCredentials = true
   const request = axios
     .post(`${API_SERVER}/auth/login`, {
@@ -20,7 +18,8 @@ export const login = (credential) => {
       withCredentials: true,
       headers: { crossDomain: true, 'Content-Type': 'application/json' },
     })
-    .then(response => response.data);
+    .then(response => response)
+    .catch((err)=> "Authentication failed")
 
   return {
     type: 'USER_LOGIN',
@@ -35,6 +34,7 @@ export const logout = () => {
     .then((response) => {
       console.log('RESPONSE: ', response);
     })
+    .catch((err) => console.log(err))
 }
 
 

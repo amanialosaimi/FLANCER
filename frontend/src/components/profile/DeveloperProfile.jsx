@@ -1,4 +1,5 @@
 import { Layout, Row, Col, Typography } from 'antd';
+import Moment from 'react-moment'
 
 const { Title } = Typography;
 
@@ -12,10 +13,11 @@ function DeveloperProfile(props) {
             <Row style={{ marginTop: 30 }}>
                 <Col span={10} style={{ margin: '0 28px 0' }}><Title level={3}>Welcome {props.profile?.user.username}!</Title></Col>
                 <br />
-                <Col span={10} style={{ margin: '0 28px 0' }}><Title level={5}>Registerd since {`${new Date(props.profile?.user.createdAt * 1000)}`}</Title></Col>
+                <Col span={10} style={{ margin: '0 28px 0' }}><Title level={5}>Registerd since <Moment fromNow>{new Date(props.profile?.user.createdAt * 1000)}</Moment> </Title></Col>
             </Row>
         </Layout>
     )
 }
 
 export default DeveloperProfile
+

@@ -16,13 +16,12 @@ import { checkStatus } from "./components/ops/API"
 function App() {
   const [isLogged, setIsLogged] = useState(false)
   const [profile, setProfile] = useState()
-  const checkLoginStatus = () => {
-    checkStatus().then((profile) => {
-      if (profile.data.cookies) {
-        setIsLogged(true)
-        setProfile(profile.data)
-      }
-    })
+
+  const checkLoginStatus = async () => {
+      await checkStatus().then((profile) => {
+          setIsLogged(true)
+          setProfile(profile.data)
+      })
   }
 
   useEffect(() => {
@@ -54,7 +53,7 @@ function App() {
           {isLogged ?
             <Route>
               <Route path="/dashboard">
-                <Dashboard profile={profile} />
+                <Dashboard profile={profile} status={checkLoginStatus} />
               </Route>
             </Route>
             : ""}

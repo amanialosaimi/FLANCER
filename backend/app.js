@@ -15,8 +15,8 @@ const { user } = require('./routes/user')
 /* Initial Express Server */
 const app = express()
 /* Database Connection */
-const db = 'Flancers';
-mongoose.connect(`mongodb://localhost:27017/${db}`, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
+const db = 'flancers';
+mongoose.connect(`mongodb+srv://dbFlancer:dbFL@2021@cluster0.sk19x.mongodb.net/${db}?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
 const Developer = require('./model/developer')
 const Project = require('./model/project')
 /* Middlewares */
@@ -66,13 +66,29 @@ const checkLogin = (req, res, next) => {
     }
 };
 /* Login Status */
-app.get("/", checkLogin, (req, res) => {
-    res.status(200).json({
-        authenticated: req.isAuthenticated(),
-        message: "User Authenticated",
-        user: req.user,
-        cookies: req.cookies
-    });
+app.get("/", checkLogin, async (req, res) => {
+        try {
+            await Developer.find({ _id: req.user._id })
+                .populate("projects")
+                .exec((err, profile) => {
+                    if (!err) {
+
+
+                        console.log(profile)
+                        res.status(200).json({
+                            authenticated: req.isAuthenticated(),
+                            message: "User Authenticated",
+                            user: req.user,
+                            projects: profile[0].projects,
+                            cookies: req.cookies
+                        });
+                    } else { console.log(err) }
+                    console.log(profile)
+                })
+        } catch (err) {
+            console.log(err)
+        }
+
 });
 /* Register New User */
 app.post('/register', (req, res) => {
@@ -86,7 +102,7 @@ app.post('/register', (req, res) => {
             res.redirect('/auth/login');
         })
     } else {
-        res.json({message: "You are already logged in"})
+        res.json({ message: "You are already logged in" })
     }
 })
 /* Find All Users - Temporary Route */
@@ -103,8 +119,8 @@ app.get('/findPublicProject', (req, res) => {
 })
 /* Endpoint Not Found */
 app.get("*", (req, res) => {
-    res.status(404).json({"messagge": "Endpoint Not Found"});
-  });
+    res.status(404).json({ "messagge": "Endpoint Not Found" });
+});
 /* Application Port */
 const PORT = process.env.PORT || 3000
 /* API Server Listen For Connections */

@@ -1,14 +1,15 @@
-import React, { Component } from "react";
-import { Form, Input, DatePicker, Modal, Button, Col } from "antd";
+import React, { useState } from "react";
+import { Form, Input, Switch, DatePicker, Modal, Button, Col } from "antd";
+import { createProject } from "../ops/API"
 const style = {
-  height: 40,
+  height: 30,
   width: 120,
-  lineHeight: "40px",
+  lineHeight: "10px",
   borderRadius: 4,
   backgroundColor: "#006466",
   color: "#fff",
   textAlign: "center",
-  fontSize: 16,
+  fontSize: 14,
   padding: 0,
 };
 const layout = {
@@ -19,92 +20,137 @@ const layout = {
     span: 16,
   },
 };
-const validateMessages = {
-  // eslint-disable-next-line
-  required: "${label} is required!",
-};
-
-export default class ProjectForm extends Component {
-  state = {
-    modal1Visible: false,
-  };
-
-  setModalVisible(modalVisible) {
-    this.setState({ modalVisible });
-  }
-  render() {
-    return (
-      <>
-        <Col span={20} style={{
-          top: "50px",
-          right: "45px",
-          position: "fixed"
-        }}>
-          <Button style={style} onClick={() => this.setModalVisible(true)}>
-            Add Project +
-          </Button>
-        </Col>
-        <Modal
-          title="Create New Project:"
-          centered
-          visible={this.state.modalVisible}
-          onOk={() => this.setModalVisible(false)}
-          onCancel={() => this.setModalVisible(false)}
+const ProjectCollection = ({ visible, createNewProject, onCancel, projectVisible }) => {
+  const [form] = Form.useForm();
+  return (
+    <Modal
+      title="Create New Project:"
+      centered
+      visible={visible}
+      onOk={() => form
+        .validateFields()
+        .then((values) => {
+          console.log(values)
+          form.resetFields();
+          createNewProject(values);
+        })
+        .catch((info) => {
+          console.log('Validate Failed:', info);
+        })
+      }
+      okText="Create New Project"
+      onCancel={onCancel}
+      htmlType="submit"
+    >
+      <Form
+        {...layout}
+        form={form}
+        name="nest-messages"
+      >
+        <Form.Item
+          name={"title"}
+          label="Project Name"
+          rules={[
+            {
+              required: true,
+              message: "Project title is required"
+            },
+          ]}
         >
-          <Form
-            {...layout}
-            name="nest-messages"
-            validateMessages={validateMessages}
-          >
-            <Form.Item
-              name={["user", "name"]}
-              label="Project Name"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              name={["user", "number"]}
-              label="Start Date"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-            >
-              <DatePicker />
-            </Form.Item>
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name={"isVisible"}
+          label="Visibility">
+          <Switch onChange={(e)=>projectVisible(e)} checkedChildren="Public" unCheckedChildren="Private" defaultChecked />
+        </Form.Item>
+        <Form.Item
+          name={"date"}
+          label="Start Date"
+          rules={[
+            {
+              required: true,
+              message: "Start Date of your project required"
+            },
+          ]}
+        >
+          <DatePicker />
+        </Form.Item>
+        <Form.Item
+          name={"technology"}
+          label="Technologies"
+          rules={[
+            {
+              message: "Technologies used for your project"
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name={"licence"}
+          label="Licence"
+          rules={[
+            {
+              message: "Licence used for your project"
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
 
-            <Form.Item name={["user", "website"]} label="Website Link">
-              <Input />
-            </Form.Item>
-            <Form.Item name={["user", "url"]} label="Image URL">
-              <Input />
-            </Form.Item>
-            <Form.Item
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-              name={["user", "Decription"]}
-              label="Decription"
-            >
-              <Input.TextArea />
-            </Form.Item>
-
-            <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-              <Button style={style} htmlType="submit">
-                Submit
-              </Button>
-            </Form.Item>
-          </Form>
-        </Modal>
-      </>
-    );
+        <Form.Item name={"url"} label="Website Link">
+          <Input />
+        </Form.Item>
+        <Form.Item name={"image"} label="Image URL">
+          <Input />
+        </Form.Item>
+        <Form.Item
+          rules={[
+            {
+              required: true,
+              message: "Project description is required"
+            },
+          ]}
+          name={"description"}
+          label="Decription"
+        >
+          <Input.TextArea />
+        </Form.Item>
+      </Form>
+    </Modal>
+  )
+}
+export default function ProjectForm(props) {
+  const [visible, setVisible] = useState(false)
+  const [projectVisible, setProjectVisible] = useState(true)
+  const createNewProject = async (values) => {
+    try {
+      await createProject(values).then((e) => { console.log("Project Added!") })
+      await props.status()
+    } catch (err) {
+      console.log(err)
+    }
+    return setVisible(false)
   }
+  return (
+    <>
+      <Col span={20} style={{
+        top: "50px",
+        right: "45px",
+        position: "fixed",
+        zIndex: "1"
+      }}>
+        <Button style={style} onClick={() => setVisible(true)}>
+          Create Project +
+          </Button>
+      </Col>
+      <ProjectCollection
+        visible={visible}
+        createNewProject={createNewProject}
+        onCancel={() => setVisible(false)}
+        projectVisible={setProjectVisible}
+      />
+    </>
+  );
 }
