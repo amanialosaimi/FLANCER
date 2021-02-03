@@ -30,7 +30,6 @@ const ProjectCollection = ({ visible, createNewProject, onCancel, projectVisible
       onOk={() => form
         .validateFields()
         .then((values) => {
-          console.log(values)
           form.resetFields();
           createNewProject(values);
         })

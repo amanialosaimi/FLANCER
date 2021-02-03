@@ -16,13 +16,15 @@ const developerSchema = new mongoose.Schema({
             ref: "Project"
         }
     ],
+    last_login: Date,
+    attemps: String,
     isActive: Boolean,
     createdAt: Number,
     updatedAt: Number
 },
 { timestamps: { currentTime: () => Math.floor(Date.now() / 1000) } }
 )
-developerSchema.plugin(passportLocalMongoose)
+developerSchema.plugin(passportLocalMongoose, {lastLoginField: 'lastLogin', limitAttempts: true, attemptsField: 'attemps'})
 
 /* Create Model From Schema */
 const DeveloperModel = mongoose.model('Developer', developerSchema)

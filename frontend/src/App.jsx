@@ -21,6 +21,10 @@ function App() {
       await checkStatus().then((profile) => {
           setIsLogged(true)
           setProfile(profile.data)
+      }).catch((err)=>{
+        setIsLogged(false)
+        setProfile(null)
+        console.log("AUTH ERR:", err)
       })
   }
 

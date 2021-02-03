@@ -48,6 +48,16 @@ export const checkStatus = async () => {
   return profile
 }
 
+export const updateProfile = async (userID, updates) => {
+  let profile
+  axios.defaults.withCredentials = true
+  await axios.put(`${API_SERVER}/user/${userID}`, updates)
+    .then((res) => {
+      profile = res
+    })
+  return profile
+}
+
 //this axios for get all the users from the server
 export const getAllUsers = () => {
   axios

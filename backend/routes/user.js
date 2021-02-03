@@ -19,12 +19,10 @@ user.route('/createProject')
                     const newProjectDetails = new Project(request.body)
                     //newProjectDetails.topics.push(request.body.topics)
                     newProjectDetails.save((err, project) => {
-                        if (!err){ response.json(project) }
+                        if (!err) { response.json(project) }
                     })
                     user.projects.push(newProjectDetails)
-                    user.save((err, developerProject) => {
-                        if (!err) console.log(developerProject)
-                    })
+                    user.save()
                 })
             } catch (err) { console.log(err) }
         } else {
@@ -76,15 +74,29 @@ user.put('/:id', async (request, response) => {
     if (request.isAuthenticated()) {
         if (request.params.id == request.user._id) {
             try {
-                await Developer.findOneAndUpdate({ _id: request.user._id }, request.body, (err, result) => {
+                await Developer.findByUsername(request.user.username, async (err, user) => {
                     if (!err) {
-                        response.json({ message: 'Profile Updated!' });
-                        /* response.redirect("/auth/login") */
+                        if (request.body.password) {
+                            await user.setPassword(request.body.password, async function () {
+                                await user.save((err, result) => {
+
+                                    if (err) console.log("Not happening: ", err)
+                                    response.status(200).json({ message: 'Profile Updated' });
+                                });
+                               
+                            })
+                        } else {
+                            user.email = request.body.email
+                            user.save()
+                            response.status(200).json({ message: 'Email Updated' });
+                        }
                     } else {
-                        response.json(err);
+                        response.status(401).json({ message: 'Cannot update' });
                     }
-                });
-            } catch (err) { console.log(err) }
+
+                })
+            }
+            catch (err) { console.log(err) }
         } else { response.json({ message: "You are not allowed to update profile" }) }
     } else {
         response.json({ message: "You must log in to edit your profile" })
@@ -92,29 +104,29 @@ user.put('/:id', async (request, response) => {
 })
 // find public projects for show it to other users 
 user.get('/publicProjects', async (req, res) => {
-    if (req.isAuthenticated()){
-    try {
-        await Developer.find({})
-            .populate("projects")
-            .exec((err, result) => {
-                if (!err) {
-                    let publicProjects = []
-                    result.map((user)=>{
-                        user.projects.map((userProject)=>{
-                            if (userProject && userProject.isVisible){
-                                publicProjects.push({user: [user._id, user.username], project: userProject})
-                            }
+    if (req.isAuthenticated()) {
+        try {
+            await Developer.find({})
+                .populate("projects")
+                .exec((err, result) => {
+                    if (!err) {
+                        let publicProjects = []
+                        result.map((user) => {
+                            user.projects.map((userProject) => {
+                                if (userProject && userProject.isVisible) {
+                                    publicProjects.push({ user: [user._id, user.username], project: userProject })
+                                }
+                            })
                         })
-                    })
-                    res.json(publicProjects)
-                }
-            })
-    } catch (err) {
-        console.log(err)
+                        res.json(publicProjects)
+                    }
+                })
+        } catch (err) {
+            console.log(err)
+        }
+    } else {
+        res.json({ message: "You must register/login to read users' projects" })
     }
-} else {
-    res.json({message: "You must register/login to read users' projects"})
-}
 })
 /* Delete | delete User account */
 user.delete('/deleteAccount', async (request, response) => {

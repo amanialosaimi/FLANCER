@@ -13,7 +13,6 @@ export default function DeveloperTable(props) {
       projectObject.isVisible = projectObject.isVisible ? "Public" : "Private"
       return projectObject;
     })
-    console.log(result)
     updateProject(result)
 
   }, [props.projects])

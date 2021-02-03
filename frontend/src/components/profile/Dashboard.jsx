@@ -23,7 +23,7 @@ export default function Dashboard(props) {
                     <DeveloperDashboard profile={uesrProfile} />
                 </Route>
                 <Route path="/dashboard/profile">
-                    <DeveloperProfile profile={uesrProfile} />
+                    <DeveloperProfile profile={uesrProfile} status={props.status} />
                 </Route>
                 <Route path="/dashboard/projects">
                     <DeveloperProjects profile={uesrProfile} status={props.status} />
