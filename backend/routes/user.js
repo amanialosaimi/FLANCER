@@ -171,9 +171,21 @@ user.delete('/deleteAccount', async (request, response) => {
         } else {
             response.json({ message: "You are not allowed to delete account" })
         }
-    } else {
+    } else { 
         response.json({ message: "You must log in to delete your account" })
     }
 })
+// Delete | delete projecr 
+user.route('/project/:id')
+.delete(async(req, res) => {
+   await Project.deleteOne(req.params.id)
+    .then(() => {
+      res.status(202).json({message: "Project deleted sucessfully"});
+    })
+    .catch((error) => {
+      res.status(500).json({ error: error })
+    });
+});
+
 
 module.exports = { user } 

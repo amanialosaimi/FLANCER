@@ -27,7 +27,7 @@ export const updateProject = async (projectID, updates) => {
 export const deleteProject = async (projectID) => {
   axios.defaults.withCredentials = true
   await axios
-    .delete(`${API}/api/user/project?id=${projectID}`)
+    .delete(`${API}/api/user/project?id=${projectID}`,projectID)
     .then((result) => result)
     .catch((err) => err)
 }

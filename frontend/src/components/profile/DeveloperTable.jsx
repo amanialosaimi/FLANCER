@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Table } from 'antd';
-import { DeleteOutlined } from '@ant-design/icons'
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
+import { deleteProject } from "../ops/API"
 import '../../App.css'
 import UpdateProject from './UpdateProject';
 export default function DeveloperTable(props) {
@@ -8,7 +9,7 @@ export default function DeveloperTable(props) {
   useEffect(() => {
     let result = props.projects?.map(function (project, i) {
       let projectObject = Object.assign({}, project);
-      projectObject.delete = <DeleteOutlined projectID={project._id}/>;
+      projectObject.delete = <DeleteOutlined onClick={()=>{deleteProject(project._id)}}/>;
       projectObject.edit = <UpdateProject project={project} />
       projectObject.key = i + 1
       projectObject.isVisible = projectObject.isVisible ? "Public" : "Private"
