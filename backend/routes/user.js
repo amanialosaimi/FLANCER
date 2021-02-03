@@ -80,7 +80,32 @@ user.put('/:id', async (request, response) => {
         response.json({ message: "You must log in to edit your profile" })
     }
 })
-
+// find public projects for show it to other users 
+user.get('/publicProjects', async (req, res) => {
+    if (req.isAuthenticated()){
+    try {
+        await Developer.find({})
+            .populate("projects")
+            .exec((err, result) => {
+                if (!err) {
+                    let publicProjects = []
+                    result.map((user)=>{
+                        user.projects.map((userProject)=>{
+                            if (userProject && userProject.isVisible){
+                                publicProjects.push({user: [user._id, user.username], project: userProject})
+                            }
+                        })
+                    })
+                    res.json(publicProjects)
+                }
+            })
+    } catch (err) {
+        console.log(err)
+    }
+} else {
+    res.json({message: "You must register/login to read users' projects"})
+}
+})
 /* Delete | delete User account */
 user.delete('/deleteAccount', async (request, response) => {
     if (request.isAuthenticated()){
@@ -95,9 +120,11 @@ user.delete('/deleteAccount', async (request, response) => {
             });
         }
         catch (err) {
-             console.log(err) }
+             console.log(err) 
+             response.json({ message: "You are not allowed to delete account" }) 
+            }
       }
-      response.json({ message: "You are not allowed to delete account" }) 
+      
     }else{
       response.json({ message: "You must log in to delete your account" })
     }
