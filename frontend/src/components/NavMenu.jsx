@@ -3,7 +3,6 @@ import { Menu, Button, Space } from "antd";
 import "../App.css";
 import { Link } from "react-router-dom";
 import Login from "./Login";
-import { logout } from "./ops/API";
 import { checkStatus, logout } from "./ops/API";
 const style = {
   height: 40,
