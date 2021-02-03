@@ -93,7 +93,7 @@ app.get("/api", checkLogin, async (req, res) => {
 /* Register New User */
 app.post('/api/register', (req, res) => {
     if (!req.isAuthenticated()) {
-        Developer.register(new Developer({ username: req.body.username }), req.body.password, function (err) {
+        Developer.register(new Developer( req.body ), req.body.password, function (err) {
             if (err) {
                 console.log('Error Register New User: ', err);
                 return next(err);
