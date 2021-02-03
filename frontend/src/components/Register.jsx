@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Form, Input, Button, Divider  } from 'antd';
+import axios from 'axios'
 import '../App.css'
 const style = {
   height: 40,
@@ -17,6 +18,16 @@ class Register extends Component {
     this.state = {
     }
   }
+  postRegister = (values) => {
+    axios.post(`http://localhost:3000/register`,
+       values)
+      .then((response) => {
+        console.log("RESPONSE: ", response);
+      })
+      .catch((err) => {
+        console.log("ERR: ", err);
+      });
+    };
   render() {
     const layout = {
       labelCol: { span: 8 },
@@ -26,6 +37,7 @@ class Register extends Component {
       wrapperCol: { offset: 8, span: 16 },
     };
     const onFinish = (values) => {
+      this.postRegister(values);
       console.log('Success:', values);
     };
       const onFinishFailed = (errorInfo) => {
@@ -47,16 +59,24 @@ class Register extends Component {
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
     >
+       <Form.Item
+        label={<h4><b>Username</b></h4>}
+        name="username"
+        rules={[{ required: true, message: 'Please input your username!' }]}
+      >
+        <Input />
+      </Form.Item>
       <Form.Item
+
         label={<h4><b>First Name</b></h4>}
-        name="Firstname"
+        name="firstname"
         rules={[{ required: true, message: 'Please input your firstname!' }]}
       >
         <Input />
       </Form.Item>
       <Form.Item
         label={<h4><b>Last Name</b></h4>}
-        name="Lastname"
+        name="lastname"
         rules={[{ required: true, message: 'Please input your Lastname!' }]}
       >
         <Input />
