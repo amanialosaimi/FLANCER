@@ -29,9 +29,33 @@ user.route('/createProject')
             response.json({ message: "You must log in to create new project" })
         }
     })
+/// update project
+user.route('/project/:id')
+.put(async(req, res) => {
+  console.log('PARAMS:', req.params);
+   await Project.findById(req.params.id)
+    .then((foundProject) => {
+      if (foundProject) {
+        return foundProject.update(req.body);
+      } else {
+        res.status(404).json({
+          error: {
+            message: "The provided ID doesn't match any documents",
+          },
+        });
+      }
+    })
+    .then(() => {
+      // If the update succeeded, return 204 and no JSON
+      res.status(202).json({message: "Project updated sucessfully"});
+    })
+    // Catch any errors that might occur
+    .catch((error) => {
+      res.status(500).json({ error: error })
+    });
+});
 
-
-/* Initial Project Collection For First Time */
+    /* Initial Project Collection For First Time */
 // user.route('/projects')
 //     .get(async (req, res, next) => {
 //         try {
