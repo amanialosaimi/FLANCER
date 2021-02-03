@@ -81,12 +81,22 @@ user.put('/:id', async (request, response) => {
     }
 })
 // find public projects for show it to other users 
-user.get('/publicProjects', (req, res) => {
+user.get('/publicProjects', async (req, res) => {
     try {
-        await Project.find({isVisible : true})
+        await Developer.find({})
             .populate("projects")
             .exec((err, result) => {
-                if (!err) response.json(result)
+                if (!err) {
+                    let publicProjects = []
+                    result.map((user)=>{
+                        user.projects.map((userProject)=>{
+                            if (userProject.projects.isVisible){
+                                publicProjects.push(userProject)
+                            }
+                        })
+                    })
+                    res.json(publicProjects)
+                }
             })
     } catch (err) {
         console.log(err)
