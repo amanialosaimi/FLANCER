@@ -82,6 +82,7 @@ user.put('/:id', async (request, response) => {
 })
 // find public projects for show it to other users 
 user.get('/publicProjects', async (req, res) => {
+    if (req.isAuthenticated()){
     try {
         await Developer.find({})
             .populate("projects")
@@ -101,6 +102,9 @@ user.get('/publicProjects', async (req, res) => {
     } catch (err) {
         console.log(err)
     }
+} else {
+    res.json({message: "You must register/login to read users' projects"})
+}
 })
 /* Delete | delete User account */
 user.delete('/deleteAccount', async (request, response) => {
