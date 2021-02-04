@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react"
-import { Layout, Row, Col, Typography, Form, Input, Button, Result, Divider, Space } from 'antd';
+import { Layout, Row, Col, Typography, Form, Input, Button, Result, Divider } from 'antd';
 import Moment from 'react-moment'
 import { API } from '../ops/API'
 const style = {
@@ -27,7 +27,7 @@ function DeveloperProfile(props) {
     // eslint-disable-next-liness
     useEffect(() => {
         props.status()
-    }, [])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
     const onFinish = async (values) => {
         if (props.profile?.user) {
             await API.updateProfile(props.profile.user._id, values)

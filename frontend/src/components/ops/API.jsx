@@ -1,8 +1,8 @@
 import axios from 'axios'
-
+const API_URI = 'http://localhost:3000'
 export const getAllUsers = () => {
   axios
-    .get(`/api/find`)
+    .get(`${API_URI}/api/find`)
     .then((response) => {
       console.log("RESPONSE: ", response);
       console.log("DATA: ", response.data);
@@ -16,7 +16,7 @@ export const API = {
   register: async (newUserInfo) => {
     let message
     await axios
-      .post(`/api/register`, newUserInfo)
+      .post(`${API_URI}/api/register`, newUserInfo)
       .then((response) => {
         message = response.data.message
       })
@@ -28,7 +28,7 @@ export const API = {
   , updateProfile: async (userID, updates) => {
     let profile
     axios.defaults.withCredentials = true
-    await axios.put(`/api/user/${userID}`, updates)
+    await axios.put(`${API_URI}/api/user/${userID}`, updates)
       .then((res) => {
         profile = res
       })
@@ -37,7 +37,7 @@ export const API = {
   checkStatus: async () => {
     let profile;
     axios.defaults.withCredentials = true
-    await axios.get(`/api`)
+    await axios.get(`${API_URI}/api`)
       .then((res) => {
         profile = res
       })
@@ -46,7 +46,7 @@ export const API = {
   login: async (credential) => {
     axios.defaults.withCredentials = true
     const request = axios
-      .post(`/api/auth/login`, {
+      .post(`${API_URI}/api/auth/login`, {
         username: credential.username,
         password: credential.password,
         withCredentials: true,
@@ -60,25 +60,28 @@ export const API = {
       payload: request,
     };
   },
-  logout: () => {
-    axios
-      .get(`/api/auth/logout`)
+  logout: async () => {
+    let profile
+    await axios
+      .get(`${API_URI}/api/auth/logout`)
       .then((response) => {
-        console.log('RESPONSE: ', response);
+        profile = response
       })
       .catch((err) => console.log(err))
+    return profile
+    
   },
   createProject: async (projectDetails) => {
     axios.defaults.withCredentials = true
     await axios
-      .post(`/api/user/createProject`, projectDetails)
+      .post(`${API_URI}/api/user/createProject`, projectDetails)
       .then((result) => result)
       .catch((err) => err)
   },
   readProject: async (projectID) => {
     axios.defaults.withCredentials = true
     await axios
-      .get(`/api/user/project?id=${projectID}`)
+      .get(`${API_URI}/api/user/project?id=${projectID}`)
       .then((result) => result)
       .catch((err) => err)
   },
@@ -86,7 +89,7 @@ export const API = {
     let project
     axios.defaults.withCredentials = true
     await axios
-      .put(`/api/user/project/${projectID}`, updates)
+      .put(`${API_URI}/api/user/project/${projectID}`, updates)
       .then((result) => project = result)
       .catch((err) => err)
     return project
@@ -95,14 +98,14 @@ export const API = {
     let project
     axios.defaults.withCredentials = true
     await axios
-      .delete(`/api/user/project/${projectID}`)
+      .delete(`${API_URI}/api/user/project/${projectID}`)
       .then((result) => project = result)
       .catch((err) => err)
     return project
   },
   postContact: async (values) => {
     let message
-    await axios.post(`/api/contact`,
+    await axios.post(`${API_URI}/api/contact`,
       values)
       .then((response) => {
         message = response.data
@@ -110,12 +113,12 @@ export const API = {
       .catch((err) => {
         console.log("ERR: ", err);
       });
-      return message
+    return message
   },
-  getProfileGH: async (userName) => {
+  getProfileGH: async (username) => {
     let profile
     await axios
-      .get(`/api/github/`)
+      .get(`${API_URI}/api/github/${username}`)
       .then((result) => profile = result)
       .catch((err) => {
         console.log("GITHUB ERR:", err)

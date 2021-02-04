@@ -16,7 +16,7 @@ const style = {
   fontSize: 16,
   padding: 0,
 };
-const LoginCollection = ({ visible, onLogin, onCancel, statusMessage }) => {
+const LoginCollection = ({ visible, onLogin, redirect ,onCancel, statusMessage }) => {
 
   const [form] = Form.useForm();
 
@@ -29,6 +29,7 @@ const LoginCollection = ({ visible, onLogin, onCancel, statusMessage }) => {
       .then((values) => {
         form.resetFields();
         onLogin(values);
+        redirect('/dashboard')
       })
       .catch((info) => {
         console.log('Validate Failed:', info);
@@ -123,6 +124,7 @@ export default function Login(props) {
         statusMessage={statusMessage}
         visible={visible}
         onLogin={onLogin}
+        redirect={props.redirect}
         onCancel={() => {
           setVisible(false);
         }}

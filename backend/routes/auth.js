@@ -16,6 +16,7 @@ Redirect To Frontend Homepage
 */
 auth.get("/logout", (req, res) => {
     req.logout();
+    res.redirect('/')
 });
 
 /* User Profile OR Flash Error */
