@@ -16,7 +16,7 @@ const { user } = require('./routes/user')
 /* Initial Express Server */
 const app = express()
 /* Database Connection */
-mongoose.connect('mongodb+srv://dbFlancer:dbFL@2021@cluster0.sk19x.mongodb.net/flancers?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
 const Developer = require('./model/developer')
 const Project = require('./model/project')
 /* Middlewares */
@@ -27,7 +27,7 @@ app.use(morgan('tiny'));
 const PORT = process.env.PORT || 3000
 app.use(cors({
     credentials: true,
-    origin: ['http://localhost:3001', '*'],
+    origin: [`http://localhost:${PORT}`, "https://flancers.herokuapp.com"],
 }));
 
 /* Auth Cookie Setup */
@@ -118,6 +118,13 @@ app.get('/api/findPublicProject', (req, res) => {
     })
 })
 
+//serves all our static files from the build directory.
+app.use(express.static(__dirname + "build"));
 
+// After all routes
+// This code essentially serves the index.html file on any unknown routes.
+app.get("/*", (req, res) => {
+  res.sendFile(__dirname + "build/index.html");
+});
 /* API Server Listen For Connections */
 app.listen(PORT, () => { console.log(`Flancer | Backend Server - Port ${PORT}`) })

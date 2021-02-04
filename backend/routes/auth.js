@@ -1,7 +1,6 @@
 const { Router } = require('express')
 const auth = Router()
 const passport = require("passport");
-const CLIENT_HOME = "http://localhost:3000";
 
 /* Failed Login Route */
 auth.get("/login/failed", (req, res) => {
@@ -17,7 +16,6 @@ Redirect To Frontend Homepage
 */
 auth.get("/logout", (req, res) => {
     req.logout();
-    res.redirect(CLIENT_HOME);
 });
 
 /* User Profile OR Flash Error */
