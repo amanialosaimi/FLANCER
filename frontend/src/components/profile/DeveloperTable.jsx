@@ -28,7 +28,7 @@ export default function DeveloperTable(props) {
     })
     updateProject(result)
 
-  }, [props.profile])
+  }, [props.profile]) // eslint-disable-line react-hooks/exhaustive-deps
   const columns = [
     {
       title: '#',

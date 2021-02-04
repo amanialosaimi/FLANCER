@@ -1,8 +1,5 @@
-// -m "Adopt Register POST In Client App"
-
 import axios from 'axios'
 const API_URI = 'http://localhost:3000'
-
 export const getAllUsers = () => {
   axios
     .get(`${API_URI}/api/find`)
@@ -63,13 +60,16 @@ export const API = {
       payload: request,
     };
   },
-  logout: () => {
-    axios
+  logout: async () => {
+    let profile
+    await axios
       .get(`${API_URI}/api/auth/logout`)
       .then((response) => {
-        console.log('RESPONSE: ', response);
+        profile = response
       })
       .catch((err) => console.log(err))
+    return profile
+    
   },
   createProject: async (projectDetails) => {
     axios.defaults.withCredentials = true
@@ -105,7 +105,7 @@ export const API = {
   },
   postContact: async (values) => {
     let message
-    await axios.post(`${API_URI}/contact`,
+    await axios.post(`${API_URI}/api/contact`,
       values)
       .then((response) => {
         message = response.data
@@ -113,12 +113,12 @@ export const API = {
       .catch((err) => {
         console.log("ERR: ", err);
       });
-      return message
+    return message
   },
-  getProfileGH: async (userName) => {
+  getProfileGH: async (username) => {
     let profile
     await axios
-      .get(`${API_URI}/api/github/`)
+      .get(`${API_URI}/api/github/${username}`)
       .then((result) => profile = result)
       .catch((err) => {
         console.log("GITHUB ERR:", err)

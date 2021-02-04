@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Menu, Button, Space } from "antd";
 import "../App.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Login from "./Login";
 import { API } from "./ops/API";
 const style = {
@@ -18,12 +18,11 @@ const style = {
 };
 function NavMenu(props) {
   const [current, setCurrent] = useState("home")
-
   const handleClick = (e) => {
     //console.log("click ", e);
     setCurrent(e.key)
   };
-
+  const history = useHistory();
 
   return (
     <Menu
@@ -43,11 +42,11 @@ function NavMenu(props) {
           <Button
             type="primary"
             style={style}
-            onClick={() => { API.logout(); props.auth(false); props.status() }}
+            onClick={async () => { await API.logout().then((profile)=>{ props.status(); props.auth(false); history.push('/'); })  }}
           >
             Logout
         </Button></Space>
-      </> : <Login auth={props.auth} status={props.status} />}
+      </> : <Login auth={props.auth} status={props.status} redirect={history.push} />}
     </Menu>
   );
 }

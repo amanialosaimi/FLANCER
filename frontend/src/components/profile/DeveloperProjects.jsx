@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import DeveloperTable from './DeveloperTable';
 import ProjectForm from './ProjectForm';
-import { Typography, Layout, Card, Col, Row, Divider } from 'antd';
+import { Typography, Layout, Card, Col, Row } from 'antd';
 import { API } from '../ops/API'
 import 'antd/dist/antd.css';
 
@@ -10,12 +10,10 @@ const { Content } = Layout;
 
 export default function DeveloperProjects(props) {
     const [githubProfile, setGithubProfile] = useState('apple')
-    const [githubRepos, setGithubRepos] = useState([])
-    const [githubStars, setGithubStars] = useState(0)
+    const [githubRepos, setGithubRepos] = useState()
+    const [githubStars, setGithubStars] = useState()
     useEffect(() => {
         const fetchGHProfile = async (username) => {
-
-            if (process.env.GITHUB_TOKEN) {
                 await API.getProfileGH(username)
                     .then((result) => {
                         setGithubProfile(result.data?.profileInfo)
@@ -25,13 +23,17 @@ export default function DeveloperProjects(props) {
                             "Github Repos", result.data?.repos)
                     })
                     .catch((err) => console.log(err))
-            }
-
-            fetchGHProfile()
         }
-        const totalStars = githubRepos.reduce((acc, repo) => acc + repo.stars, 0);
-        setGithubStars(totalStars)
-    }, [])
+        try {
+            fetchGHProfile('apple').then(()=>{
+                const totalStars = githubRepos?.reduce((acc, repo) => acc + repo.stars, 0);
+                setGithubStars(totalStars)
+            })
+        } catch (err) {
+            console.log(err)
+        }
+        
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
     return (
         <Layout style={{ marginLeft: 200 }}>
             <Row style={{ marginTop: 30 }}>
@@ -43,7 +45,7 @@ export default function DeveloperProjects(props) {
                     <Card title="Total Projects" bordered={false} style={{ textAlign: 'center' }}><Title level={2}>{props.profile?.projects.length}</Title></Card>
                 </Col>
                 <Col span={8}>
-                    <Card title="Total Repos" bordered={false} style={{ textAlign: 'center' }}><Title level={2}>{githubProfile > 0 ? githubProfile.public_repos : "0"}</Title></Card>
+                    <Card title="Total Repos" bordered={false} style={{ textAlign: 'center' }}><Title level={2}>{githubProfile ? githubProfile.public_repos : "0"}</Title></Card>
                 </Col>
                 <Col span={7}>
                     <Card title="Total Stars" bordered={false} style={{ textAlign: 'center' }}><Title level={2}>{githubStars ? githubStars.toString() : "0"}</Title></Card>
