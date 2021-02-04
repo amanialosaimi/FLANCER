@@ -27,7 +27,7 @@ app.use(morgan('tiny'));
 const PORT = process.env.PORT || 3000
 app.use(cors({
     credentials: true,
-    origin: [`http://localhost:${PORT}`, 'http://localhost:3001', "https://flancers.herokuapp.com", "https://flancer.herokuapp.com"],
+    origin: [`http://localhost:${PORT}`, "https://flancers.herokuapp.com", "https://flancer.herokuapp.com"],
 }));
 
 /* Auth Cookie Setup */
