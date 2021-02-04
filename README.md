@@ -2,7 +2,7 @@
 # FLANCER | Web Application
 
 ## Table of Contents
-1. [Project Discribtion](#Project-Discribtion)
+1. [Project Discribtion](#Project-Description)
 2. [Technologies](#technologies)
 3. [User Stories](#userStories)
 4. [WireFrames](#WireFrames)
@@ -14,9 +14,9 @@
 10. [Final Result](#Final-Result)
 11. [FLANCER Team](#FLANCER-Team)
 12. [References](#References)
-### Project Discribtion
+### Project Description
 ***
-FLANCER is your destination of showing the case of your existing projects,repositories, and designs in detail as a Developer while you are able to share them with other developers, creating a new project along with detailed info, and read, update, delete existing project as well, with the ability to update the project status whether public or private. Flancer will also have visitors with a read-only privilege to give them the ability to read a public project's details. FLANCER is a full-Stack Web Application, we mainly used MEARN technology to implemented it and with differint technologies  to be illustrated.
+FLANCER is your destination of showing the case of your existing projects,repositories, and designs in detail as a Developer while you are able to share them with other developers, creating a new project along with detailed info, and read, update, delete existing project as well, with the ability to update the project status whether public or private. Flancer will also have visitors with a read-only privilege to give them the ability to read a public project's details. FLANCER is a Full-Stack Web Application, built using MEARN technology to implemented it and with differint technologies  to be illustrated.
 
 
 ## Technologies
