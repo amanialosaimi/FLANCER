@@ -66,7 +66,7 @@ A list of technologies used within the project:
 ***
 The ER Diagram and Use Case Diagram to clarify the functionalities associated with our users.
 
-![useCase](./ReadmeImages/useCase.png)
+![useCase](./ReadmeImages/UseCase.png)
 
 ![ER](./ReadmeImages/ER.png)
 
