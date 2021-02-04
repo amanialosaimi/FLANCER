@@ -7,7 +7,6 @@ import {
     ShareAltOutlined,
     TeamOutlined,
     ToolOutlined,
-    AppstoreOutlined,
     RollbackOutlined,
     LogoutOutlined,
 } from '@ant-design/icons';
@@ -29,9 +28,8 @@ export default function DeveloperSidebar() {
             >
                 <div className="logo" />
                 <FlancerLogo />
-                <Menu theme="light" mode="inline" defaultSelectedKeys={['1']}>
-                    {/* <Menu.Item key="0" icon={<UserOutlined />}><Link to="/dashboard">Dashboard</Link></Menu.Item> */}
-                    <Menu.Item key="1" icon={<UserOutlined />}><Link to="/dashboard/profile">Profile</Link></Menu.Item>
+                <Menu theme="light" mode="inline" defaultSelectedKeys={['5']}>
+                    <Menu.Item key="1" icon={<UserOutlined />}><Link to="/dashboard">Profile</Link></Menu.Item>
                     <Menu.Item key="2" icon={<TrophyOutlined />}><Link to="/dashboard/projects">Projects</Link></Menu.Item>
                     <Menu.Item key="3" icon={<ShareAltOutlined />}><Link to="/dashboard/publication">Publication</Link></Menu.Item>
                     <Menu.Item key="4" icon={<TeamOutlined />}>Teams <Badge count={"Soon"} /></Menu.Item>

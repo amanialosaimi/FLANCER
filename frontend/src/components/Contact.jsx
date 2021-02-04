@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Form, Input, Button, Divider, Space } from 'antd';
-import axios from 'axios'
+import { Form, Input, Button, Divider } from 'antd';
+import { API } from './ops/API'
 import '../App.css'
 const { TextArea } = Input;
 const style = {
@@ -14,20 +14,9 @@ const style = {
   fontSize: 14,
 };
 class Contact extends Component {
-  constructor(props) {
-    super(props)
-  }
-  postContact = (values) => {
-    axios.post(`http://localhost:3000/contact`,
-       values)
-      .then((response) => {
-        console.log("RESPONSE: ", response);
-      })
-      .catch((err) => {
-        console.log("ERR: ", err);
-      });
-    };
-   
+  s
+
+
   render() {
     const layout = {
       labelCol: { span: 8 },
@@ -37,8 +26,7 @@ class Contact extends Component {
       wrapperCol: { offset: 8, span: 16 },
     };
     const onFinish = (values) => {
-      this.postContact(values);
-      console.log('Success:', values);
+      API.postContact(values).then((result) => console.log("Message Saved: ", result))
     };
     const onFinishFailed = (errorInfo) => {
       console.log('Failed:', errorInfo);
@@ -65,7 +53,7 @@ class Contact extends Component {
               label={<h4><b>First Name</b></h4>}
               name="firstname"
               rules={[{ required: true, message: 'Please input your firstname!' }]}
-               
+
             >
               <Input />
             </Form.Item>
@@ -73,7 +61,7 @@ class Contact extends Component {
               label={<h4><b>Last Name</b></h4>}
               name="lastname"
               rules={[{ required: true, message: 'Please input your Lastname!' }]}
-               
+
             >
               <Input />
             </Form.Item>
@@ -82,15 +70,15 @@ class Contact extends Component {
               label={<h4><b>Email</b></h4>}
               name="email"
               rules={[{ required: true, message: 'Please input your email!' }]}
-              
+
             >
               <Input />
             </Form.Item>
 
             <Form.Item {...tailLayout} >
-              <TextArea placeholder='Write something..' rows={4} 
-               label="Messagee"
-               name="message"
+              <TextArea placeholder='Write something..' rows={4}
+                label="Messagee"
+                name="message"
               />
             </Form.Item>
 

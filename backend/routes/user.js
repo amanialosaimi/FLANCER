@@ -32,7 +32,6 @@ user.route('/createProject')
 /// update project
 user.route('/project/:id')
 .put(async(req, res) => {
-  console.log('PARAMS:', req.params);
    await Project.findById(req.params.id)
     .then((foundProject) => {
       if (foundProject) {
@@ -46,16 +45,24 @@ user.route('/project/:id')
       }
     })
     .then(() => {
-      // If the update succeeded, return 204 and no JSON
       res.status(202).json({message: "Project updated sucessfully"});
     })
     // Catch any errors that might occur
     .catch((error) => {
       res.status(500).json({ error: error })
-    });
-});
+    })
+})
+.delete(async (req, res) => {
+    await Project.findOneAndRemove({_id: req.params.id})
+    .then((foundProject)=>{
+        res.json(foundProject)
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+})
 
-    /* Initial Project Collection For First Time */
+/* Initial Project Collection For First Time */
 // user.route('/projects')
 //     .get(async (req, res, next) => {
 //         try {
@@ -171,21 +178,9 @@ user.delete('/deleteAccount', async (request, response) => {
         } else {
             response.json({ message: "You are not allowed to delete account" })
         }
-    } else { 
+    } else {
         response.json({ message: "You must log in to delete your account" })
     }
 })
-// Delete | delete projecr 
-user.route('/project/:id')
-.delete(async(req, res) => {
-   await Project.deleteOne(req.params.id)
-    .then(() => {
-      res.status(202).json({message: "Project deleted sucessfully"});
-    })
-    .catch((error) => {
-      res.status(500).json({ error: error })
-    });
-});
-
 
 module.exports = { user } 

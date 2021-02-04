@@ -11,7 +11,7 @@ const projectSchema = new mongoose.Schema({
     licence: String,
     url: String,
     technology: String,
-    topics: [String],
+    image: String,
     isVisible: String,
     createdAt: Number,
     updatedAt: Number,

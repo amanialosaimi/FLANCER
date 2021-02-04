@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Form, Button, Modal, Input, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 // import { ReactComponent as LoginBg } from "../images/LoginBg.svg";
-import { login } from "./ops/API"
+import { API } from "./ops/API"
 
 const style = {
   height: 40,
@@ -78,7 +78,7 @@ const LoginCollection = ({ visible, onLogin, onCancel, statusMessage }) => {
       <Form.Item>
         <Form.Item valuePropName="checked" noStyle>
           <Checkbox>Remember me</Checkbox>
-        </Form.Item><a className="login-form-forgot" href="#">Forgot password</a></Form.Item>
+        </Form.Item><a className="login-form-forgot" href="/restorePassowrd">Forgot password</a></Form.Item>
       <Form.Item>
         <a href="/register">Register now!</a>
       </Form.Item>
@@ -90,14 +90,15 @@ export default function Login(props) {
   const [statusMessage, setStatusMessage] = useState("")
   const onLogin = async (values) => {
     try {
-      await login(values).then((res) => {
-        return res.payload
-      })
+      await API.login(values)
+        .then((res) => {
+          return res.payload
+        })
         .then((login) => {
           if (login.data) {
-            setStatusMessage("Logged in successfuly...")
             setVisible(false)
             props.auth(true)
+            props.status()
           } else {
             setStatusMessage("Authentication failed")
           }

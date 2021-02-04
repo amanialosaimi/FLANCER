@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form, Input, Switch, DatePicker, Modal, Button, Col } from "antd";
-import { createProject } from "../ops/API"
+import { API } from "../ops/API"
 const style = {
   height: 30,
   width: 120,
@@ -61,7 +61,7 @@ const ProjectCollection = ({ visible, createNewProject, onCancel, projectVisible
         <Form.Item
           name={"isVisible"}
           label="Visibility">
-          <Switch onChange={(e)=>projectVisible(e)} checkedChildren="Public" unCheckedChildren="Private" defaultChecked />
+          <Switch onChange={(e)=>projectVisible(e)} checkedChildren="Public" unCheckedChildren="Private" />
         </Form.Item>
         <Form.Item
           name={"date"}
@@ -69,11 +69,12 @@ const ProjectCollection = ({ visible, createNewProject, onCancel, projectVisible
           rules={[
             {
               required: true,
-              message: "Start Date of your project required"
+              message: "Start Date of your project required",
             },
+          
           ]}
         >
-          <DatePicker />
+          <DatePicker format='YYYY-MM-DD' />
         </Form.Item>
         <Form.Item
           name={"technology"}
@@ -122,10 +123,11 @@ const ProjectCollection = ({ visible, createNewProject, onCancel, projectVisible
 }
 export default function ProjectForm(props) {
   const [visible, setVisible] = useState(false)
-  const [projectVisible, setProjectVisible] = useState(true)
+  // eslint-disable-next-line
+  const [projectVisible, setProjectVisible] = useState(false)
   const createNewProject = async (values) => {
     try {
-      await createProject(values).then((e) => { console.log("Project Added!") })
+      await API.createProject(values).then((e) => { console.log("New Project Added ") })
       await props.status()
     } catch (err) {
       console.log(err)

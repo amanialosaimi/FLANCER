@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Form, Input, Switch, DatePicker, Modal, Button, Col } from "antd";
+import { Form, Input, Switch, DatePicker, Modal } from "antd";
 import { EditOutlined } from "@ant-design/icons";
+import moment from 'moment';
 
-import { updateProject } from "../ops/API";
+import { API } from "../ops/API";
 const layout = {
   labelCol: {
     span: 8,
@@ -13,9 +14,11 @@ const layout = {
 };
 const UpdateProjectCollection = ({
   visible,
-  updateProject,
+  updateCurrentProject,
   onCancel,
+  setProjectVisible,
   projectVisible,
+  currentProjectVisible,
   fields,
 }) => {
   const [form] = Form.useForm();
@@ -29,7 +32,7 @@ const UpdateProjectCollection = ({
           .validateFields()
           .then((values) => {
             form.resetFields();
-            updateProject(values);
+            updateCurrentProject(values);
           })
           .catch((info) => {
             console.log("Validate Failed:", info);
@@ -43,7 +46,7 @@ const UpdateProjectCollection = ({
         {...layout}
         form={form}
         name="nest-messages"
-        onFinish={updateProject}
+        onFinish={API.updateProject}
         // onFinishFailed={onFinishFailed}
         fields={fields}
       >
@@ -61,17 +64,19 @@ const UpdateProjectCollection = ({
         </Form.Item>
         <Form.Item name={"isVisible"} label="Visibility">
           <Switch
-            onChange={(e) => projectVisible(e)}
+            onClick = {(e)=> setProjectVisible(!projectVisible)}
             checkedChildren="Public"
             unCheckedChildren="Private"
-           
+            checked={currentProjectVisible}
           />
         </Form.Item>
         <Form.Item
           name={"date"}
           label="Start Date"
+          format={'YYYY-MM-DD'}
           rules={[
             {
+              required: false,
               message: "Start Date of your project required",
             },
           ]}
@@ -122,31 +127,15 @@ const UpdateProjectCollection = ({
     </Modal>
   );
 };
-// const onFinish = async (values) => {
-//     if (props.project?._id) {
-//       await UpdateProject(props.project._id, values)
-//         .then((result) => {
-//           form.resetFields();
-//           setStatus(result.data.message);
-//         })
-//         .then(() => {
-//           props.status();
-//           setTimeout(() => setStatus(undefined), 2000);
-//         });
-//     }
-//   };
-//   const onFinishFailed = (errorInfo) => {
-//     console.log("Failed:", errorInfo);
-//   };
 
 function UpdateProject(props) {
-    console.log(props.project?._id)
   const [visible, setVisible] = useState(false);
-  const [projectVisible, setProjectVisible] = useState(true);
-  const updateProject = async (values) => {
+  let currentProjectState = props.project?.isVisible === "true"
+  const [projectVisible, setProjectVisible] = useState(currentProjectState);
+  const updateCurrentProject = async (values, projectID = props.project._id) => {
     try {
-      await updateProject(values).then((e) => {
-        console.log("Project Updated!");
+      await API.updateProject(values, projectID).then((e) => {
+        console.log("Project Updated!", values);
       });
       await props.status();
     } catch (err) {
@@ -154,21 +143,27 @@ function UpdateProject(props) {
     }
     return setVisible(false);
   };
-
   return (
     <div>
       <EditOutlined onClick={() => setVisible(true)} />
+
       <UpdateProjectCollection
         visible={visible}
-        updateProject={updateProject}
+        updateCurrentProject={updateCurrentProject}
         onCancel={() => setVisible(false)}
-        projectVisible={setProjectVisible}
-        fields={[{name: ["title"], value: props.project?.title},
-        {name: ["description"], value: props.project?.description},
-        // {name: ["date"], value: props.project?.date},
-        {name: ["licence"], value: props.project?.licence},
-        {name: ["isVisible"], checked: props.project?.isVisible}
-          ]}
+        setProjectVisible={setProjectVisible}
+        projectVisible={currentProjectState}
+        currentProjectVisible={projectVisible}
+        fields={[{ name: ["title"], value: props.project?.title },
+        { name: ["date"], value: moment(props.project?.date) },
+        { name: ["technology"], value: props.project?.technology },
+        { name: ["licence"], value: props.project?.licence },
+        // {name: ['isVisible'], checked: projectVisible},
+        { name: ["url"], value: props.project?.url },
+        { name: ["image"], value: props.project?.image },
+        { name: ["description"], value: props.project?.description },
+        ]}
+        projectID={props.project?._id}
       />
     </div>
   );

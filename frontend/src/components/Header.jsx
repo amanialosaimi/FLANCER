@@ -11,7 +11,7 @@ function Header(props) {
           <FlancerLogo />
         </Col>
         
-        <Col style={{height : "50px"}}><NavMenu authd={props.authd} auth={props.auth} /></Col>
+        <Col style={{height : "50px"}}><NavMenu authd={props.authd} auth={props.auth} status={props.status} /></Col>
         </Space>
       </Row>
 

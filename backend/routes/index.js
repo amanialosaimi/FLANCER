@@ -2,7 +2,7 @@ const { Router } = require('express')
 const index = Router()
 const GitHubExtended = require('../lib/ThirdParty/GitHubExtend')
 const Github = new GitHubExtended(({
-    token: process.env.GH_TOKEN
+    token: process.env.GITHUB_TOKEN
 }))
 index.route('/')
     .get(async (request, response) => {
@@ -11,12 +11,12 @@ index.route('/')
             let repos = [];
             await Github.getUserProfile('apple').then((profile) => {
                 profileInfo = {
-                    'Full Name': profile.name,
-                    'Location': profile.location,
-                    'Public Repos': profile.public_repos,
-                    'Private Repos': profile.total_private_repos,
-                    'Following': profile.following,
-                    'Followers': profile.followers
+                    'fullname': profile.name,
+                    'location': profile.location,
+                    'public_repos': profile.public_repos,
+                    'private_repos': profile.total_private_repos,
+                    'following': profile.following,
+                    'followers': profile.followers
                 }
                 return profileInfo
             })
@@ -25,11 +25,11 @@ index.route('/')
                 .then((result) => {
                     result.map((repo) => {
                         repos.push({
-                            'Repo Name': repo.name,
-                            'Private': repo.private,
-                            'Forks': repo.forks,
-                            'Stars': repo.stargazers_count,
-                            'Watchers': repo.watchers_count
+                            'repo_name': repo.name,
+                            'isPrivate': repo.private,
+                            'forksCount': repo.forks,
+                            'stars': repo.stargazers_count,
+                            'watchers': repo.watchers_count
                         })
                     })
                     return repos

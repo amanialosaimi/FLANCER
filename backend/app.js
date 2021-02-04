@@ -49,7 +49,7 @@ passport.serializeUser(Developer.serializeUser())
 /* Deserialize User */
 passport.deserializeUser(Developer.deserializeUser())
 /* REST API Endpoints */
-app.use('/api/v1', index)
+app.use('/api/github', index)
 /* REST API Authorization Endpoints */
 app.use("/api/auth", auth);
 /* REST API User Endpoints */
@@ -67,42 +67,40 @@ const checkLogin = (req, res, next) => {
 };
 /* Login Status */
 app.get("/api", checkLogin, async (req, res) => {
-        try {
-            await Developer.find({ _id: req.user._id })
-                .populate("projects")
-                .exec((err, profile) => {
-                    if (!err) {
+    try {
+        await Developer.find({ _id: req.user._id })
+            .populate("projects")
+            .exec((err, profile) => {
+                if (!err) {
 
 
-                        console.log(profile)
-                        res.status(200).json({
-                            authenticated: req.isAuthenticated(),
-                            message: "User Authenticated",
-                            user: req.user,
-                            projects: profile[0].projects,
-                            cookies: req.cookies
-                        });
-                    } else { console.log(err) }
                     console.log(profile)
-                })
-        } catch (err) {
-            console.log(err)
-        }
+                    res.status(200).json({
+                        authenticated: req.isAuthenticated(),
+                        message: "User Authenticated",
+                        user: req.user,
+                        projects: profile[0].projects,
+                        cookies: req.cookies
+                    });
+                } else { console.log(err) }
+                console.log(profile)
+            })
+    } catch (err) {
+        console.log(err)
+    }
 
 });
 /* Register New User */
-app.post('/api/register', (req, res) => {
+app.post('/api/register', async (req, res) => {
     if (!req.isAuthenticated()) {
-        Developer.register(new Developer( req.body ), req.body.password, function (err) {
-            if (err) {
-                console.log('Error Register New User: ', err);
-                return next(err);
-            }
-            console.log('New User Registered!');
-            res.redirect('/api/auth/login');
-        })
-    } else {
-        res.json({ message: "You are already logged in" })
+        await Developer.register(new Developer(req.body), req.body.password)
+            .then((err, user) => {
+                return res.status(202).json({ message: "Thank you, you've been registered, login to access your dashboard" })
+            }).catch((err) => {
+                let errorMsg = err.toString()
+                let errorArray = errorMsg.split(':')
+                return res.status(202).json({ message: errorArray[1] })
+            })
     }
 })
 /* Find All Users - Temporary Route */
@@ -113,7 +111,7 @@ app.get('/api/find', (req, res) => {
 })
 // find public projects 
 app.get('/api/findPublicProject', (req, res) => {
-    Project.find({isVisible : true}, (err, public) => {
+    Project.find({ isVisible: true }, (err, public) => {
         res.json(public)
     })
 })

@@ -10,18 +10,26 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import Register from "./components/Register";
 import Members from "./components/Members";
+import { API } from "./components/ops/API";
 
-
-import { checkStatus } from "./components/ops/API"
 function App() {
   const [isLogged, setIsLogged] = useState(false)
   const [profile, setProfile] = useState()
 
-  const checkLoginStatus = async () => {
-      await checkStatus().then((profile) => {
-          setIsLogged(true)
-          setProfile(profile.data)
-      }).catch((err)=>{
+  const checkLoginStatus = () => {
+     API.checkStatus()
+      .then((profile) => {
+        if(profile.data.authenticated) {
+        console.log('APP',profile)
+        setIsLogged(true)
+        setProfile(profile.data)
+        } else {
+          setIsLogged(false)
+          setProfile(null)
+        }
+      })
+      
+      .catch((err) => {
         setIsLogged(false)
         setProfile(null)
         console.log("AUTH ERR:", err)
@@ -34,7 +42,7 @@ function App() {
   return (
     <>
       <Router>
-        <Header authd={isLogged} auth={setIsLogged} />
+        <Header authd={isLogged} auth={setIsLogged} status={checkLoginStatus} />
         <Switch>
           <Route exact path="/">
             <Home />

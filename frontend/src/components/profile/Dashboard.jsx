@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
 import DeveloperSidebar from "./DeveloperSidebar";
-import DeveloperDashboard from "./DeveloperDashboard";
 import DeveloperProfile from "./DeveloperProfile";
 import DeveloperProjects from "./DeveloperProjects";
 import DeveloperPublication from "./DeveloperPublication"
@@ -13,16 +12,15 @@ export default function Dashboard(props) {
 
     const [uesrProfile, setProfile] = useState()
     useEffect(() => {
-        setProfile(props.profile)
+        if(props.profile?.authenticated){
+            setProfile(props.profile)
+        }
     }, [props.profile])
     return (
         <div>
             <DeveloperSidebar />
             <Switch>
                 <Route exact path="/dashboard">
-                    <DeveloperDashboard profile={uesrProfile} />
-                </Route>
-                <Route path="/dashboard/profile">
                     <DeveloperProfile profile={uesrProfile} status={props.status} />
                 </Route>
                 <Route path="/dashboard/projects">

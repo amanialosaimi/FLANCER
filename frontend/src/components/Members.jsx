@@ -8,16 +8,14 @@ import {
   Space,
   Avatar,
   Divider,
-  Tooltip,
 } from "antd";
-
-import { UserOutlined } from "@ant-design/icons";
 
 const { Content } = Layout;
 const { Meta } = Card;
 const gridStyle = {
-  width: "25%",
+  width: "300px",
   textAlign: "center",
+  marginTop: 16
 };
 function Members() {
   return (
@@ -50,7 +48,6 @@ function Members() {
               <Space>
                 <Card.Grid
                   style={gridStyle}
-                  style={{ width: 300, marginTop: 16 }}
                 >
                   <Meta
                     avatar={<Avatar size={95} src={<Membership />} />}
@@ -60,7 +57,7 @@ function Members() {
                 </Card.Grid>
                 <Card.Grid
                   style={gridStyle}
-                  style={{ width: 300, marginTop: 16 }}
+
                 
                 >
                   <Meta
@@ -73,7 +70,7 @@ function Members() {
                 </Card.Grid>
                 <Card.Grid
                   style={gridStyle}
-                  style={{ width: 300, marginTop: 16 }}
+
                 >
                   <Meta
                     avatar={<Avatar size={95} src={<Membership />} />}
@@ -83,7 +80,7 @@ function Members() {
                 </Card.Grid>
                 <Card.Grid
                   style={gridStyle}
-                  style={{ width: 300, marginTop: 16 }}
+
                 >
                   <Meta
                     avatar={<Avatar size={95} src={<Membership />} />}

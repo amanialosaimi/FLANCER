@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Menu, Button, Space } from "antd";
 import "../App.css";
 import { Link } from "react-router-dom";
 import Login from "./Login";
-import { checkStatus, logout } from "./ops/API";
+import { API } from "./ops/API";
 const style = {
   height: 40,
   width: 90,
@@ -14,11 +14,11 @@ const style = {
   textAlign: "center",
   fontSize: 16,
   padding: 0,
-  marginRight:8,
+  marginRight: 8,
 };
 function NavMenu(props) {
   const [current, setCurrent] = useState("home")
- 
+
   const handleClick = (e) => {
     //console.log("click ", e);
     setCurrent(e.key)
@@ -38,17 +38,16 @@ function NavMenu(props) {
       <Menu.Item key="about"><Link to="/about">About</Link></Menu.Item>
       <Menu.Item key="contact"><Link to="/contact">Contact Us</Link></Menu.Item>
       {props.authd ? <>
-      <Space size={[8, 16]} wrap><Button type="ghost" style={style}><Link to="/dashboard">Dashboard</Link></Button></Space>
-      <Space size={[8, 16]} wrap>
-      <Button
-        type="primary"
-        style={style}
-        onClick={() => { logout(); props.auth(false) }}
-
-      >
-        Logout
+        <Space size={[8, 16]} wrap><Button type="ghost" style={style}><Link to="/dashboard">Dashboard</Link></Button></Space>
+        <Space size={[8, 16]} wrap>
+          <Button
+            type="primary"
+            style={style}
+            onClick={() => { API.logout(); props.auth(false); props.status() }}
+          >
+            Logout
         </Button></Space>
-        </> : <Login auth={props.auth} />}
+      </> : <Login auth={props.auth} status={props.status} />}
     </Menu>
   );
 }
