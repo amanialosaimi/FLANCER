@@ -23,6 +23,8 @@ const Project = require('./model/project')
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan('tiny'));
+/* Application Port */
+const PORT = process.env.PORT || 3000
 app.use(cors({
     credentials: true,
     origin: ['http://localhost:3001', '*'],
@@ -116,7 +118,6 @@ app.get('/api/findPublicProject', (req, res) => {
     })
 })
 
-/* Application Port */
-const PORT = process.env.PORT || 3000
+
 /* API Server Listen For Connections */
 app.listen(PORT, () => { console.log(`Flancer | Backend Server - Port ${PORT}`) })
