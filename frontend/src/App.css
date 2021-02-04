@@ -166,3 +166,11 @@ font-size: 40px;
 .ant-timeline-item-head, .ant-layout,.site-layout .site-layout-background {
   background-color: rgba(255, 255, 255, 0);
 }
+.profile-items{
+  width: 60%;
+  margin: auto;
+  padding: 50px 50px 50px 50px;
+  margin-top: 6px;
+  margin-bottom: 70px;
+  
+}

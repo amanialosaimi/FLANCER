@@ -1,6 +1,6 @@
 import DeveloperTable from './DeveloperTable';
 import ProjectForm from './ProjectForm';
-import { Typography, Layout, Card, Col, Row } from 'antd';
+import { Typography, Layout, Card, Col, Row, Divider } from 'antd';
 import 'antd/dist/antd.css';
 
 const { Title } = Typography;
