@@ -74,9 +74,6 @@ app.get("/api", checkLogin, async (req, res) => {
             .populate("projects")
             .exec((err, profile) => {
                 if (!err) {
-
-
-                    console.log(profile)
                     res.status(200).json({
                         authenticated: req.isAuthenticated(),
                         message: "User Authenticated",
@@ -85,7 +82,7 @@ app.get("/api", checkLogin, async (req, res) => {
                         cookies: req.cookies
                     });
                 } else { console.log(err) }
-                console.log(profile)
+                console.log(err)
             })
     } catch (err) {
         console.log(err)
