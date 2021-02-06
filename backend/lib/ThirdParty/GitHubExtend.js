@@ -1,7 +1,10 @@
-const GitHub = require('github-api')
+const GitHub = require('github-api');
 
 class GitHubExtended extends GitHub {
-
+    constructor(props) {
+        super(props);
+        this.__apiBase = 'https://git.generalassemb.ly/api/v3'
+    }
     /**
      * Github: Get User Repos
      */
@@ -13,10 +16,7 @@ class GitHubExtended extends GitHub {
                 data = response.data
             })
             .catch((err) => {
-                data = {
-                    status: err.response.status,
-                    err: err.response.statusText
-                }
+                console.log(err)
             })
         return data
     }
@@ -32,10 +32,7 @@ class GitHubExtended extends GitHub {
                 userProfile = result.data
             })
             .catch((err) => {
-                data = {
-                    status: err.response.status,
-                    err: err.response.statusText
-                }
+                console.log(err)
             })
         return userProfile
     }

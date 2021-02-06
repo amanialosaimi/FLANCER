@@ -33,7 +33,7 @@ export default function DeveloperProjects(props) {
                     .catch((err) => console.log(err))
         }
 
-        fetchGHProfile('apple')
+        fetchGHProfile('s1')
         
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
     return (
