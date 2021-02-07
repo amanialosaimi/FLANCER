@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Table } from 'antd';
+import { Table, Badge } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons'
 import { API } from "../ops/API"
 import Moment from 'react-moment'
@@ -33,8 +33,8 @@ export default function DeveloperTable(props) {
     props.repos?.map((repo, i) => {
       let repoObject = Object.assign({}, repo)
       let repoDate = <Moment fromNow>{repo.created_at}</Moment>
-      repoObject.delete = <DeleteOutlined />
-      repoObject.edit = <UpdateProject project={repo} status={props.state} />
+      repoObject.delete = <Badge count={"Soon"} />
+      repoObject.edit = <Badge count={"Soon"} />
       repoObject.key = i + props.profile?.projects.length + 1
       repoObject.private = repoObject.private === true
       repoObject.isVisible = repoObject.private ? "Private" : "Public"
