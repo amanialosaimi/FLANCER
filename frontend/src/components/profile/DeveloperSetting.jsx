@@ -1,5 +1,7 @@
-import React, { Component } from 'react'
-import { Button, Switch, Collapse, Divider, Space } from 'antd';
+import React, { useState } from 'react'
+import { Button, Switch, Collapse, Divider, Space, Row, Badge } from 'antd';
+import 'antd/dist/antd.css';
+
 const { Panel } = Collapse;
 const Answer1 = `
   From your Home page click on Contact Us on the nav Menu, we will recive your email and get back yo you as soon as we can.
@@ -13,52 +15,34 @@ const Answer3 = `
 function callback(key) {
   console.log(key);
 }
-export default class DeveloperSetting extends Component {
-  constructor() {
-    super()
-    this.state = {
-      light: true
+function DeveloperSetting() {
+  const [light, setLight] = useState(true)
+  const changeLight = () => {
+    if (light) {
+      setLight(!light)
+      DarkMode('black')
+    } else {
+      setLight(!light)
+      DarkMode('')
     }
   }
-
-  changeLight = () => {
-    if (this.state.light) {
-      this.setState({
-        light: !this.state.light
-      })
-      this.DarkMode('Black')
-    }
-    else if (!this.state.light) {
-      this.setState({
-        light: !this.state.light
-      })
-      this.DarkMode('White')
-
-    }
-  }
-  DarkMode = (color) => {
+  const DarkMode = (color) => {
     document.body.style.backgroundColor = color;
-    document.querySelector('.Dark').innerHTML = this.state.light ? 'Light mode' : 'Dark mode'
   }
-  raiseInvoiceClicked = () => {
+  const raiseInvoiceClicked = () => {
     const url = 'https://github.com/';
     window.open(url, '_blank');
   }
-  render() {
-    return (
-      <div className='Setting contContainer site-card-wrapper' >
+  return (
+    <Row style={{ marginTop: 100 }}>
+      <div className='setting contContainer' >
         <Divider orientation="center" type="horizontal">
           <h1 className="large-font">
             <b>Settings</b>
           </h1>
-
         </Divider>
-        {/* // <div className = 'Setting'>
-            //   <h1 className="font-setting">
-            //      <b></b>
-            //   </h1> */}
         <br />
-        <div className="Settings-items">
+        <div className="settings-items">
           <h3>FAQs</h3>
 
           <Collapse defaultActiveKey={['']} onChange={callback}>
@@ -73,16 +57,18 @@ export default class DeveloperSetting extends Component {
             </Panel>
           </Collapse><br />
           <Space>
-            <Button onClick={this.raiseInvoiceClicked} block>Open githup page</Button>
+            <Button onClick={raiseInvoiceClicked} block>Open githup page</Button>
             <Button block>Delete your account</Button>
-            <Switch className='Dark' onChange={this.changeLight} block />
+            </Space>
+            <Space style={{marginTop: 20}}>
+            <Switch checkedChildren="Dark Mood On" unCheckedChildren="Dark Mood Off" onChange={changeLight} /><Badge style={{ backgroundColor: '#52c41a' }} count={"BETA"} />
           </Space>
           <br />
           <br />
         </div>
       </div>
+    </Row>
 
-
-    )
-  }
+  )
 }
+export default DeveloperSetting

@@ -45,21 +45,16 @@ function DeveloperProfile(props) {
         console.log('Failed:', errorInfo);
     };
     return (
-        <>
-            <Layout style={{ marginLeft: 200 }}>
-                <Row style={{ marginTop: 20 }}>
-                    <Col span={10} style={{ margin: '0 28px 0' }}><Title level={1}>
-                        <Divider orientation="left" type="horizontal">
-                            <h1 className="large-font">
-                                <b>Profile</b>
-                            </h1></Divider>
-                    </Title></Col>
-                </Row>
-            </Layout>
-            <Layout>
-                <div className='Setting contContainer site-card-wrapper'>
+        <Row style={{ marginTop: 100 }}>
+            <div className='setting contContainer' >
+                <Divider orientation="center" type="horizontal">
+                    <h1 className="large-font">
+                        <b>Profile</b>
+                    </h1>
+                </Divider>
+                <Layout>
                     <div className="profile-items">
-                        <Row style={{ marginTop: 0 }}>
+                        <Row style={{ marginTop: 20 }}>
 
                             <Col span={40} style={{ margin: '0 28px 0' }}><Title level={3}>Welcome {props.profile?.user.username}!</Title></Col>
                             <br />
@@ -74,7 +69,7 @@ function DeveloperProfile(props) {
                             <Col span={40} style={{ margin: '0 28px 0' }}><Title level={5}>Last Login <Moment fromNow>{new Date(props.profile?.user.lastLogin)}</Moment> </Title></Col>
                         </Row>
                         <Row style={{ margin: "50px 30px" }}>
-                            <div className=''>
+                            <div className='profile-form'>
                                 <Form
                                     {...layout}
                                     initialValues={{
@@ -109,33 +104,6 @@ function DeveloperProfile(props) {
             </Button>
                                     </Form.Item>
                                 </Form></div>
-                            {/* <Form
-                    form={form}
-                    layout={'inline'}
-                    initialValues={{
-                        email: props.profile?.email,
-                    }}
-                    onFinish={onFinish}
-                    onFinishFailed={onFinishFailed}
-                >
-                    <Row>
-                        <Space>
-                    
-                    <Form.Item label="E-mail" name="email" {...tailLayout}>
-                        <Input  size="large" placeholder="Change your email" />
-                    </Form.Item>
-                    
-                    <Form.Item label="Password" name="password" {...tailLayout}>
-                        <Input size="large" placeholder="Change password" />
-                    </Form.Item>
-                    
-                    <Form.Item >
-                        <Button type="primary" htmlType="submit">Update</Button>
-                    </Form.Item>
-                    </Space>
-                    </Row>
-                    
-                </Form> */}
                         </Row>
                         <Row style={{ marginLeft: 'auto', marginRight: 'auto', color: 'white' }}>
                             {status ? <Result
@@ -146,9 +114,9 @@ function DeveloperProfile(props) {
 
                         </Row>
                     </div>
-                </div>
-            </Layout>
-        </>
+                </Layout>
+            </div>
+        </Row>
     )
 }
 
