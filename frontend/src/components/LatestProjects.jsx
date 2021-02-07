@@ -4,11 +4,9 @@ import { ReactComponent as ProjectAvatar } from "../images/projectAvatar.svg";
 
 import {
   Layout,
-  Breadcrumb,
   Card,
   Avatar,
   Timeline,
-  Divider,
   BackTop,
   Tooltip,
 } from "antd";
@@ -20,6 +18,8 @@ import {
   UnlockOutlined,
   SafetyCertificateOutlined,
 } from "@ant-design/icons";
+import HeaderContent from './content/HeaderContent';
+
 
 const { Content } = Layout;
 const { Meta } = Card;
@@ -35,21 +35,12 @@ const style = {
   fontSize: 16,
 };
 function LatestProjects() {
+  let qoute =  (<>" It always seems impossible until it's done  "{' '}
+                <span className="qoute">Nelson Mandela</span></>)
   return (
-    <div className=" contContainer ">
-      <Layout style={{ padding: "0 24px 24px" }} className=" site-card-wrapper">
-        <Breadcrumb style={{ margin: "16px 0" }}>
-          <Divider orientation="center" type="horizontal">
-            <h1 className="large-font">
-              <b>Latest Projects</b>
-            </h1>
-            <h2 className="semi-large-font">
-              " It always seems impossible until it's done "{" "}
-              <span className="qoute">Nelson Mandela</span>
-            </h2>
-          </Divider>
-        </Breadcrumb>
-
+    <div className="contContainer site-card-wrapper">
+      <Layout style={{ padding: "0 24px 24px" }}>
+        <HeaderContent title="LATEST PROJECT" h2={qoute} />
         <Content
           style={{
             padding: 24,

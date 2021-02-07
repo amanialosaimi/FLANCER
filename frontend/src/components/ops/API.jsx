@@ -114,14 +114,14 @@ export const API = {
       });
     return message
   },
-  getProfileGH: async (username) => {
-    let profile
+  getUserRepos: async () => {
+    let repos
     await axios
-      .get(`/api/github/${username}`)
-      .then((result) => profile = result)
+      .get(`/api/github`)
+      .then((result) => repos = result)
       .catch((err) => {
         console.log("GITHUB ERR:", err)
       })
-    return profile
+    return repos
   }
 }

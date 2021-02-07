@@ -4,7 +4,7 @@ import Moment from 'react-moment'
 import { API } from '../ops/API'
 const style = {
     height: 40,
-    width: 90,
+    width: 320,
     lineHeight: "30px",
     borderRadius: 4,
     backgroundColor: "#fff",
@@ -47,7 +47,7 @@ function DeveloperProfile(props) {
     return (
         <>
         <Layout style={{ marginLeft: 200 }}>
-            <Row style={{ marginTop: 30 }}>
+            <Row style={{ marginTop: 20 }}>
                 <Col span={10} style={{ margin: '0 28px 0' }}><Title level={1}>
                 <Divider orientation="left" type="horizontal">
             <h1 className="large-font">
@@ -88,7 +88,7 @@ function DeveloperProfile(props) {
             <Form.Item
               label={<h4><b>Email</b></h4>}
               name="email"
-              rules={[{ required: true, message: 'Please input your firstname!' }]}
+              rules={[{ required: true, message: 'Enter new email address!' }]}
                
             >
               <Input placeholder="Change your email"/>
@@ -105,7 +105,7 @@ function DeveloperProfile(props) {
 
             <Form.Item {...tailLayout}>
               <Button type="primary" htmlType="submit" style={style}>
-                Send
+                Save
             </Button>
             </Form.Item>
           </Form></div>
@@ -137,7 +137,7 @@ function DeveloperProfile(props) {
                     
                 </Form> */}
             </Row>
-            <Row style={{ marginLeft: 'auto', marginRight: 'auto' }}>
+            <Row style={{ marginLeft: 'auto', marginRight: 'auto', color: 'white'}}>
                 {status ? <Result
                     status="success"
                     title=""

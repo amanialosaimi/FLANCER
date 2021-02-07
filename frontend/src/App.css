@@ -27,6 +27,7 @@ body {
 
 .container {
   padding: 64px;
+  margin-top: 80px;
 }
 
 .row:after {
@@ -89,7 +90,7 @@ img {
 }
 
 .site-card-wrapper {
-  padding: 30px;
+  padding: 120px 30px 30px 30px;
   background: #ececec;
 }
 
@@ -122,6 +123,7 @@ img {
   border: 1px solid #fff;
 }
 .contact-title {
+  /* margin-top: 55px; */
   text-align: center;
 }
 .register-container {
@@ -133,8 +135,6 @@ img {
   border: 1px solid #fff;
 }
 .Setting{
- margin-top: 250px;
- margin-bottom: 100px;
  margin-left: 450px;
  width: 100vh;
  text-align: left;
@@ -158,7 +158,7 @@ font-size: 40px;
   align-items: center;
 }
 .contContainer{
-  margin-top: 120px ;
+  margin-top: -50px ;
 }
 .ant-timeline-item-tail{
   color: #fff;
@@ -169,8 +169,31 @@ font-size: 40px;
 .profile-items{
   width: 60%;
   margin: auto;
-  padding: 50px 50px 50px 50px;
+  padding: 10px;
   margin-top: 6px;
-  margin-bottom: 70px;
   
+}
+.ant-menu { 
+  z-index: 1;
+background: transparent;
+}
+
+.ant-menu-horizontal {
+  border-bottom-color: transparent
+}
+
+.ant-menu-horizontal > .ant-menu-item-selected a {
+  color: #4d194d;
+
+}
+
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected {
+  border-bottom: 2px solid #4d194d;
+}
+
+.ant-menu-horizontal > .ant-menu-item a:hover {
+  color: #312244;
+}
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-active:hover {
+  border-bottom: 2px solid #312244;
 }

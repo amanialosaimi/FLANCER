@@ -68,7 +68,7 @@ function App() {
                 <Dashboard profile={profile} status={checkLoginStatus} />
               </Route>
             </Route>
-            : ""}
+            : <h1 style={{textAlign: "center", margin: 80}}>No Content</h1>}
         </Switch>
         <PageFooter />
       </Router>

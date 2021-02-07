@@ -1,8 +1,16 @@
 import React, { Component } from 'react'
-import { Row, Col , Card,BackTop,Divider} from "antd"
+import {
+  Layout,
+  Card,
+  BackTop,
+  Row,
+  Col
+} from "antd";
 import { ReactComponent as AboutUs } from "../images/AboutUs.svg";
 import { ReactComponent as Goals } from "../images/Goals.svg";
 import { ReactComponent as Values } from "../images/Values.svg";
+import HeaderContent from './content/HeaderContent';
+const { Content } = Layout;
 
 export default class About extends Component {
      style = {
@@ -18,15 +26,17 @@ export default class About extends Component {
     render() {
        
         return (
-            <div className ='About contContainer site-card-wrapper' >
-              <Divider orientation="center" type="horizontal">
-            <h1 className="large-font">
-              <b>About FLANCER</b>
-            </h1>
-          
-          </Divider>
-               <div className="" >  
-                 <br/>
+          <div className="contContainer site-card-wrapper">
+          <Layout style={{ padding: "0 24px 24px" }} className="site-layout">
+            <HeaderContent title={'ABOUT'} />
+            <Content
+              style={{
+                padding: 24,
+                margin: 0,
+                minHeight: 280,
+              }}
+            >
+              <Layout className="site-layout members">
                  <Row gutter={16}>
                    <Col span={8}>
                      <Card className = 'Card-Title' title={<h3><b>About Us</b></h3>} bordered={false} cover={<AboutUs />} style={{height: "350px"}}>
@@ -51,13 +61,14 @@ export default class About extends Component {
                     </Card>
                    </Col>  
                </Row>
-               <br/>
+               </Layout>
                <p className = 'lastLine'>   At FLANCER, we are always excited to share with our developers the success stories their projects , their achievements. </p>
                <br/>
-            </div>  
+               </Content>
            <BackTop>
                <div style={this.style}>Go Up</div>
            </BackTop> 
+        </Layout>
         </div>
           )
       } 
