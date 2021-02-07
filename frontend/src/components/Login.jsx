@@ -35,11 +35,9 @@ const LoginCollection = ({ visible, onLogin, redirect, onCancel, statusMessage }
         console.log('Validate Failed:', info);
       })
     }
+    okText="Login"
     onCancel={onCancel}
     htmlType="submit"
-
-  //   style={{ backgroundImage: `url(${LoginBg})`, backgroundRepeat: 'no-repeat',
-  //   width:'250px', height:'300px'}}
   >
     <Form
       form={form}

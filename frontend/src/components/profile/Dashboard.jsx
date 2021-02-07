@@ -18,7 +18,7 @@ export default function Dashboard(props) {
     }, [props.profile])
     return (
         <div>
-            <DeveloperSidebar />
+            <DeveloperSidebar status={props.status} />
             <Switch>
                 <Route exact path="/dashboard">
                     <DeveloperProfile profile={uesrProfile} status={props.status} />

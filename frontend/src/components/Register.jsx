@@ -53,7 +53,7 @@ function Register(props) {
           <Form.Item
             label={<h4><b>Username</b></h4>}
             name="username"
-            rules={[{ required: true, message: 'Please input your username!' }]}
+            rules={[{ required: false, message: 'Please enter your username!' }]}
           >
             <Input />
           </Form.Item>
@@ -61,28 +61,28 @@ function Register(props) {
 
             label={<h4><b>First Name</b></h4>}
             name="firstname"
-            rules={[{ required: true, message: 'Please input your firstname!' }]}
+            rules={[{ required: true, message: 'Please enter your firstname!' }]}
           >
             <Input />
           </Form.Item>
           <Form.Item
             label={<h4><b>Last Name</b></h4>}
             name="lastname"
-            rules={[{ required: true, message: 'Please input your Lastname!' }]}
+            rules={[{ required: false, message: 'Please enter your Lastname!' }]}
           >
             <Input />
           </Form.Item>
           <Form.Item
             label={<h4><b>Email</b></h4>}
             name="email"
-            rules={[{ required: true, message: 'Please input your email!' }]}
+            rules={[{ required: true, message: 'Please enter your email!' }]}
           >
             <Input />
           </Form.Item>
           <Form.Item
             label={<h4><b>Password</b></h4>}
             name="password"
-            rules={[{ required: true, message: 'Please input your password!' }]}
+            rules={[{ required: false, message: 'Please enter your password!' }]}
           >
             <Input.Password />
           </Form.Item>

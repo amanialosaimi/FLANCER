@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Layout, Row, Col, Typography, Form, Input, Button, Result, Divider } from 'antd';
+import { Layout, Row, Col, Typography, Form, Input, Button, Result, Divider, Tooltip } from 'antd';
 import Moment from 'react-moment'
 import { API } from '../ops/API'
 const style = {
@@ -44,6 +44,7 @@ function DeveloperProfile(props) {
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
+    const githubTooltip = <><h4 style={{ color: 'white' }}>Generated PATs From Github Account In Developer Settings <a href='https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token#creating-a-token' target='_new'>Tutorial Instruction</a></h4></>
     return (
         <Row style={{ marginTop: 100 }}>
             <div className='setting contContainer' >
@@ -54,7 +55,7 @@ function DeveloperProfile(props) {
                 </Divider>
                 <Layout>
                     <div className="profile-items">
-                        <Row style={{ marginTop: 20 }}>
+                        <Row style={{ marginTop: -20 }}>
 
                             <Col span={40} style={{ margin: '0 28px 0' }}><Title level={3}>Welcome {props.profile?.user.username}!</Title></Col>
                             <br />
@@ -72,40 +73,52 @@ function DeveloperProfile(props) {
                             <div className='profile-form'>
                                 <Form
                                     {...layout}
-                                    initialValues={{
-                                        email: props.profile?.email,
-                                    }}
                                     onFinish={onFinish}
                                     onFinishFailed={onFinishFailed}
-
-
+                                    fields={[
+                                        { name: ['email'], value: props.profile?.user.email },
+                                    ]}
                                 >
                                     <Form.Item
                                         label={<h4><b>Email</b></h4>}
                                         name="email"
-                                        rules={[{ required: true, message: 'Enter new email address!' }]}
-
+                                        rules={[{
+                                            required: true,
+                                            message: 'Enter new email address!',
+                                        }]}
                                     >
                                         <Input placeholder="Change your email" />
                                     </Form.Item>
+
+                                    <Tooltip
+                                        trigger={['focus']}
+                                        title={githubTooltip}
+                                        placement="right"
+                                        color='#312244'>
+                                        <Form.Item
+                                            label={<h4><b>Github</b></h4>}
+                                            name="ghToken"
+                                            rules={[{ required: false, message: 'Enter Github PAT!' }]}>
+                                            <Input placeholder="Personal Access Token (PAT)" />
+                                        </Form.Item>
+                                    </Tooltip>
 
                                     <Form.Item
                                         label={<h4><b>Password</b></h4>}
                                         name="password"
                                     >
-                                        <Input placeholder="Change password" />
+                                        <Input.Password placeholder="Change password" />
                                     </Form.Item>
-
 
 
                                     <Form.Item {...tailLayout}>
                                         <Button type="primary" htmlType="submit" style={style}>
                                             Save
-            </Button>
+                                        </Button>
                                     </Form.Item>
                                 </Form></div>
                         </Row>
-                        <Row style={{ marginLeft: 'auto', marginRight: 'auto', color: 'white' }}>
+                        <Row style={{ position: 'fixed', top: '60%', left: '60%', color: 'white' }}>
                             {status ? <Result
                                 status="success"
                                 title=""
@@ -116,7 +129,7 @@ function DeveloperProfile(props) {
                     </div>
                 </Layout>
             </div>
-        </Row>
+        </Row >
     )
 }
 

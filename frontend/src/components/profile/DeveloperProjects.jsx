@@ -22,11 +22,12 @@ export default function DeveloperProjects(props) {
             await API.getUserRepos()
                 .then((result) => {
                     setLoadingGH(false)
-                    setGithubProfile(result.data?.profile)
+                    setGithubProfile(result.data.profile)
                     setGithubRepos(result.data.repos)
-                    console.log(
+                    result.data.status ? console.log("Github Retrive Error:", result.data.status)
+                    : console.log(
                         "Github Profile", result.data?.profile,
-                        "Github Repos", result.data?.repos)
+                        "Github Repos", result.data?.repos)   
                     return result.data.repos
                 })
                 .then((repos) => {

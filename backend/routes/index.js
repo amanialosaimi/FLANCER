@@ -1,13 +1,16 @@
 const { Router } = require('express')
 const index = Router()
 const { Octokit } = require("@octokit/rest");
-const octokit = new Octokit({
-    auth: process.env.GITHUB_TOKEN,
-    baseUrl: "https://git.generalassemb.ly/api/v3",
-});
+
 index.route('/')
     .get(async (request, response) => {
-        if (request.isAuthenticated()) {
+        if (request.isAuthenticated() && request.user.gh_personal_token) {
+
+            const octokit = new Octokit({
+                auth: request.user.gh_personal_token,
+                baseUrl: "https://git.generalassemb.ly/api/v3",
+            });
+
             let userRepos
             let userProfile
 
@@ -35,7 +38,7 @@ index.route('/')
             response.json({ profile: userProfile, repos: userRepos })
 
         } else {
-            response.redirect('/auth/login')
+            response.json({status: 'You must add your Github Personal Token to your profile for retrieve repos.'})
         }
     })
 module.exports = { index }

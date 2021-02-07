@@ -99,28 +99,23 @@ user.route('/profile')
         }
     })
 
-
-/* PUT | Edit User Profile */
+    /* PUT | Edit User Profile */
 user.put('/:id', async (request, response) => {
     if (request.isAuthenticated()) {
         if (request.params.id == request.user._id) {
             try {
                 await Developer.findByUsername(request.user.username, async (err, user) => {
                     if (!err) {
-                        if (request.body.password) {
+                        const { email, ghToken, password } = request.body
+                        if (email) user.email = email
+                        if (ghToken) user.gh_personal_token = ghToken
+                        user.save()
+                        if (password) {
                             await user.setPassword(request.body.password, async function () {
-                                await user.save((err, result) => {
-
-                                    if (err) console.log("Not happening: ", err)
-                                    response.status(200).json({ message: 'Profile Updated' });
-                                });
-
+                                await user.save();
                             })
-                        } else {
-                            user.email = request.body.email
-                            user.save()
-                            response.status(200).json({ message: 'Email Updated' });
                         }
+                        response.status(200).json({ message: 'Profile Updated' });
                     } else {
                         response.status(401).json({ message: 'Cannot update' });
                     }

@@ -18,11 +18,12 @@ const style = {
 };
 function NavMenu(props) {
   const [current, setCurrent] = useState("home")
+  const history = useHistory();
+
   const handleClick = (e) => {
     //console.log("click ", e);
     setCurrent(e.key)
   };
-  const history = useHistory();
 
   return (
     <Menu

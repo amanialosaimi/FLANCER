@@ -1,6 +1,6 @@
 {
   "name": "flancer",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Flancer WebApp, Made by Team 2",
   "main": "app.js",
   "scripts": {
