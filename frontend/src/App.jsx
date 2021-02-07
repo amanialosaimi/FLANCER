@@ -48,7 +48,7 @@ function App() {
             <Home />
           </Route>
           <Route path="/latest">
-            <LatestProjects />
+            <LatestProjects profile={profile} status={checkLoginStatus}/>
           </Route>
           <Route path="/about">
             <About />

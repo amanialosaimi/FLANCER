@@ -49,7 +49,7 @@ export default function DeveloperTable(props) {
     })    
     updateProject(repos)
 
-  }, [props.repos]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [props.repos, props.profile]) // eslint-disable-line react-hooks/exhaustive-deps
   const [sortInfo, setSortInfo] = useState({})
   let updateTable = (pagination, filters, sorter) => {
     console.log("Pagination >", pagination,"Filter >", filters, "Sort >", sorter);

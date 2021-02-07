@@ -48,10 +48,10 @@ export default function DeveloperProjects(props) {
             </Row>
             <Row style={{ marginTop: 30, marginLeft: 28 }}>
                 <Col span={8}>
-                    <Card title="Total Projects" bordered={false} style={{ textAlign: 'center' }}><Title level={2}>{repoCount}</Title></Card>
+                    <Card title="Total Projects" bordered={false} style={{ textAlign: 'center' }}><Title level={2}>{props.profile?.projects.length}</Title></Card>
                 </Col>
                 <Col span={8}>
-                    <Card title="Total Repos" bordered={false} style={{ textAlign: 'center' }}><Title level={2}>{githubProfile ? (githubProfile.public_repos + githubProfile.total_private_repos) : <Spin tip={`Loading ${currentGH}'s repos...`} spinning={loadingGH} delay={100}></Spin>}</Title></Card>
+                    <Card title="Total Repos" bordered={false} style={{ textAlign: 'center' }}><Title level={2}>{githubProfile ? repoCount : <Spin tip={`Loading ${currentGH}'s repos...`} spinning={loadingGH} delay={100}></Spin>}</Title></Card>
                 </Col>
                 <Col span={7}>
                     <Card title="Total Stars" bordered={false} style={{ textAlign: 'center' }}><Title level={2}>{githubStars ? githubStars : <Spin tip={`Loading ${currentGH}'s stars...`} spinning={loadingGH} delay={100}></Spin>}</Title></Card>
