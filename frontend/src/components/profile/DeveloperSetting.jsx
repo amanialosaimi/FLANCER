@@ -59,8 +59,8 @@ function DeveloperSetting() {
           <Space>
             <Button onClick={raiseInvoiceClicked} block>Open githup page</Button>
             <Button block>Delete your account</Button>
-            </Space>
-            <Space style={{marginTop: 20}}>
+          </Space>
+          <Space style={{ marginTop: 20 }}>
             <Switch checkedChildren="Dark Mood On" unCheckedChildren="Dark Mood Off" onChange={changeLight} /><Badge style={{ backgroundColor: '#52c41a' }} count={"BETA"} />
           </Space>
           <br />
