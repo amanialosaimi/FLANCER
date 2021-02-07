@@ -1,3 +1,4 @@
+import React from "react"
 import { Layout, Row, Col, Typography, Avatar, Card } from 'antd';
 import { ReactComponent as Membership } from "../../images/Membership.svg";
 import Banner from "../../images/flancerBanner.png";
@@ -12,8 +13,23 @@ const gridStyle = {
     marginTop: 16,
 };
 
-function DeveloperPublication() {
-    const items = [{ key: 2, title: 'hola' }, { key: 2, title: 'hola' }, { key: 3, title: 'hola' }, { key: 3, title: 'hola' }]
+function DeveloperPublication(props) {
+
+    const ProjectSort = props.profile?.projects.sort((a, b) => new Date(b.date) - new Date(a.date))
+    const ProjectPreview = ({ content }) => {
+        return (
+            <Col span={8} >
+
+                <Card
+                    hoverable
+                    style={gridStyle}
+                    cover={<img alt="example" src={content.image ? content.image : Banner} />}
+                >
+                    <Meta title={content.title} description={<><p>{content.description}</p><p style={{ marginBottom: '4px' }}>{content.isVisible ? "Public" : "Private"}</p></>} />
+                </Card>
+            </Col>
+        )
+    }
     return (
         <>
             <Layout style={{ marginLeft: 0 }}>
@@ -41,28 +57,17 @@ function DeveloperPublication() {
                             }}
                             cover={<Avatar size={310} src={<Membership />} />}
                         >
-                            <Meta title="Fullname" description="@account" /><br />
-                            <Meta title="Projects" description="0" />
+                            <Meta title="Account" description={`@${props.profile?.user.username}`} /><br />
+                            <Meta title="Projects" description={props.profile?.projects.length} />
                         </Card>
                     </Col>
                 </Sider>
             </Layout>
             <Layout style={{ marginLeft: 520, marginTop: 100 }}>
                 <Row gutter={[16, 16]}>
-                    {items.map((e) => {
+                    {ProjectSort?.map((project, index) => {
                         return (
-
-                            <Col key={e.key} span={8} >
-
-                                <Card
-                                    hoverable
-                                    style={gridStyle}
-                                    cover={<img alt="example" src={Banner} />}
-                                >
-                                    <Meta title="Project Title" description={<><p>Project Description</p><p style={{ marginBottom: '4px' }}>PUB/PRV</p></>} />
-                                </Card>
-                            </Col>
-
+                            <ProjectPreview key={index + 1} content={project} />
                         )
                     })}
                 </Row>

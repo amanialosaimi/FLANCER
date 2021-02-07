@@ -27,7 +27,7 @@ export default function Dashboard(props) {
                     <DeveloperProjects profile={uesrProfile} status={props.status} />
                 </Route>
                 <Route path="/dashboard/publication">
-                    <DeveloperPublication profile={uesrProfile} />
+                    <DeveloperPublication profile={uesrProfile} status={props.status}/>
                 </Route>
                 <Route path="/dashboard/settings">
                     <DeveloperSetting profile={uesrProfile} />
