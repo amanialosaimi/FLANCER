@@ -115,4 +115,4 @@ At FLANCER we collaborated and strived to build a complete Web Application to Ke
 ***
 - [GitHub API](https://docs.github.com/en/rest/reference/repos)
 - [Passport](http://www.passportjs.org/packages/passport-local/)
-- [Ant Desigin](https://ant.design/)
+- [Ant Design](https://ant.design/)
