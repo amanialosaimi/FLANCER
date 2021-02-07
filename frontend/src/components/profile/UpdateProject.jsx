@@ -17,7 +17,6 @@ const UpdateProjectCollection = ({
   updateCurrentProject,
   onCancel,
   setProjectVisible,
-  projectVisible,
   currentProjectVisible,
   fields,
 }) => {
@@ -64,7 +63,7 @@ const UpdateProjectCollection = ({
         </Form.Item>
         <Form.Item name={"isVisible"} label="Visibility">
           <Switch
-            onClick={(e) => setProjectVisible(!projectVisible)}
+            onChange={setProjectVisible}
             checkedChildren="Public"
             unCheckedChildren="Private"
             checked={currentProjectVisible}
@@ -132,6 +131,8 @@ function UpdateProject(props) {
   const [visible, setVisible] = useState(false);
   let currentProjectState = props.project?.isVisible === "true"
   const [projectVisible, setProjectVisible] = useState(currentProjectState);
+
+  const toggleVisible = (e) => { setProjectVisible(e)}
   const updateCurrentProject = async (values, projectID = props.project._id) => {
     try {
       await API.updateProject(values, projectID).then((e) => {
@@ -151,14 +152,12 @@ function UpdateProject(props) {
         visible={visible}
         updateCurrentProject={updateCurrentProject}
         onCancel={() => setVisible(false)}
-        setProjectVisible={setProjectVisible}
-        projectVisible={currentProjectState}
+        setProjectVisible={toggleVisible}
         currentProjectVisible={projectVisible}
         fields={[{ name: ["title"], value: props.project?.title },
         { name: ["date"], value: moment(props.project?.date) },
         { name: ["technology"], value: props.project?.technology },
         { name: ["licence"], value: props.project?.licence },
-        // {name: ['isVisible'], checked: projectVisible},
         { name: ["url"], value: props.project?.url },
         { name: ["image"], value: props.project?.image },
         { name: ["description"], value: props.project?.description },

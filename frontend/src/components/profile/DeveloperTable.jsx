@@ -29,9 +29,6 @@ export default function DeveloperTable(props) {
     })
     repos = result
 
-<<<<<<< HEAD
-  }, [props.profile]) // eslint-disable-line react-hooks/exhaustive-deps
-=======
     
     props.repos?.map((repo, i) => {
       let repoObject = Object.assign({}, repo)
@@ -58,7 +55,6 @@ export default function DeveloperTable(props) {
     console.log("Pagination >", pagination,"Filter >", filters, "Sort >", sorter);
     setSortInfo(sorter);
   };
->>>>>>> Release-v2.3.2
   const columns = [
     {
       title: '#',

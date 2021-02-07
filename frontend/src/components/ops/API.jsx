@@ -1,8 +1,4 @@
 import axios from 'axios'
-<<<<<<< HEAD
-const API_URI = 'http://localhost:3000'
-=======
->>>>>>> Release-v2.3.2
 export const getAllUsers = () => {
   axios
     .get(`/api/find`)
@@ -66,21 +62,12 @@ export const API = {
   logout: async () => {
     let profile
     await axios
-<<<<<<< HEAD
-      .get(`${API_URI}/api/auth/logout`)
-=======
       .get(`/api/auth/logout`)
->>>>>>> Release-v2.3.2
       .then((response) => {
         profile = response
       })
       .catch((err) => console.log(err))
     return profile
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> Release-v2.3.2
   },
   createProject: async (projectDetails) => {
     axios.defaults.withCredentials = true
@@ -116,11 +103,7 @@ export const API = {
   },
   postContact: async (values) => {
     let message
-<<<<<<< HEAD
-    await axios.post(`${API_URI}/api/contact`,
-=======
     await axios.post(`/api/contact`,
->>>>>>> Release-v2.3.2
       values)
       .then((response) => {
         message = response.data
@@ -130,19 +113,11 @@ export const API = {
       });
     return message
   },
-<<<<<<< HEAD
-  getProfileGH: async (username) => {
-    let profile
-    await axios
-      .get(`${API_URI}/api/github/${username}`)
-      .then((result) => profile = result)
-=======
   getUserRepos: async () => {
     let repos
     await axios
       .get(`/api/github`)
       .then((result) => repos = result)
->>>>>>> Release-v2.3.2
       .catch((err) => {
         console.log("GITHUB ERR:", err)
       })

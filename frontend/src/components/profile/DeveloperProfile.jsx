@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-import React, {useState, useEffect} from "react"
-import { Layout, Row, Col, Typography, Form, Input, Button, Result, Divider } from 'antd';
-=======
 import React, { useState, useEffect } from "react"
 import { Layout, Row, Col, Typography, Form, Input, Button, Result, Divider, Tooltip } from 'antd';
->>>>>>> Release-v2.3.2
 import Moment from 'react-moment'
 import { API } from '../ops/API'
 const style = {
