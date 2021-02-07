@@ -1,6 +1,6 @@
 import React from "react";
-import { ReactComponent as FirstBlockImg } from "../../images/FirstBlockImg.svg";
-function FirstBlock() {
+import { ReactComponent as WhyUsBanner } from "../../images/FirstBlockImg.svg";
+function WhyUS() {
   return (
     <div className="container">
       <div className="row">
@@ -26,11 +26,11 @@ function FirstBlock() {
           <br />
         </div>
         <div className="column-33">
-          <FirstBlockImg />
+          <WhyUsBanner />
         </div>
       </div>
     </div>
   );
 }
 
-export default FirstBlock;
+export default WhyUS;

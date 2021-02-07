@@ -64,7 +64,7 @@ function About() {
           <br />
         </Content>
         <BackTop>
-          <div style={this.style}>Go Up</div>
+          <div style={style}>Go Up</div>
         </BackTop>
       </Layout>
     </div>
