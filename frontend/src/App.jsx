@@ -17,18 +17,18 @@ function App() {
   const [profile, setProfile] = useState()
 
   const checkLoginStatus = () => {
-     API.checkStatus()
+    API.checkStatus()
       .then((profile) => {
-        if(profile.data.authenticated) {
-        console.log('APP',profile)
-        setIsLogged(true)
-        setProfile(profile.data)
+        if (profile.data.authenticated) {
+          console.log('APP', profile)
+          setIsLogged(true)
+          setProfile(profile.data)
         } else {
           setIsLogged(false)
           setProfile(null)
         }
       })
-      
+
       .catch((err) => {
         setIsLogged(false)
         setProfile(null)
@@ -48,7 +48,7 @@ function App() {
             <Home />
           </Route>
           <Route path="/latest">
-            <LatestProjects />
+            <LatestProjects profile={profile} status={checkLoginStatus}/>
           </Route>
           <Route path="/about">
             <About />
@@ -68,7 +68,7 @@ function App() {
                 <Dashboard profile={profile} status={checkLoginStatus} />
               </Route>
             </Route>
-            : ""}
+            : <h1 style={{ textAlign: "center", margin: 80 }}>No Content</h1>}
         </Switch>
         <PageFooter />
       </Router>

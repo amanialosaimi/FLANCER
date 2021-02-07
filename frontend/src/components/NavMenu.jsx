@@ -18,11 +18,19 @@ const style = {
 };
 function NavMenu(props) {
   const [current, setCurrent] = useState("home")
+<<<<<<< HEAD
+=======
+  const history = useHistory();
+
+>>>>>>> Release-v2.3.2
   const handleClick = (e) => {
     //console.log("click ", e);
     setCurrent(e.key)
   };
+<<<<<<< HEAD
   const history = useHistory();
+=======
+>>>>>>> Release-v2.3.2
 
   return (
     <Menu
@@ -42,7 +50,11 @@ function NavMenu(props) {
           <Button
             type="primary"
             style={style}
+<<<<<<< HEAD
             onClick={async () => { await API.logout().then((profile)=>{ props.status(); props.auth(false); history.push('/'); })  }}
+=======
+            onClick={async () => { await API.logout().then((profile) => { props.status(); props.auth(false); history.push('/'); }) }}
+>>>>>>> Release-v2.3.2
           >
             Logout
         </Button></Space>

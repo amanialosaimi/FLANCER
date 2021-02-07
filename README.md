@@ -40,7 +40,7 @@ A list of technologies used within the project:
 | ------ |------ |  
 |1| cookie-parser | 
 |2| cookie-session |
-|3| github-api |
+|3| octokit |
 |4| moment |
 |5| morgan | 
 |6| passport-local |

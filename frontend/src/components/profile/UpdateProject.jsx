@@ -64,7 +64,7 @@ const UpdateProjectCollection = ({
         </Form.Item>
         <Form.Item name={"isVisible"} label="Visibility">
           <Switch
-            onClick = {(e)=> setProjectVisible(!projectVisible)}
+            onClick={(e) => setProjectVisible(!projectVisible)}
             checkedChildren="Public"
             unCheckedChildren="Private"
             checked={currentProjectVisible}

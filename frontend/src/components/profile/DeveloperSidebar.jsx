@@ -10,8 +10,9 @@ import {
     RollbackOutlined,
     LogoutOutlined,
 } from '@ant-design/icons';
+import { API } from '../ops/API';
 
-export default function DeveloperSidebar() {
+export default function DeveloperSidebar(props) {
     const { Sider } = Layout;
     return (
         <Layout>
@@ -28,14 +29,14 @@ export default function DeveloperSidebar() {
             >
                 <div className="logo" />
                 <FlancerLogo />
-                <Menu theme="light" mode="inline" defaultSelectedKeys={['5']}>
+                <Menu theme="light" mode="inline" defaultSelectedKeys={['1']}>
                     <Menu.Item key="1" icon={<UserOutlined />}><Link to="/dashboard">Profile</Link></Menu.Item>
                     <Menu.Item key="2" icon={<TrophyOutlined />}><Link to="/dashboard/projects">Projects</Link></Menu.Item>
                     <Menu.Item key="3" icon={<ShareAltOutlined />}><Link to="/dashboard/publication">Publication</Link></Menu.Item>
                     <Menu.Item key="4" icon={<TeamOutlined />}>Teams <Badge count={"Soon"} /></Menu.Item>
                     <Menu.Item key="5" icon={<ToolOutlined />}><Link to="/dashboard/settings">Settings</Link></Menu.Item>
                     <Menu.Item key="6" icon={<RollbackOutlined />}><Link to="/">Back To Home</Link></Menu.Item>
-                    <Menu.Item key="7" icon={<LogoutOutlined />}><Link to="/logout">Log Out</Link></Menu.Item>
+                    <Menu.Item key="7" icon={<LogoutOutlined />}><Link to="/" onClick={async()=>{await API.logout().then(()=>props.status())}}>Log Out</Link></Menu.Item>
                 </Menu>
             </Sider>
         </Layout>

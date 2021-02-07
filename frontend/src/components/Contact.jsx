@@ -1,5 +1,7 @@
-import React, { Component } from "react";
-import { Form, Input, Button, Divider } from 'antd';
+import React from "react";
+import { Form, Input, Button, Layout } from 'antd';
+import HeaderContent from './content/HeaderContent';
+
 import { API } from './ops/API'
 import '../App.css'
 const { TextArea } = Input;
@@ -13,34 +15,24 @@ const style = {
   textAlign: "center",
   fontSize: 14,
 };
-class Contact extends Component {
-  s
-
-
-  render() {
-    const layout = {
-      labelCol: { span: 8 },
-      wrapperCol: { span: 16 },
-    };
-    const tailLayout = {
-      wrapperCol: { offset: 8, span: 16 },
-    };
-    const onFinish = (values) => {
-      API.postContact(values).then((result) => console.log("Message Saved: ", result))
-    };
-    const onFinishFailed = (errorInfo) => {
-      console.log('Failed:', errorInfo);
-    };
-    return (
-      <div className="contContainer site-card-wrapper">
-
-        <Divider orientation="center" type="horizontal">
-          <h1 className="large-font contact-title">
-            <b>Contact Us</b>
-          </h1>
-          <h2>Let's keep in touch!</h2>
-
-        </Divider>
+function Contact() {
+  const layout = {
+    labelCol: { span: 8 },
+    wrapperCol: { span: 16 },
+  };
+  const tailLayout = {
+    wrapperCol: { offset: 8, span: 16 },
+  };
+  const onFinish = (values) => {
+    API.postContact(values).then((result) => console.log("Message Saved: ", result))
+  };
+  const onFinishFailed = (errorInfo) => {
+    console.log('Failed:', errorInfo);
+  };
+  return (
+    <div className="contContainer site-card-wrapper">
+      <Layout style={{ padding: "0 24px 24px" }} className="site-layout">
+        <HeaderContent title={'CONTACT US'} h2={"Let's keep in touch!"} />
         <div className='contact-container'>
           <Form
             {...layout}
@@ -89,9 +81,9 @@ class Contact extends Component {
             </Form.Item>
           </Form>
         </div>
-      </div>
-    );
-  }
+      </Layout>
+    </div>
+  );
 }
 export default Contact;
 

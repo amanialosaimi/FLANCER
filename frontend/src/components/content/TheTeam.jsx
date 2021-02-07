@@ -1,7 +1,7 @@
 import React from "react";
-import { ReactComponent as LastBlockImg } from "../../images/LastBlockImg.svg";
+import { ReactComponent as TheTeamBanner } from "../../images/LastBlockImg.svg";
 
-function LastBlock() {
+function TheTeam() {
   return (
     <div>
       <div className="container">
@@ -22,7 +22,7 @@ function LastBlock() {
             <br />
           </div>
           <div className="column-33">
-            <LastBlockImg />
+            <TheTeamBanner />
           </div>
         </div>
       </div>
@@ -30,4 +30,4 @@ function LastBlock() {
   );
 }
 
-export default LastBlock;
+export default TheTeam;

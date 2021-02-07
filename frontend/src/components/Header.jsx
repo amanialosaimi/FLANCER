@@ -7,14 +7,13 @@ function Header(props) {
     <>
       <Row>
         <Space size={[600, 16]}>
-        <Col style={{height : "50px"}}>
-          <FlancerLogo />
-        </Col>
-        
-        <Col style={{height : "50px"}}><NavMenu authd={props.authd} auth={props.auth} status={props.status} /></Col>
+          <Col style={{ height: "50px" }}>
+            <FlancerLogo />
+          </Col>
+
+          <Col style={{ height: "50px" }}><NavMenu authd={props.authd} auth={props.auth} status={props.status} /></Col>
         </Space>
       </Row>
-
     </>
   );
 }

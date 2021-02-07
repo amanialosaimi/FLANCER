@@ -1,14 +1,13 @@
 import "../App.css";
-import React from "react";
+import React, { useEffect } from "react";
 import { ReactComponent as ProjectAvatar } from "../images/projectAvatar.svg";
+import Moment from 'react-moment'
 
 import {
   Layout,
-  Breadcrumb,
   Card,
   Avatar,
   Timeline,
-  Divider,
   BackTop,
   Tooltip,
 } from "antd";
@@ -20,6 +19,8 @@ import {
   UnlockOutlined,
   SafetyCertificateOutlined,
 } from "@ant-design/icons";
+import HeaderContent from './content/HeaderContent';
+
 
 const { Content } = Layout;
 const { Meta } = Card;
@@ -34,22 +35,50 @@ const style = {
   textAlign: "center",
   fontSize: 16,
 };
-function LatestProjects() {
+function LatestProjects(props) {
+  useEffect(() => {
+    props.status()
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  const ProjectSort = props.profile?.projects.sort((a, b) => new Date(b.date) - new Date(a.date))
+  const ProjectPreview = ({ content }) => {
+    return (
+      <Timeline.Item color="#4d194d">
+        <p><Moment fromNow>{content.date}</Moment></p>
+        <Card
+          style={{ width: 1300, marginTop: 16 }}
+          actions={[
+            <Tooltip placement="top" title={`Technologies: ${content?.technology}`}>
+              <CodeOutlined />
+            </Tooltip>,
+            <Tooltip placement="top" title={<>Created <Moment Format="YYYY-MM-DD">{content?.date}</Moment></>}>
+              <FieldTimeOutlined />
+            </Tooltip>,
+            <Tooltip placement="top" title={<>Project Preview <a href={content?.url ? content.url : '#'}>Demo</a></>}>
+              <StarOutlined />
+            </Tooltip>,
+            <Tooltip placement="top" title={`${content?.isVisible ? "Public" : "Private"}`}>
+              <UnlockOutlined />
+            </Tooltip>,
+            <Tooltip placement="top" title={`${content?.licence}`}>
+              <SafetyCertificateOutlined />
+            </Tooltip>,
+          ]}
+        >
+          <Meta
+            avatar={<Avatar size={85} src={<ProjectAvatar />} />}
+            title={`${content?.title}`}
+            description={`${content?.description}`}
+          />
+        </Card>
+      </Timeline.Item>
+    )
+  }
+  let qoute = (<>" It always seems impossible until it's done  "{' '}
+    <span className="qoute">Nelson Mandela</span></>)
   return (
-    <div className=" contContainer ">
-      <Layout style={{ padding: "0 24px 24px" }} className=" site-card-wrapper">
-        <Breadcrumb style={{ margin: "16px 0" }}>
-          <Divider orientation="center" type="horizontal">
-            <h1 className="large-font">
-              <b>Latest Projects</b>
-            </h1>
-            <h2 className="semi-large-font">
-              " It always seems impossible until it's done "{" "}
-              <span className="qoute">Nelson Mandela</span>
-            </h2>
-          </Divider>
-        </Breadcrumb>
-
+    <div className="contContainer site-card-wrapper">
+      <Layout style={{ padding: "0 24px 24px" }}>
+        <HeaderContent title="LATEST PROJECTS" h2={qoute} />
         <Content
           style={{
             padding: 24,
@@ -66,82 +95,14 @@ function LatestProjects() {
                 minHeight: 280,
               }}
             >
-              {/* first project details section goes here */}
-              {/* Adding a tooltip for icons only for the first section */}
 
               <Timeline>
-                <Timeline.Item color="#4d194d">
-                  <p>2 hours ago</p>
-                  <Card
-                    style={{ width: 1300, marginTop: 16 }}
-                    actions={[
-                      <Tooltip placement="top" title="Technologies">
-                        <CodeOutlined />
-                      </Tooltip>,
-                      <Tooltip placement="top" title="Date">
-                        <FieldTimeOutlined />
-                      </Tooltip>,
-                      <Tooltip placement="top" title="Stars">
-                        <StarOutlined />
-                      </Tooltip>,
-                      <Tooltip placement="top" title="This project is public">
-                        <UnlockOutlined />
-                      </Tooltip>,
-                      <Tooltip placement="top" title="Licence">
-                        <SafetyCertificateOutlined />
-                      </Tooltip>,
-                    ]}
-                  >
-                    <Meta
-                      avatar={<Avatar size={85} src={<ProjectAvatar />} />}
-                      title="FLANCER"
-                      description="FLANCER is your destination of showing the case of your existing projects, repositories, and designs in detail as a Developer while you are able to share them with other developers,creating a new project along with detailed info, and read, update, delete existing project as well, with the ability to update the project status whether public or private. Flancer will also have visitors with a read-only privilege to give them the ability to read a public project's details."
-                    />
-                  </Card>
-                </Timeline.Item>
-                {/* End of first project details section goes here */}
-
-                {/* second project details section goes here */}
-                <Timeline.Item color="#006466">
-                  <Card
-                    style={{ width: 1300, marginTop: 16 }}
-                    actions={[
-                      <CodeOutlined />,
-                      <FieldTimeOutlined />,
-                      <StarOutlined />,
-                      <UnlockOutlined />,
-                      <SafetyCertificateOutlined />,
-                    ]}
-                  >
-                    <Meta
-                      avatar={<Avatar size={85} src={<ProjectAvatar />} />}
-                      title="Rick and Morty API"
-                      description="FLANCER is your destination of showing the case of your existing projects, repositories, and designs in detail as a Developer while you are able to share them with other developers."
-                    />
-                  </Card>
-                </Timeline.Item>
-                {/* End of second project details section goes here */}
-
-                {/* third project details section goes here */}
-                <Timeline.Item color="#4d194d">
-                  <Card
-                    style={{ width: 1300, marginTop: 16 }}
-                    actions={[
-                      <CodeOutlined />,
-                      <FieldTimeOutlined />,
-                      <StarOutlined />,
-                      <UnlockOutlined />,
-                      <SafetyCertificateOutlined />,
-                    ]}
-                  >
-                    <Meta
-                      avatar={<Avatar size={85} src={<ProjectAvatar />} />}
-                      title="The Movies List"
-                      description="FLANCER is your destination of showing the case of your existing projects, repositories, and designs in detail as a Developer while you are able to share them with other developers."
-                    />
-                  </Card>
-                </Timeline.Item>
-                {/* End of third project details section goes here */}
+                {/* Start of User Timeline */}
+                {ProjectSort?.length > 0 ?
+                  ProjectSort?.map((project, index) => {
+                    return (<ProjectPreview key={index + 1} content={project} />)
+                  }) : <><h3 style={{ textAlign: 'center' }}><b>Your Projects' Timeline Will Load Here</b></h3></>}
+                {/* End of Timeline */}
               </Timeline>
             </Content>
           </Layout>

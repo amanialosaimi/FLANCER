@@ -27,4 +27,5 @@ yarn-error.log*
 
 # ignore backend
 /backend/node_modules
+/backend/build
 /backend/.env

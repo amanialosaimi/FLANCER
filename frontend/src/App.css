@@ -27,6 +27,7 @@ body {
 
 .container {
   padding: 64px;
+  margin-top: 80px;
 }
 
 .row:after {
@@ -89,7 +90,7 @@ img {
 }
 
 .site-card-wrapper {
-  padding: 30px;
+  padding: 120px 30px 30px 30px;
   background: #ececec;
 }
 
@@ -109,9 +110,11 @@ img {
   text-align: left;
   font-size: 1em;
 }
-.site-card-wrapper{
-  background: linear-gradient(141deg, #f8f7ef 15%, #80b2b3 48%, #006466 70% , #1b3a4b 95%) ;
+
+.site-card-wrapper {
+  background: linear-gradient(141deg, #f8f7ef 15%, #80b2b3 48%, #006466 70%, #1b3a4b 95%);
 }
+
 .contact-container {
   width: 40%;
   margin: auto;
@@ -121,9 +124,12 @@ img {
   align-items: center;
   border: 1px solid #fff;
 }
+
 .contact-title {
+  /* margin-top: 55px; */
   text-align: center;
 }
+
 .register-container {
   width: 40%;
   margin: auto;
@@ -132,45 +138,77 @@ img {
   margin-bottom: 70px;
   border: 1px solid #fff;
 }
-.Setting{
- margin-top: 250px;
- margin-bottom: 100px;
- margin-left: 450px;
- width: 100vh;
- text-align: left;
- border: 1px solid #006466;
- /* background-color: rgb(0, 100, 102, 0.4); */
+
+.setting {
+  margin-top: 20px;
+  margin-left: 450px;
+  width: 100vh;
+  text-align: left;
+  border: 1px solid #006466;
+  /* background-color: rgb(0, 100, 102, 0.4); */
 }
-.Settings-items{
+
+.settings-items {
   width: 65%;
   margin: auto;
   padding: 50px 50px 20px 5px;
   margin-top: 6px;
   margin-bottom: 70px;
-  
-}
-.font-setting{
-font-size: 40px;
- color: white; 
 }
 
-.members{
+.font-setting {
+  font-size: 40px;
+  color: white;
+}
+
+.members {
   align-items: center;
 }
-.contContainer{
-  margin-top: 120px ;
+
+.contContainer {
+  margin-top: -50px;
 }
-.ant-timeline-item-tail{
+
+.ant-timeline-item-tail {
   color: #fff;
 }
-.ant-timeline-item-head, .ant-layout,.site-layout .site-layout-background {
+
+.ant-timeline-item-head, .ant-layout, .site-layout .site-layout-background {
   background-color: rgba(255, 255, 255, 0);
 }
-.profile-items{
+
+.profile-items {
   width: 60%;
   margin: auto;
-  padding: 50px 50px 50px 50px;
+  padding: 10px;
   margin-top: 6px;
-  margin-bottom: 70px;
-  
+}
+
+.ant-menu {
+  z-index: 1;
+  background: transparent;
+}
+
+.ant-menu-horizontal {
+  border-bottom-color: transparent
+}
+
+.ant-menu-horizontal>.ant-menu-item-selected a {
+  color: #4d194d;
+}
+
+.ant-menu-horizontal:not(.ant-menu-dark)>.ant-menu-item-selected {
+  border-bottom: 2px solid #4d194d;
+}
+
+.ant-menu-horizontal>.ant-menu-item a:hover {
+  color: #312244;
+}
+
+.ant-menu-horizontal:not(.ant-menu-dark)>.ant-menu-item-active:hover {
+  border-bottom: 2px solid #312244;
+}
+
+.profile-form > form > div > div {
+  text-align: left;
 }

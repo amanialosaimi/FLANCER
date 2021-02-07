@@ -1,13 +1,12 @@
 import React from "react";
-import { ReactComponent as MiddleBlockImg } from "../../images/MiddleBlockImg.svg";
-function MiddleBlock() {
+import { ReactComponent as AMISBanner } from "../../images/MiddleBlockImg.svg";
+function AIMS() {
   return (
     <div className="middleBlock">
       <div className="container">
         <div className="row">
           <div className="column-33">
-            <MiddleBlockImg />
-            {/* <img src="Images/aim.png" alt="Somthing went wrong!"/> */}
+            <AMISBanner />
           </div>
           <div className="column-66">
             <h1 className="large-font">
@@ -32,4 +31,4 @@ function MiddleBlock() {
   );
 }
 
-export default MiddleBlock;
+export default AIMS;

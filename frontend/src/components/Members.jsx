@@ -3,12 +3,11 @@ import React from "react";
 import { ReactComponent as Membership } from "../images/Membership.svg";
 import {
   Layout,
-  Breadcrumb,
   Card,
   Space,
   Avatar,
-  Divider,
 } from "antd";
+import HeaderContent from './content/HeaderContent';
 
 const { Content } = Layout;
 const { Meta } = Card;
@@ -19,16 +18,9 @@ const gridStyle = {
 };
 function Members() {
   return (
-    <div className="site-layout-background contContainer site-card-wrapper">
+    <div className="contContainer site-card-wrapper">
       <Layout style={{ padding: "0 24px 24px" }} className="site-layout">
-        <Breadcrumb style={{ margin: "16px 0" }}>
-          <Divider orientation="center" type="horizontal">
-            <h1 className="large-font">
-              <b>Our Members</b>
-            </h1>
-          </Divider>
-        </Breadcrumb>
-
+      <HeaderContent title={'MEMBERS'} />
         <Content
           style={{
             padding: 24,

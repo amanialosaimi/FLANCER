@@ -12,13 +12,13 @@ export default function Dashboard(props) {
 
     const [uesrProfile, setProfile] = useState()
     useEffect(() => {
-        if(props.profile?.authenticated){
+        if (props.profile?.authenticated) {
             setProfile(props.profile)
         }
     }, [props.profile])
     return (
         <div>
-            <DeveloperSidebar />
+            <DeveloperSidebar status={props.status} />
             <Switch>
                 <Route exact path="/dashboard">
                     <DeveloperProfile profile={uesrProfile} status={props.status} />
@@ -27,7 +27,7 @@ export default function Dashboard(props) {
                     <DeveloperProjects profile={uesrProfile} status={props.status} />
                 </Route>
                 <Route path="/dashboard/publication">
-                    <DeveloperPublication profile={uesrProfile} />
+                    <DeveloperPublication profile={uesrProfile} status={props.status}/>
                 </Route>
                 <Route path="/dashboard/settings">
                     <DeveloperSetting profile={uesrProfile} />

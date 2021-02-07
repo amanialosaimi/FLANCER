@@ -22,9 +22,9 @@ const developerSchema = new mongoose.Schema({
     createdAt: Number,
     updatedAt: Number
 },
-{ timestamps: { currentTime: () => Math.floor(Date.now() / 1000) } }
+    { timestamps: { currentTime: () => Math.floor(Date.now() / 1000) } }
 )
-developerSchema.plugin(passportLocalMongoose, {lastLoginField: 'lastLogin', limitAttempts: true, attemptsField: 'attemps'})
+developerSchema.plugin(passportLocalMongoose, { lastLoginField: 'lastLogin', limitAttempts: true, attemptsField: 'attemps' })
 
 /* Create Model From Schema */
 const DeveloperModel = mongoose.model('Developer', developerSchema)

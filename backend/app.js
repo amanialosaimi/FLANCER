@@ -27,7 +27,7 @@ app.use(morgan('tiny'));
 const PORT = process.env.PORT || 3000
 app.use(cors({
     credentials: true,
-    origin: [`http://localhost:${PORT}`, 'http://localhost:3001', "https://flancers.herokuapp.com", "https://flancer.herokuapp.com"],
+    origin: [`http://localhost:${PORT}`, "https://flancers.herokuapp.com", "https://flancer.herokuapp.com", "https://git.generalassemb.ly"],
 }));
 
 /* Auth Cookie Setup */
@@ -74,9 +74,6 @@ app.get("/api", checkLogin, async (req, res) => {
             .populate("projects")
             .exec((err, profile) => {
                 if (!err) {
-
-
-                    console.log(profile)
                     res.status(200).json({
                         authenticated: req.isAuthenticated(),
                         message: "User Authenticated",
@@ -85,7 +82,6 @@ app.get("/api", checkLogin, async (req, res) => {
                         cookies: req.cookies
                     });
                 } else { console.log(err) }
-                console.log(profile)
             })
     } catch (err) {
         console.log(err)
@@ -124,7 +120,7 @@ app.use(express.static(__dirname + "/build"));
 // After all routes
 // This code essentially serves the index.html file on any unknown routes.
 app.get("*", (req, res) => {
-  res.sendFile(__dirname + "/build/index.html");
+    res.sendFile(__dirname + "/build/index.html");
 });
 /* API Server Listen For Connections */
 app.listen(PORT, () => { console.log(`Flancer | Backend Server - Port ${PORT}`) })

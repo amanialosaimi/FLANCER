@@ -1,46 +1,44 @@
 const { Router } = require('express')
 const index = Router()
-const GitHubExtended = require('../lib/ThirdParty/GitHubExtend')
-const Github = new GitHubExtended(({
-    token: process.env.GITHUB_TOKEN
-}))
-index.route('/:username')
+const { Octokit } = require("@octokit/rest");
+
+index.route('/')
     .get(async (request, response) => {
-        if (request.isAuthenticated()) {
-            let profileInfo = {};
-            let repos = [];
-            if (request.params.username){
-            await Github.getUserProfile(request.params.username).then((profile) => {
-                profileInfo = {
-                    'fullname': profile.name,
-                    'location': profile.location,
-                    'public_repos': profile.public_repos,
-                    // 'private_repos': profile.total_private_repos,
-                    'following': profile.following,
-                    'followers': profile.followers
-                }
-                return profileInfo
+        if (request.isAuthenticated() && request.user.gh_personal_token) {
+
+            const octokit = new Octokit({
+                auth: request.user.gh_personal_token,
+                baseUrl: "https://git.generalassemb.ly/api/v3",
+            });
+
+            let userRepos
+            let userProfile
+
+            await octokit.request('GET /user', {
+            }).then((foundProfile) => {
+                userProfile = foundProfile.data
+            }).catch((err) => {
+                console.log(err)
             })
 
-            await Github.getUserRepos(request.params.username)
-                .then((result) => {
-                    result.map((repo) => {
-                        repos.push({
-                            'repo_name': repo.name,
-                            'isPrivate': repo.private,
-                            'forksCount': repo.forks,
-                            'stars': repo.stargazers_count,
-                            'watchers': repo.watchers_count
-                        })
-                    })
-                    return repos
-                })
-                response.json({profileInfo, repos})
-            } else {
-                response.json({messagge: "You must specifiy params of username in your request"})
-            }
+            await octokit.request('GET /user/repos', {
+                type: 'owner',
+                mediaType: {
+                    previews: [
+                        'mercy'
+                    ]
+                }
+            }).then((foundRepos) => {
+                userRepos = foundRepos.data
+                return userRepos
+            }).catch((err) => {
+                console.log(err)
+            })
+
+            response.json({ profile: userProfile, repos: userRepos })
+
         } else {
-            response.redirect('/auth/login')
+            response.json({status: 'You must add your Github Personal Token to your profile for retrieve repos.'})
         }
     })
 module.exports = { index }

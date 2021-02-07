@@ -16,7 +16,11 @@ const style = {
   fontSize: 16,
   padding: 0,
 };
+<<<<<<< HEAD
 const LoginCollection = ({ visible, onLogin, redirect ,onCancel, statusMessage }) => {
+=======
+const LoginCollection = ({ visible, onLogin, redirect, onCancel, statusMessage }) => {
+>>>>>>> Release-v2.3.2
 
   const [form] = Form.useForm();
 
@@ -35,11 +39,9 @@ const LoginCollection = ({ visible, onLogin, redirect ,onCancel, statusMessage }
         console.log('Validate Failed:', info);
       })
     }
+    okText="Login"
     onCancel={onCancel}
     htmlType="submit"
-
-  //   style={{ backgroundImage: `url(${LoginBg})`, backgroundRepeat: 'no-repeat',
-  //   width:'250px', height:'300px'}}
   >
     <Form
       form={form}
