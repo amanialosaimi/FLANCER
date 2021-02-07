@@ -1,4 +1,4 @@
-    Flancer - Web Application
+    Flancer Software
     Copyright (C) 2021 Flancer Team
     Abdulaziz Alfayaa (az.alfay3@hotmail.com)
     Abeer Albawardi   (albawardi.as@gmail.com)
