@@ -45,7 +45,7 @@ export default function DeveloperTable(props) {
       repoObject.description = repo.description ? repo.description : "Not Specified"
       repos.push(repoObject)
       props.count(repos.length)
-      return
+      return null
     })    
     updateProject(repos)
 

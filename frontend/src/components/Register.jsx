@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Form, Input, Button, Divider } from 'antd';
 import { API } from './ops/API'
 import '../App.css'
@@ -12,14 +12,9 @@ const style = {
   textAlign: "center",
   fontSize: 14,
 };
-class Register extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      sucsses: false
-    }
-  }
-  render() {
+function Register(props) {
+  const [successStatus, setSuccessStatus] = useState(false)
+ 
     const layout = {
       labelCol: { span: 8 },
       wrapperCol: { span: 16 },
@@ -30,7 +25,7 @@ class Register extends Component {
     const onFinish = async (values) => {
       await API.register(values)
         .then((response) => {
-          this.setState({ sucsses: response })
+          setSuccessStatus(response)
         }).catch((err) => {
           console.log(err)
         })
@@ -48,7 +43,7 @@ class Register extends Component {
         </Divider>
         <div className='register-container'>
           <h1 className="contact-title">Be one of our creatives!</h1>
-          <h4 className="contact-title">{this.state.sucsses ? this.state.sucsses : ""}</h4><br />
+          <h4 className="contact-title">{successStatus ? successStatus : ""}</h4><br />
           <Form
             {...layout}
             name="basic"
@@ -109,5 +104,4 @@ class Register extends Component {
       </div>
     );
   }
-}
 export default Register;
