@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import {
   Layout,
   Card,
@@ -12,8 +12,8 @@ import { ReactComponent as Values } from "../images/Values.svg";
 import HeaderContent from './content/HeaderContent';
 const { Content } = Layout;
 
-export default class About extends Component {
-  style = {
+function About() {
+  const style = {
     height: 40,
     width: 90,
     lineHeight: "40px",
@@ -23,8 +23,6 @@ export default class About extends Component {
     textAlign: "center",
     fontSize: 16,
   };
-  render() {
-
     return (
       <div className="contContainer site-card-wrapper">
         <Layout style={{ padding: "0 24px 24px" }} className="site-layout">
@@ -72,5 +70,5 @@ export default class About extends Component {
       </div>
     )
   }
-}
 
+  export default About
