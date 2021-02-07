@@ -1,6 +1,6 @@
 ![flancerBanner](./frontend/readme-assets/flancerBanner.png)
 
-# FLANCER | Web Application
+# FLANCER | Web Application Software (MERN)
 ## Table of Contents
 - [FLANCER | Web Application](#flancer--web-application)
   - [Table of Contents](#table-of-contents)
