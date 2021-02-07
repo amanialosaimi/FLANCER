@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Form, Input, Button, Layout } from 'antd';
 import HeaderContent from './content/HeaderContent';
 
@@ -15,8 +15,7 @@ const style = {
   textAlign: "center",
   fontSize: 14,
 };
-class Contact extends Component {
-  render() {
+function Contact() {
     const layout = {
       labelCol: { span: 8 },
       wrapperCol: { span: 16 },
@@ -86,7 +85,6 @@ class Contact extends Component {
       </div>
     );
   }
-}
 export default Contact;
 
 

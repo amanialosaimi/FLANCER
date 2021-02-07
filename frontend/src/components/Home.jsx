@@ -4,7 +4,7 @@ import TheTeam from "./content/TheTeam";
 import { Row, Col } from "antd";
 function Home() {
   return (
-    <div className="">
+    <>
       <Row>
         <Col>
           <WhyUS />
@@ -12,7 +12,7 @@ function Home() {
           <TheTeam />
         </Col>
       </Row>
-    </div>
+    </>
   );
 }
 

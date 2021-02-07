@@ -14,7 +14,6 @@ function Header(props) {
           <Col style={{ height: "50px" }}><NavMenu authd={props.authd} auth={props.auth} status={props.status} /></Col>
         </Space>
       </Row>
-
     </>
   );
 }
