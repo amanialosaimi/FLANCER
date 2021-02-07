@@ -1,6 +1,6 @@
     Flancer Software
     Copyright (C) 2021 Flancer Team
-    Abdulaziz Alfayaa (az.alfay3@hotmail.com)
+    Abdulaziz Alfayaa (aziz@s1.sa OR az.alfay3@hotmail.com)
     Abeer Albawardi   (albawardi.as@gmail.com)
     Amani Alosaimi    (amanialossaimi@gmail.com)
     Fahad Alsaedi     (alsaedifahad58@gmail.com)
@@ -8,7 +8,7 @@
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+    any later version.
 
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
