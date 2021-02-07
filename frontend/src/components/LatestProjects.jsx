@@ -35,8 +35,8 @@ const style = {
   fontSize: 16,
 };
 function LatestProjects() {
-  let qoute =  (<>" It always seems impossible until it's done  "{' '}
-                <span className="qoute">Nelson Mandela</span></>)
+  let qoute = (<>" It always seems impossible until it's done  "{' '}
+    <span className="qoute">Nelson Mandela</span></>)
   return (
     <div className="contContainer site-card-wrapper">
       <Layout style={{ padding: "0 24px 24px" }}>

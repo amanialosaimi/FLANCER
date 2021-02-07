@@ -12,7 +12,7 @@ export default function Dashboard(props) {
 
     const [uesrProfile, setProfile] = useState()
     useEffect(() => {
-        if(props.profile?.authenticated){
+        if (props.profile?.authenticated) {
             setProfile(props.profile)
         }
     }, [props.profile])

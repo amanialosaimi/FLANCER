@@ -61,7 +61,7 @@ const ProjectCollection = ({ visible, createNewProject, onCancel, projectVisible
         <Form.Item
           name={"isVisible"}
           label="Visibility">
-          <Switch onChange={(e)=>projectVisible(e)} checkedChildren="Public" unCheckedChildren="Private" />
+          <Switch onChange={(e) => projectVisible(e)} checkedChildren="Public" unCheckedChildren="Private" />
         </Form.Item>
         <Form.Item
           name={"date"}
@@ -71,7 +71,7 @@ const ProjectCollection = ({ visible, createNewProject, onCancel, projectVisible
               required: true,
               message: "Start Date of your project required",
             },
-          
+
           ]}
         >
           <DatePicker format='YYYY-MM-DD' />

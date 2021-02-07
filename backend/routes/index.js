@@ -11,10 +11,10 @@ index.route('/')
             let userRepos
             let userProfile
 
-            await octokit.request('GET /user', {  
+            await octokit.request('GET /user', {
             }).then((foundProfile) => {
                 userProfile = foundProfile.data
-            }).catch((err)=>{
+            }).catch((err) => {
                 console.log(err)
             })
 
@@ -28,11 +28,11 @@ index.route('/')
             }).then((foundRepos) => {
                 userRepos = foundRepos.data
                 return userRepos
-            }).catch((err)=>{
+            }).catch((err) => {
                 console.log(err)
             })
 
-            response.json({profile: userProfile, repos: userRepos})
+            response.json({ profile: userProfile, repos: userRepos })
 
         } else {
             response.redirect('/auth/login')

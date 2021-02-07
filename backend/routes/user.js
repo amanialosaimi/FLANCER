@@ -31,36 +31,36 @@ user.route('/createProject')
     })
 /// update project
 user.route('/project/:id')
-.put(async(req, res) => {
-   await Project.findById(req.params.id)
-    .then((foundProject) => {
-      if (foundProject) {
-        return foundProject.update(req.body);
-      } else {
-        res.status(404).json({
-          error: {
-            message: "The provided ID doesn't match any documents",
-          },
-        });
-      }
+    .put(async (req, res) => {
+        await Project.findById(req.params.id)
+            .then((foundProject) => {
+                if (foundProject) {
+                    return foundProject.update(req.body);
+                } else {
+                    res.status(404).json({
+                        error: {
+                            message: "The provided ID doesn't match any documents",
+                        },
+                    });
+                }
+            })
+            .then(() => {
+                res.status(202).json({ message: "Project updated sucessfully" });
+            })
+            // Catch any errors that might occur
+            .catch((error) => {
+                res.status(500).json({ error: error })
+            })
     })
-    .then(() => {
-      res.status(202).json({message: "Project updated sucessfully"});
+    .delete(async (req, res) => {
+        await Project.findOneAndRemove({ _id: req.params.id })
+            .then((foundProject) => {
+                res.json(foundProject)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     })
-    // Catch any errors that might occur
-    .catch((error) => {
-      res.status(500).json({ error: error })
-    })
-})
-.delete(async (req, res) => {
-    await Project.findOneAndRemove({_id: req.params.id})
-    .then((foundProject)=>{
-        res.json(foundProject)
-    })
-    .catch((err)=>{
-        console.log(err)
-    })
-})
 
 /* Initial Project Collection For First Time */
 // user.route('/projects')
@@ -114,7 +114,7 @@ user.put('/:id', async (request, response) => {
                                     if (err) console.log("Not happening: ", err)
                                     response.status(200).json({ message: 'Profile Updated' });
                                 });
-                               
+
                             })
                         } else {
                             user.email = request.body.email

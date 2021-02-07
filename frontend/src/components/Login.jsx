@@ -16,7 +16,7 @@ const style = {
   fontSize: 16,
   padding: 0,
 };
-const LoginCollection = ({ visible, onLogin, redirect ,onCancel, statusMessage }) => {
+const LoginCollection = ({ visible, onLogin, redirect, onCancel, statusMessage }) => {
 
   const [form] = Form.useForm();
 

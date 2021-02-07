@@ -42,7 +42,7 @@ function NavMenu(props) {
           <Button
             type="primary"
             style={style}
-            onClick={async () => { await API.logout().then((profile)=>{ props.status(); props.auth(false); history.push('/'); })  }}
+            onClick={async () => { await API.logout().then((profile) => { props.status(); props.auth(false); history.push('/'); }) }}
           >
             Logout
         </Button></Space>

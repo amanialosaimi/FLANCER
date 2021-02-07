@@ -68,7 +68,7 @@ export const API = {
       })
       .catch((err) => console.log(err))
     return profile
-    
+
   },
   createProject: async (projectDetails) => {
     axios.defaults.withCredentials = true

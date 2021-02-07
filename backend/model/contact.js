@@ -8,7 +8,7 @@ const contactSchema = new mongoose.Schema({
     email: String,
     message: String,
 },
-{ timestamps: { currentTime: () => Math.floor(Date.now() / 1000) } }
+    { timestamps: { currentTime: () => Math.floor(Date.now() / 1000) } }
 )
 
 

@@ -13,7 +13,7 @@ const gridStyle = {
 };
 
 function DeveloperPublication() {
-    const items = [{ key: 2, title: 'hola'}, { key: 2, title: 'hola'}, { key: 3, title: 'hola'}, { key: 3, title: 'hola'}]
+    const items = [{ key: 2, title: 'hola' }, { key: 2, title: 'hola' }, { key: 3, title: 'hola' }, { key: 3, title: 'hola' }]
     return (
         <>
             <Layout style={{ marginLeft: 0 }}>
@@ -59,7 +59,7 @@ function DeveloperPublication() {
                                     style={gridStyle}
                                     cover={<img alt="example" src={Banner} />}
                                 >
-                                    <Meta title="Project Title" description={<><p>Project Description</p><p style={{marginBottom: '4px'}}>PUB/PRV</p></>} />
+                                    <Meta title="Project Title" description={<><p>Project Description</p><p style={{ marginBottom: '4px' }}>PUB/PRV</p></>} />
                                 </Card>
                             </Col>
 

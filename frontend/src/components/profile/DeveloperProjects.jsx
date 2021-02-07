@@ -17,27 +17,27 @@ export default function DeveloperProjects(props) {
     const [repoCount, setRepoCounts] = useState(0)
     useEffect(() => {
         const fetchGHProfile = async () => {
-                setCurrentGH('your')
-                setLoadingGH(true)
-                await API.getUserRepos()
-                    .then((result) => {
-                        setLoadingGH(false)
-                        setGithubProfile(result.data?.profile)
-                        setGithubRepos(result.data.repos)
-                        console.log(
-                            "Github Profile", result.data?.profile,
-                            "Github Repos", result.data?.repos)
-                        return result.data.repos
-                    })
-                    .then((repos)=>{
-                        const totalStars = repos?.reduce((acc, repo) => acc + repo.stargazers_count, 0);
-                        setGithubStars(totalStars)
-                    })
-                    .catch((err) => console.log(err))
+            setCurrentGH('your')
+            setLoadingGH(true)
+            await API.getUserRepos()
+                .then((result) => {
+                    setLoadingGH(false)
+                    setGithubProfile(result.data?.profile)
+                    setGithubRepos(result.data.repos)
+                    console.log(
+                        "Github Profile", result.data?.profile,
+                        "Github Repos", result.data?.repos)
+                    return result.data.repos
+                })
+                .then((repos) => {
+                    const totalStars = repos?.reduce((acc, repo) => acc + repo.stargazers_count, 0);
+                    setGithubStars(totalStars)
+                })
+                .catch((err) => console.log(err))
         }
 
         fetchGHProfile()
-        
+
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
     return (
         <Layout style={{ marginLeft: 200 }}>
