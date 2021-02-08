@@ -4,11 +4,13 @@ const passport = require("passport");
 
 /* Failed Login Route */
 auth.get("/login/failed", (req, res) => {
-    res.status(401).json({
-        success: false,
-        message: "Authentication Failed"
-    });
+    res.status(401).json({ message: "Authentcation failed, check your credentials and try again!" })
 });
+
+/* Activation Route */
+auth.get("/login/deactivated", (req, res) => {
+    res.status(403).json({ message: "Your account is suspended, contact us for more information. " })
+})
 
 /*
 Logout Route 
@@ -22,9 +24,15 @@ auth.get("/logout", (req, res) => {
 /* User Profile OR Flash Error */
 auth.get('/login', function (req, res) {
     if (req.isAuthenticated()) {
-        res.json({
-            user: req.user,
-        });
+        if (req.user.isDeactive) {
+            req.logout()
+            res.redirect('/api/auth/login/deactivated')
+        } else {
+            res.json({
+                user: req.user,
+            });
+        }
+
     } else {
         res.json({ message: 'Login To Access Your Dashboard' })
     }

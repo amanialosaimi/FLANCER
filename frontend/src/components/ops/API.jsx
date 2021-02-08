@@ -17,6 +17,14 @@ export const API = {
       .catch((err) => console.log("UDATE PROFILE ERRR:", err))
     return profile
   },
+  deactiveProfile: async () => {
+    let message
+    axios.defaults.withCredentials = true
+    await axios.get(`/api/user/deactiveProfile`)
+      .then((response) => message = response.data)
+      .catch((err) => console.log("DEACTIVEATE ACCOUNT ERR:", err))
+    return message
+  },
   checkStatus: async () => {
     let profile;
     axios.defaults.withCredentials = true
@@ -36,7 +44,7 @@ export const API = {
         headers: { crossDomain: true, 'Content-Type': 'application/json' },
       })
       .then(response => response)
-      .catch((err) => "Authentication failed")
+      .catch((err) => err.response.data)
 
     return {
       type: 'USER_LOGIN',

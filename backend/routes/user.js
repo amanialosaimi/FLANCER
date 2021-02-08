@@ -154,27 +154,25 @@ user.get('/publicProjects', async (req, res) => {
         res.json({ message: "You must register/login to read users' projects" })
     }
 })
-/* Delete | delete User account */
-user.delete('/deleteAccount', async (request, response) => {
+/* GET | Deactivate User Profile */
+user.get('/deactiveProfile', async (request, response) => {
     if (request.isAuthenticated()) {
-        if (request.query.deleteProfile == request.user._id) {
-            try {
-                await Developer.deleteOne({ _id: request.user._id }, (err, result) => {
-                    if (!err) {
-                        response.json({ message: 'Account deleted ' });
-                    } else {
-                        response.json(err);
-                    }
-                });
-            }
-            catch (err) {
-                console.log(err)
-            }
-        } else {
-            response.json({ message: "You are not allowed to delete account" })
+        try {
+            await Developer.updateOne({ _id: request.user._id }, { isDeactive: true }, (err, result) => {
+                if (!err) {
+                    console.log(`Account been deactivated: ${request.user.username}`)
+                    request.logout()
+                    response.status(202).json({ message: 'Account Suspended' });
+                } else {
+                    response.json(err);
+                }
+            });
+        }
+        catch (err) {
+            console.log(err)
         }
     } else {
-        response.json({ message: "You must log in to delete your account" })
+        response.json({ message: "You must log in to deactivate your account" })
     }
 })
 

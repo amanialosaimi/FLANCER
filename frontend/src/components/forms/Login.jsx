@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button, Modal, Input, Checkbox } from "antd";
+import { Form, Button, Modal, Input, Checkbox, Alert } from "antd";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 // import { ReactComponent as LoginBg } from "../images/LoginBg.svg";
 import { API } from "../ops/API"
@@ -47,7 +47,11 @@ const LoginCollection = ({ visible, onLogin, redirect, onCancel, statusMessage }
         remember: true,
       }}
     >
-      {statusMessage}
+      {statusMessage ? <Alert
+        message={statusMessage}
+        type="warning"
+      /> : ""}
+      <br />
       <Form.Item
         name="username"
         rules={[
@@ -99,7 +103,7 @@ export default function Login(props) {
             props.auth(true)
             props.status()
           } else {
-            setStatusMessage("Authentication failed")
+            setStatusMessage(login.message)
           }
         })
     } catch (err) {
@@ -120,6 +124,7 @@ export default function Login(props) {
 
       <LoginCollection
         statusMessage={statusMessage}
+        setStausMessage={setStatusMessage}
         visible={visible}
         onLogin={onLogin}
         redirect={props.redirect}

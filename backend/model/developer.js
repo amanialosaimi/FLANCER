@@ -18,7 +18,7 @@ const developerSchema = new mongoose.Schema({
     ],
     last_login: Date,
     attemps: String,
-    isActive: Boolean,
+    isDeactive: Boolean,
     createdAt: Number,
     updatedAt: Number
 },

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Button, Switch, Collapse, Divider, Space, Row, Badge, Alert } from 'antd';
+import { API } from '../ops/API'
 import 'antd/dist/antd.css';
 
 const { Panel } = Collapse;
@@ -15,7 +16,18 @@ const Answer3 = `
 
 export default function Settings() {
   const [deactiveShow, setDeactiveShow] = useState(false)
+  const [deactivateMessage, setDeactivateMessage] = useState()
   const [light, setLight] = useState(true)
+  const deactiveNow = async () => {
+    await API.deactiveProfile()
+      .then((response) => {
+        setDeactivateMessage(response.message)
+        setTimeout(() => setDeactiveShow(false), 5000)
+      })
+      .catch((err) => {
+
+      })
+  }
   const changeLight = () => {
     if (light) {
       setLight(!light)
@@ -25,20 +37,22 @@ export default function Settings() {
       DarkMode('')
     }
   }
-  const DeactiveAccount = ({ state }) => {
+  const DeactiveAccount = ({ state, message }) => {
     return (
       <Alert
-        message="Deactive Account Confirmation"
-        description="If you need your account again you'll have to contact us to restore your account."
+        message={message ? message : "Deactive Account Confirmation"}
+        description={message ? "" : "If you need your account again you'll have to contact us to restore your account."}
         type="info"
         action={
           <Space direction="vertical">
-            <Button onClick={() => state(false)} size="small" type="primary">
-              Accept
+            {message ? "" : <>
+              <Button onClick={() => deactiveNow()} size="small" type="primary">
+                Accept
           </Button>
-            <Button onClick={() => state(false)} size="small" danger type="ghost">
-              Decline
+              <Button onClick={() => state(false)} size="small" danger type="ghost">
+                Decline
           </Button>
+            </>}
           </Space>
         }
       />
@@ -74,7 +88,7 @@ export default function Settings() {
               <p>{Answer3}</p>
             </Panel>
           </Collapse><br />
-          {deactiveShow ? <DeactiveAccount state={setDeactiveShow} /> : "Hola"}
+          {deactiveShow ? <DeactiveAccount state={setDeactiveShow} message={deactivateMessage} /> : "Hola"}
           <br />
           <Space>
             <Button onClick={githubPage} block>Open githup page</Button>
