@@ -1,13 +1,13 @@
-import "../App.css";
+import "../../App.css";
 import React from "react";
-import { ReactComponent as Membership } from "../images/Membership.svg";
+import HeaderContent from './HeaderContent';
+import { ReactComponent as Membership } from "../../images/Membership.svg";
 import {
   Layout,
   Card,
   Space,
   Avatar,
 } from "antd";
-import HeaderContent from './content/HeaderContent';
 
 const { Content } = Layout;
 const { Meta } = Card;

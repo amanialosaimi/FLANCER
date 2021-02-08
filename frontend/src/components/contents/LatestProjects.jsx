@@ -1,7 +1,8 @@
-import "../App.css";
 import React, { useEffect } from "react";
-import { ReactComponent as ProjectAvatar } from "../images/projectAvatar.svg";
 import Moment from 'react-moment'
+import HeaderContent from './HeaderContent';
+import { ReactComponent as ProjectAvatar } from "../../images/projectAvatar.svg";
+import "../../App.css";
 
 import {
   Layout,
@@ -19,7 +20,6 @@ import {
   UnlockOutlined,
   SafetyCertificateOutlined,
 } from "@ant-design/icons";
-import HeaderContent from './content/HeaderContent';
 
 
 const { Content } = Layout;

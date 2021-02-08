@@ -12,7 +12,7 @@ import {
 } from '@ant-design/icons';
 import { API } from '../ops/API';
 
-export default function DeveloperSidebar(props) {
+export default function DashboardSidebar(props) {
     const { Sider } = Layout;
     return (
         <Layout>

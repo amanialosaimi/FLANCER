@@ -1,9 +1,9 @@
 import React from "react";
 import { Form, Input, Button, Layout } from 'antd';
-import HeaderContent from './content/HeaderContent';
+import HeaderContent from '../contents/HeaderContent';
+import { API } from '../ops/API'
+import '../../App.css'
 
-import { API } from './ops/API'
-import '../App.css'
 const { TextArea } = Input;
 const style = {
   height: 40,
@@ -44,7 +44,7 @@ function Contact() {
             <Form.Item
               label={<h4><b>First Name</b></h4>}
               name="firstname"
-              rules={[{ required: true, message: 'Please input your firstname!' }]}
+              rules={[{ required: true, message: 'Please enter your firstname!' }]}
 
             >
               <Input />
@@ -52,7 +52,7 @@ function Contact() {
             <Form.Item
               label={<h4><b>Last Name</b></h4>}
               name="lastname"
-              rules={[{ required: true, message: 'Please input your Lastname!' }]}
+              rules={[{ required: true, message: 'Please enter your lastname!' }]}
 
             >
               <Input />
@@ -61,7 +61,7 @@ function Contact() {
             <Form.Item
               label={<h4><b>Email</b></h4>}
               name="email"
-              rules={[{ required: true, message: 'Please input your email!' }]}
+              rules={[{ required: true, message: 'Please enter your email!' }]}
 
             >
               <Input />
@@ -76,7 +76,7 @@ function Contact() {
 
             <Form.Item {...tailLayout}>
               <Button type="primary" htmlType="submit" style={style}>
-                Send
+                Submit
             </Button>
             </Form.Item>
           </Form>

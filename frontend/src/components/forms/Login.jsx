@@ -1,9 +1,9 @@
-import "../App.css";
 import React, { useState } from "react";
 import { Form, Button, Modal, Input, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 // import { ReactComponent as LoginBg } from "../images/LoginBg.svg";
-import { API } from "./ops/API"
+import { API } from "../ops/API"
+import "../../App.css";
 
 const style = {
   height: 40,

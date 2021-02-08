@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import Home from "./components/Home";
-import Header from "./components/Header";
-import Dashboard from "./components/profile/Dashboard"
-import LatestProjects from "./components/LatestProjects";
-import PageFooter from "./components/PageFooter";
-import About from "./components/About";
-import Contact from "./components/Contact";
-import Register from "./components/Register";
-import Members from "./components/Members";
+import PageHeader from "./components/main/PageHeader";
+import PageFooter from "./components/main/PageFooter";
+import Home from "./components/contents/Home";
+import LatestProjects from "./components/contents/LatestProjects";
+import Members from "./components/contents/Members";
+import About from "./components/contents/About";
+import Contact from "./components/forms/Contact";
+import Register from "./components/forms/Register";
+import Dashboard from "./components/dashboard/Dashboard"
 import { API } from "./components/ops/API";
 
 function App() {
@@ -42,7 +42,7 @@ function App() {
   return (
     <>
       <Router>
-        <Header authd={isLogged} auth={setIsLogged} status={checkLoginStatus} />
+        <PageHeader authd={isLogged} auth={setIsLogged} status={checkLoginStatus} />
         <Switch>
           <Route exact path="/">
             <Home />

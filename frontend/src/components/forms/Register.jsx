@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Input, Button, Divider } from 'antd';
-import { API } from './ops/API'
-import '../App.css'
+import { API } from '../ops/API'
+import '../../App.css'
 const style = {
   height: 40,
   width: 100,

@@ -1,8 +1,9 @@
 import React from "react";
 import NavMenu from "./NavMenu";
 import { Row, Col, Space } from "antd"
-import { ReactComponent as FlancerLogo } from "../images/flancerLogo_1.svg";
-function Header(props) {
+import { ReactComponent as FlancerLogo } from "../../images/flancerLogo_1.svg";
+
+export default function PageHeader(props) {
   return (
     <>
       <Row>
@@ -17,5 +18,3 @@ function Header(props) {
     </>
   );
 }
-
-export default Header;

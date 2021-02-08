@@ -127,7 +127,7 @@ const UpdateProjectCollection = ({
   );
 };
 
-function UpdateProject(props) {
+export default function ProjectModification(props) {
   const [visible, setVisible] = useState(false);
   let currentProjectState = props.project?.isVisible === "true"
   const [projectVisible, setProjectVisible] = useState(currentProjectState);
@@ -167,5 +167,3 @@ function UpdateProject(props) {
     </div>
   );
 }
-
-export default UpdateProject;

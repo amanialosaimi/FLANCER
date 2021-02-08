@@ -1,7 +1,7 @@
 import React from "react";
 import { Layout } from "antd";
 const { Footer } = Layout;
-function PageFooter() {
+export default function PageFooter() {
   return (
     <div>
       <Layout>
@@ -20,5 +20,3 @@ function PageFooter() {
     </div>
   );
 }
-
-export default PageFooter;

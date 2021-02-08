@@ -13,7 +13,7 @@ const gridStyle = {
     marginTop: 16,
 };
 
-function DeveloperPublication(props) {
+export default function Publication(props) {
 
     const ProjectSort = props.profile?.projects.sort((a, b) => new Date(b.date) - new Date(a.date))
     const ProjectPreview = ({ content }) => {
@@ -79,4 +79,3 @@ function DeveloperPublication(props) {
     )
 
 }
-export default DeveloperPublication

@@ -1,36 +1,20 @@
 import axios from 'axios'
-export const getAllUsers = () => {
-  axios
-    .get(`/api/find`)
-    .then((response) => {
-      console.log("RESPONSE: ", response);
-      console.log("DATA: ", response.data);
-    })
-    .catch((err) => {
-      console.log("ERR: ", err);
-    });
-};
 
 export const API = {
   register: async (newUserInfo) => {
     let message
     await axios
       .post(`/api/register`, newUserInfo)
-      .then((response) => {
-        message = response.data.message
-      })
-      .catch((err) => {
-        message = err.split(':')[1]
-      });
+      .then((response) => message = response.data.message)
+      .catch((err) => message = err.split(':')[1]);
     return message
   }
   , updateProfile: async (userID, updates) => {
     let profile
     axios.defaults.withCredentials = true
     await axios.put(`/api/user/${userID}`, updates)
-      .then((res) => {
-        profile = res
-      })
+      .then((res) => profile = res)
+      .catch((err) => console.log("UDATE PROFILE ERRR:", err))
     return profile
   },
   checkStatus: async () => {
@@ -63,9 +47,7 @@ export const API = {
     let profile
     await axios
       .get(`/api/auth/logout`)
-      .then((response) => {
-        profile = response
-      })
+      .then((response) => profile = response)
       .catch((err) => console.log(err))
     return profile
   },
@@ -103,14 +85,9 @@ export const API = {
   },
   postContact: async (values) => {
     let message
-    await axios.post(`/api/contact`,
-      values)
-      .then((response) => {
-        message = response.data
-      })
-      .catch((err) => {
-        console.log("ERR: ", err);
-      });
+    await axios.post(`/api/contact`, values)
+      .then((response) => message = response.data)
+      .catch((err) => console.log("CONTACT US ERR: ", err));
     return message
   },
   getUserRepos: async () => {
@@ -118,9 +95,15 @@ export const API = {
     await axios
       .get(`/api/github`)
       .then((result) => repos = result)
-      .catch((err) => {
-        console.log("GITHUB ERR:", err)
-      })
+      .catch((err) => console.log("GITHUB ERR:", err))
     return repos
+  },
+  getAllUsers: async () => {
+    let users
+    axios
+      .get(`/api/find`)
+      .then((response) => users = response.data)
+      .catch((err) => console.log("GET USERS ERR: ", err))
+    return users
   }
 }

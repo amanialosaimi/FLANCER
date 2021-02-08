@@ -6,10 +6,10 @@ import {
   Row,
   Col
 } from "antd";
-import { ReactComponent as AboutUs } from "../images/AboutUs.svg";
-import { ReactComponent as Goals } from "../images/Goals.svg";
-import { ReactComponent as Values } from "../images/Values.svg";
-import HeaderContent from './content/HeaderContent';
+import { ReactComponent as AboutUs } from "../../images/AboutUs.svg";
+import { ReactComponent as Goals } from "../../images/Goals.svg";
+import { ReactComponent as Values } from "../../images/Values.svg";
+import HeaderContent from './HeaderContent';
 const { Content } = Layout;
 
 function About() {

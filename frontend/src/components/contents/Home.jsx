@@ -1,6 +1,6 @@
-import WhyUS from "./content/WhyUS";
-import AIMS from "./content/AIMS";
-import TheTeam from "./content/TheTeam";
+import WhyUS from "./WhyUS";
+import AIMS from "./AIMS";
+import TheTeam from "./TheTeam";
 import { Row, Col } from "antd";
 function Home() {
   return (

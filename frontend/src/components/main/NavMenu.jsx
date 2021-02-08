@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Menu, Button, Space } from "antd";
-import "../App.css";
 import { Link, useHistory } from "react-router-dom";
-import Login from "./Login";
-import { API } from "./ops/API";
+import Login from "../forms/Login";
+import { API } from "../ops/API";
+import "../../App.css";
+
 const style = {
   height: 40,
   width: 90,

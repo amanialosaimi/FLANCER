@@ -20,7 +20,7 @@ const { Title } = Typography;
 const tailLayout = {
     wrapperCol: { offset: 0, span: 20 },
 };
-function DeveloperProfile(props) {
+export default function Profile(props) {
     const [form] = Form.useForm()
     const [status, setStatus] = useState()
 
@@ -132,6 +132,3 @@ function DeveloperProfile(props) {
         </Row >
     )
 }
-
-export default DeveloperProfile
-

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import DeveloperTable from './DeveloperTable';
-import ProjectForm from './ProjectForm';
+import ProjectsTable from './ProjectsTable';
+import ProjectCreation from './ProjectCreation';
 import { Typography, Layout, Card, Col, Row, Spin } from 'antd';
 import { API } from '../ops/API'
 import 'antd/dist/antd.css';
@@ -8,7 +8,7 @@ import 'antd/dist/antd.css';
 const { Title } = Typography;
 const { Content } = Layout;
 
-export default function DeveloperProjects(props) {
+export default function ProjectsOverview(props) {
     const [githubProfile, setGithubProfile] = useState()
     const [githubRepos, setGithubRepos] = useState()
     const [githubStars, setGithubStars] = useState()
@@ -44,7 +44,7 @@ export default function DeveloperProjects(props) {
         <Layout style={{ marginLeft: 200 }}>
             <Row style={{ marginTop: 30 }}>
                 <Col span={10} style={{ margin: '0 28px 0' }}><Title level={1}>Projects</Title></Col>
-                <Col><ProjectForm status={props.status} /></Col>
+                <Col><ProjectCreation status={props.status} /></Col>
             </Row>
             <Row style={{ marginTop: 30, marginLeft: 28 }}>
                 <Col span={8}>
@@ -59,7 +59,7 @@ export default function DeveloperProjects(props) {
             </Row>
             <Content style={{ margin: '24px 16px 0', overflow: 'auto' }}>
                 <div className="project-layout" style={{ padding: 16, marginRight: 10, textAlign: 'center' }}>
-                    <DeveloperTable profile={props.profile} repos={githubRepos} status={props.status} count={setRepoCounts} />
+                    <ProjectsTable profile={props.profile} repos={githubRepos} status={props.status} count={setRepoCounts} />
                 </div>
             </Content>
         </Layout>

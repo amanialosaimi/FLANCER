@@ -121,7 +121,7 @@ const ProjectCollection = ({ visible, createNewProject, onCancel, projectVisible
     </Modal>
   )
 }
-export default function ProjectForm(props) {
+export default function ProjectCreation(props) {
   const [visible, setVisible] = useState(false)
   // eslint-disable-next-line
   const [projectVisible, setProjectVisible] = useState(false)

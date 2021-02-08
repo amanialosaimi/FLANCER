@@ -4,8 +4,9 @@ import { DeleteOutlined } from '@ant-design/icons'
 import { API } from "../ops/API"
 import Moment from 'react-moment'
 import '../../App.css'
-import UpdateProject from './UpdateProject';
-export default function DeveloperTable(props) {
+import ProjectModification from './ProjectModification';
+
+export default function ProjectsTable(props) {
   const [projects, updateProject] = useState([])
 
   // eslint-disable-next-line
@@ -20,7 +21,7 @@ export default function DeveloperTable(props) {
           .then((res) => console.log(res))
         await props.status()
       }} />;
-      projectObject.edit = <UpdateProject project={project} status={props.status} />
+      projectObject.edit = <ProjectModification project={project} status={props.status} />
       projectObject.key = i + 1
       projectObject.isVisible = projectObject.isVisible === "true" // Change From String To Boolen
       projectObject.isVisible = projectObject.isVisible ? "Public" : "Private" // Change True/False To Public/Private
@@ -29,7 +30,7 @@ export default function DeveloperTable(props) {
     })
     repos = result
 
-    
+
     props.repos?.map((repo, i) => {
       let repoObject = Object.assign({}, repo)
       let repoDate = <Moment fromNow>{repo.created_at}</Moment>
@@ -46,13 +47,13 @@ export default function DeveloperTable(props) {
       repos.push(repoObject)
       props.count(repos.length)
       return null
-    })    
+    })
     updateProject(repos)
 
   }, [props.repos, props.profile]) // eslint-disable-line react-hooks/exhaustive-deps
   const [sortInfo, setSortInfo] = useState({})
   let updateTable = (pagination, filters, sorter) => {
-    console.log("Pagination >", pagination,"Filter >", filters, "Sort >", sorter);
+    console.log("Pagination >", pagination, "Filter >", filters, "Sort >", sorter);
     setSortInfo(sorter);
   };
   const columns = [
